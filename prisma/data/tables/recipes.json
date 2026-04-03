@@ -1,0 +1,220 @@
+[
+  {
+    "id": "recipe-1768696173552-rxtwe7xzy",
+    "productId": "cafe-negro",
+    "productName": "Café negro artesanal",
+    "category": "cafe-caliente",
+    "ingredients": [
+      {
+        "productId": "inv-1768953803936-gz1gyesjb",
+        "productName": "Café molido o instantáneo",
+        "quantity": 10,
+        "unit": "gr"
+      },
+      {
+        "productId": "inv-1767483353926-tgjwb0599",
+        "productName": "Azúcar",
+        "quantity": 10,
+        "unit": "gr"
+      }
+    ],
+    "createdAt": "2026-01-18T00:29:33.552Z",
+    "updatedAt": "2026-01-31T00:20:03.742Z"
+  },
+  {
+    "id": "recipe-1768698117168-1ztr4vf9a",
+    "productId": "cafe-leche",
+    "productName": "Café artesanal con leche",
+    "category": "cafe-caliente",
+    "ingredients": [
+      {
+        "productId": "inv-1768953803936-gz1gyesjb",
+        "productName": "Café molido o instantáneo",
+        "quantity": 10,
+        "unit": "gr"
+      },
+      {
+        "productId": "inv-1767483353917-ser4dw1e8",
+        "productName": "Leche",
+        "quantity": 50,
+        "unit": "ml"
+      },
+      {
+        "productId": "inv-1767483353926-tgjwb0599",
+        "productName": "Azúcar",
+        "quantity": 10,
+        "unit": "gr"
+      }
+    ],
+    "createdAt": "2026-01-18T01:01:57.168Z",
+    "updatedAt": "2026-01-31T00:20:03.742Z"
+  },
+  {
+    "id": "recipe-1768698117961-l6cw1o0qi",
+    "productId": "cafe-aromatizado",
+    "productName": "Café aromatizado artesanal (canela o vainilla)",
+    "category": "cafe-caliente",
+    "ingredients": [
+      {
+        "productId": "inv-1768953803936-gz1gyesjb",
+        "productName": "Café molido o instantáneo",
+        "quantity": 10,
+        "unit": "gr"
+      },
+      {
+        "productId": "inv-1767483353926-wdcg82vjf",
+        "productName": "Canela/vainilla (Aromáticas)",
+        "quantity": 1,
+        "unit": "unidad"
+      },
+      {
+        "productId": "inv-1767483353926-tgjwb0599",
+        "productName": "Azúcar",
+        "quantity": 10,
+        "unit": "gr"
+      }
+    ],
+    "createdAt": "2026-01-18T01:01:57.961Z",
+    "updatedAt": "2026-01-31T00:20:03.742Z"
+  },
+  {
+    "id": "recipe-1768698118665-ra9nohkty",
+    "productId": "cafe-irlandes",
+    "productName": "Café irlandés",
+    "category": "cafe-caliente",
+    "ingredients": [
+      {
+        "productId": "inv-1768953803936-gz1gyesjb",
+        "productName": "Café molido o instantáneo",
+        "quantity": 10,
+        "unit": "gr"
+      },
+      {
+        "productId": "inv-1767483353908-y3b53io8x",
+        "productName": "Whisky",
+        "quantity": 30,
+        "unit": "ml"
+      },
+      {
+        "productId": "inv-1767483353917-ser4dw1e8",
+        "productName": "Leche",
+        "quantity": 30,
+        "unit": "ml"
+      },
+      {
+        "productId": "inv-1767483353926-tgjwb0599",
+        "productName": "Azúcar",
+        "quantity": 10,
+        "unit": "gr"
+      }
+    ],
+    "createdAt": "2026-01-18T01:01:58.665Z",
+    "updatedAt": "2026-01-31T00:20:03.742Z"
+  },
+  {
+    "id": "recipe-1768698119376-fmlumi9l6",
+    "productId": "carajillo",
+    "productName": "Carajillo",
+    "category": "cafe-caliente",
+    "ingredients": [
+      {
+        "productId": "inv-1768953803936-gz1gyesjb",
+        "productName": "Café molido o instantáneo",
+        "quantity": 10,
+        "unit": "gr"
+      },
+      {
+        "productId": "inv-1767483353908-agu-nar",
+        "productName": "Aguardiente",
+        "quantity": 30,
+        "unit": "ml"
+      },
+      {
+        "productId": "inv-1767483353926-tgjwb0599",
+        "productName": "Azúcar",
+        "quantity": 10,
+        "unit": "gr"
+      }
+    ],
+    "createdAt": "2026-01-18T01:01:59.376Z",
+    "updatedAt": "2026-01-31T00:20:03.742Z"
+  },
+  {
+    "id": "recipe-1768698120104-zjebzvac0",
+    "productId": "vaso-leche",
+    "productName": "Vaso de leche caliente",
+    "category": "cafe-caliente",
+    "ingredients": [
+      {
+        "productId": "inv-1767483353917-ser4dw1e8",
+        "productName": "Leche",
+        "quantity": 250,
+        "unit": "ml"
+      },
+      {
+        "productId": "inv-1767483353926-tgjwb0599",
+        "productName": "Azúcar",
+        "quantity": 10,
+        "unit": "gr"
+      }
+    ],
+    "createdAt": "2026-01-18T01:02:00.104Z",
+    "updatedAt": "2026-01-31T00:20:03.742Z"
+  },
+  {
+    "id": "recipe-1768698121531-rd76x4buu",
+    "productId": "cafe-helado",
+    "productName": "Café helado artesanal (affogato)",
+    "category": "cafe-frio",
+    "ingredients": [
+      {
+        "productId": "inv-1768953803936-gz1gyesjb",
+        "productName": "Café molido o instantáneo",
+        "quantity": 10,
+        "unit": "gr"
+      },
+      {
+        "productId": "inv-1767483353913-1889mnu82",
+        "productName": "Hielo",
+        "quantity": 150,
+        "unit": "gr"
+      },
+      {
+        "productId": "inv-1767483353926-tgjwb0599",
+        "productName": "Azúcar",
+        "quantity": 10,
+        "unit": "gr"
+      }
+    ],
+    "createdAt": "2026-01-18T01:02:01.531Z",
+    "updatedAt": "2026-02-10T02:53:06.765Z"
+  },
+  {
+    "id": "recipe-1768698122940-8quqrkvum",
+    "productId": "coctel-arandano",
+    "productName": "Cóctel de arándano",
+    "category": "coctel",
+    "ingredients": [
+      {
+        "productId": "inv-1767483353913-4i345h1fq",
+        "productName": "Sirope de arándano",
+        "quantity": 30,
+        "unit": "ml"
+      },
+      {
+        "productId": "inv-1767483353913-kkkqg7bwc",
+        "productName": "Soda o agua con gas",
+        "quantity": 200,
+        "unit": "ml"
+      },
+      {
+        "productId": "inv-1767483353913-1889mnu82",
+        "productName": "Hielo",
+        "quantity": 100,
+        "unit": "gr"
+      }
+    ],
+    "createdAt": "2026-01-18T01:02:02.940Z",
+    "updatedAt": "2026-01-31T00:20:03.742Z"
+  }
+]

@@ -1,0 +1,126 @@
+Enum MovementType { IN OUT ADJUSTMENT SALE }
+Enum PaymentMethod { CASH CARD BANK_TRANSFER DIGITAL_WALLET OTHER }
+Enum ExpenseKind { FIXED VARIABLE }
+Enum PartnerContributionKind { MONEY INVENTORY }
+
+Table product_categories { id uuid [pk] name varchar [unique, not null] }
+Table expense_categories { id uuid [pk] name varchar [unique, not null] }
+Table inventory_categories { id uuid [pk] name varchar [unique, not null] }
+Table task_categories { id uuid [pk] name varchar [unique, not null] }
+
+Table partners {
+  id uuid [pk]
+  name varchar [not null]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table partner_contributions {
+  id uuid [pk]
+  partner_id uuid [not null, ref: > partners.id, note: 'CASCADE']
+  kind PartnerContributionKind [not null]
+  amount double [not null]
+  created_at timestamptz [not null]
+}
+
+Table products {
+  id uuid [pk]
+  name varchar [not null]
+  price double [not null]
+  description varchar [not null]
+  image_url varchar
+  size varchar [not null]
+  product_category_id uuid [not null, ref: > product_categories.id]
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+  indexes { (name, size) [unique] }
+}
+
+Table inventory {
+  id uuid [pk]
+  name varchar [not null]
+  inventory_category_id uuid [not null, ref: > inventory_categories.id]
+  quantity double [not null]
+  unit varchar [not null]
+  cost double [not null]
+  supplier varchar
+  code varchar
+  notes text
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table recipes {
+  id uuid [pk]
+  product_id uuid [unique, not null, ref: > products.id, note: '1:1 CASCADE']
+  created_at timestamptz [not null]
+  updated_at timestamptz [not null]
+}
+
+Table recipe_ingredients {
+  id uuid [pk]
+  recipe_id uuid [not null, ref: > recipes.id]
+  inventory_item_id uuid [not null, ref: > inventory.id]
+  quantity double [not null]
+  unit varchar [not null]
+}
+
+Table sales {
+  id uuid [pk]
+  sale_date timestamptz [not null]
+  hour int [not null]
+  total double [not null]
+  payment_method PaymentMethod
+  notes text
+  mesa varchar
+  created_at timestamptz
+  updated_at timestamptz
+}
+
+Table sale_lines {
+  id uuid [pk]
+  sale_id uuid [not null, ref: > sales.id]
+  product_id uuid [not null, ref: > products.id]
+  product_name varchar [not null, note: 'snapshot']
+  quantity double [not null]
+  unit_price double [not null]
+}
+
+Table stock_movements {
+  id uuid [pk]
+  inventory_item_id uuid [not null, ref: > inventory.id]
+  type MovementType [not null]
+  quantity double [not null]
+  unit varchar [not null]
+  reason varchar
+  notes text
+  movement_date timestamptz [not null]
+  sale_id uuid [ref: > sales.id]
+  created_at timestamptz
+}
+
+Table tasks {
+  id uuid [pk]
+  title varchar [not null]
+  description text
+  task_category_id uuid [not null, ref: > task_categories.id]
+  priority varchar [not null]
+  completed boolean [not null]
+  created_at timestamptz
+  completed_at timestamptz
+  due_date timestamptz
+  assigned_to varchar
+  tags text
+}
+
+Table expenses {
+  id uuid [pk]
+  description varchar [not null]
+  amount double [not null]
+  expense_date timestamptz [not null]
+  expense_category_id uuid [not null, ref: > expense_categories.id]
+  kind ExpenseKind [not null]
+  partner_id uuid [ref: > partners.id, note: 'optional']
+  notes text
+  created_at timestamptz
+}

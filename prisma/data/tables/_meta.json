@@ -1,0 +1,15 @@
+{
+  "sourceDump": "/Users/gustavo/Documents/Projects/ARANDANO/data/migration-dump.json",
+  "organizedAt": "2026-04-02T23:49:45.750Z",
+  "originalExportedAt": "2026-04-02T23:42:14.172Z",
+  "originalSourceFile": "data/arandano.db",
+  "counts": {
+    "products": 51,
+    "inventory": 222,
+    "sales": 83,
+    "recipes": 8,
+    "stock_movements": 0,
+    "tasks": 13,
+    "expenses": 14
+  }
+}

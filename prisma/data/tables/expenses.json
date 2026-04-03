@@ -1,0 +1,142 @@
+[
+  {
+    "id": "expense-1768953983064-kg672jrov",
+    "description": "Destapar cañería lavaplatos",
+    "amount": 10000,
+    "expenseDate": "2026-01-19T12:00:00.000Z",
+    "category": "utilities",
+    "type": "variable",
+    "notes": "Mantenimiento por destapar cañería del lavaplatos",
+    "createdAt": "2026-01-21T00:06:23.064Z"
+  },
+  {
+    "id": "expense-1767845735851-5zmegqd25",
+    "description": "Adecuaciones / mantenimiento locativo - Ferretería Maridíaz",
+    "amount": 31300,
+    "expenseDate": "2025-12-23T12:00:00.000Z",
+    "category": "other",
+    "type": "variable",
+    "notes": "Gasto de reparaciones y mantenimiento. Items: 6 metros dúplex ($9,600), 1 cinta aislante ($2,500), 1 chazo + tornillo ($2,500), 1 enchufe ($4,800), 2 tornillos ($400), 1 broca muro 5/16 ($5,900). Total: $31,300",
+    "createdAt": "2026-01-21T00:43:44.107Z"
+  },
+  {
+    "id": "expense-1767498799894-pov99no3q",
+    "description": "Internet leather",
+    "amount": 59500,
+    "expenseDate": "2026-01-04T12:00:00.000Z",
+    "category": "utilities",
+    "type": "fixed",
+    "notes": null,
+    "createdAt": "2026-01-21T00:43:44.153Z"
+  },
+  {
+    "id": "expense-1769477739281-orm3vqff0",
+    "description": "Mantenimiento y reparaciones - Instalación eléctrica y mejoras",
+    "amount": 231500,
+    "expenseDate": "2026-01-27T12:00:00.000Z",
+    "category": "other",
+    "type": "variable",
+    "notes": "Materiales (pagados de la caja de Arándano - $71.500): Cable dúplex $7.000, Cinta LED $39.500, Adaptador cinta LED $8.000, Canaleta e interruptor $10.000, Seguro de baño $7.000. Mano de obra (pagada por Gustavo - $160.000): $160.000. Total: $231.500",
+    "createdAt": "2026-01-27T01:35:39.281Z"
+  },
+  {
+    "id": "expense-1769814963482-ylaezsoew",
+    "description": "TV Samsung 40\", base y seguro - Activo local",
+    "amount": 1127000,
+    "expenseDate": "2026-01-29T12:00:00.000Z",
+    "category": "other",
+    "type": "variable",
+    "notes": "Compra jueves 29 ene 2026 3pm - Almacenes Éxito Pasto",
+    "createdAt": "2026-01-30T23:16:03.442Z"
+  },
+  {
+    "id": "expense-1769965240759-u38gxxndw",
+    "description": "Compra Tiendas D1: Papel higiénico 3H, Gaseosa Coca-Cola, Gaseosa Schweppes, Moritas de go, Limpiador Bic, Bolsa papelera, Bolsa hogar, Ambientador, Lulo 800 g",
+    "amount": 47430,
+    "expenseDate": "2026-01-31T12:00:00.000Z",
+    "category": "supplies",
+    "type": "variable",
+    "notes": "Viernes 31 enero 2026 7pm - Tiendas D1",
+    "createdAt": "2026-02-01T17:00:40.714Z"
+  },
+  {
+    "id": "expense-1769965466067-wqb47ker8",
+    "description": "Compra Tiendas esquina: Azúcar morena 1500 g, anís estrellado",
+    "amount": 10000,
+    "expenseDate": "2026-01-31T12:00:00.000Z",
+    "category": "supplies",
+    "type": "variable",
+    "notes": "Viernes 31 enero 2026 8pm - Tiendas esquina",
+    "createdAt": "2026-02-01T17:04:26.019Z"
+  },
+  {
+    "id": "expense-1770573297982-ptz69v4f1",
+    "description": "Compra: Lulo, Tomate, Albahaca",
+    "amount": 12000,
+    "expenseDate": "2026-02-07T12:00:00.000Z",
+    "category": "supplies",
+    "type": "variable",
+    "notes": "Sábado 7 feb — 6 lulos, 2 tomates, albahaca",
+    "createdAt": "2026-02-08T17:54:57.936Z"
+  },
+  {
+    "id": "expense-1770573297983-zl4gi76ni",
+    "description": "Compra: Maracuyá, Arándanos, Menta",
+    "amount": 12000,
+    "expenseDate": "2026-02-08T12:00:00.000Z",
+    "category": "supplies",
+    "type": "variable",
+    "notes": "Domingo 8 feb — maracuyá, arándanos, menta",
+    "createdAt": "2026-02-08T17:54:57.936Z"
+  },
+  {
+    "id": "expense-1770684128141-fl47ipf5x",
+    "description": "Compra Bodega Bavaria: Poker LTA 330cc, Club Colombia LTA, Budweiser LTA 269cc",
+    "amount": 193397,
+    "expenseDate": "2026-02-08T12:00:00.000Z",
+    "category": "supplies",
+    "type": "variable",
+    "notes": "Pago efectivo. Aporte Gustavo Arteaga. Lote Bodega Bavaria.",
+    "createdAt": "2026-02-10T00:42:08.097Z"
+  },
+  {
+    "id": "expense-1771001849834-5fefbmj86",
+    "description": "Compra Triple sec - Lote Paty",
+    "amount": 33400,
+    "expenseDate": "2026-02-12T12:00:00.000Z",
+    "category": "supplies",
+    "type": "variable",
+    "notes": "Lo pagó gustavo. Lote Paty.",
+    "createdAt": "2026-02-13T16:57:29.773Z"
+  },
+  {
+    "id": "expense-1771051465510-wnqj198ma",
+    "description": "Compra Chapil de los pastos - Lote Conoradi",
+    "amount": 36000,
+    "expenseDate": "2026-02-13T12:00:00.000Z",
+    "category": "supplies",
+    "type": "variable",
+    "notes": "Viernes 13 de febrero 2026, 5pm. 2 L por $36.000.",
+    "createdAt": "2026-02-14T06:44:25.473Z"
+  },
+  {
+    "id": "expense-1771051787957-p53e0kr6d",
+    "description": "Compra Empanadas - Parqueadero",
+    "amount": 26100,
+    "expenseDate": "2026-02-13T12:00:00.000Z",
+    "category": "supplies",
+    "type": "variable",
+    "notes": "13 feb 2026. Compra en el parqueadero. 6 empanadas.",
+    "createdAt": "2026-02-14T06:49:47.911Z"
+  },
+  {
+    "id": "expense-1771051787958-jl376odfi",
+    "description": "Compra Canela, anís y pulpas - Las Monas",
+    "amount": 34000,
+    "expenseDate": "2026-02-13T12:00:00.000Z",
+    "category": "supplies",
+    "type": "variable",
+    "notes": "13 feb 2026. Tienda Las Monas.",
+    "createdAt": "2026-02-14T06:49:47.911Z"
+  }
+]

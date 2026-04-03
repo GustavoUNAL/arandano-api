@@ -1,0 +1,1999 @@
+[
+  {
+    "id": "sale-1768704949500-7gtzlryoi",
+    "saleDate": "2025-12-30T18:00:00.000Z",
+    "hour": 18,
+    "items": [
+      {
+        "productId": "cerveza-aguila-330",
+        "productName": "Cerveza Águila 330cm3",
+        "quantity": 1,
+        "price": 20000
+      }
+    ],
+    "total": 20000,
+    "paymentMethod": "efectivo",
+    "notes": "Parte de sixpack latón",
+    "createdAt": "2026-01-18T02:55:49.500Z",
+    "updatedAt": "2026-01-18T02:55:49.500Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768704949500-3k5mk2wq3",
+    "saleDate": "2025-12-30T18:00:00.000Z",
+    "hour": 18,
+    "items": [
+      {
+        "productId": "cerveza-aguila-330",
+        "productName": "Cerveza Águila 330cm3",
+        "quantity": 1,
+        "price": 15000
+      }
+    ],
+    "total": 15000,
+    "paymentMethod": "nequi",
+    "notes": "Parte de sixpack latón",
+    "createdAt": "2026-01-18T02:55:49.500Z",
+    "updatedAt": "2026-01-18T02:55:49.500Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768704949500-8tdebrg03",
+    "saleDate": "2025-12-30T20:00:00.000Z",
+    "hour": 20,
+    "items": [
+      {
+        "productId": "bebida-1767478306369-c8s8nr6nh",
+        "productName": "Cóctel moscowmule",
+        "quantity": 6,
+        "price": 7500
+      }
+    ],
+    "total": 45000,
+    "paymentMethod": "nequi",
+    "notes": null,
+    "createdAt": "2026-01-18T02:55:49.500Z",
+    "updatedAt": "2026-01-18T02:55:49.500Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768704949501-fa1ggvb5t",
+    "saleDate": "2025-12-31T10:00:00.000Z",
+    "hour": 10,
+    "items": [
+      {
+        "productId": "cafe-negro",
+        "productName": "Café negro artesanal",
+        "quantity": 1,
+        "price": 5000
+      }
+    ],
+    "total": 5000,
+    "paymentMethod": "efectivo",
+    "notes": null,
+    "createdAt": "2026-01-18T02:55:49.501Z",
+    "updatedAt": "2026-01-18T02:55:49.501Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768704949501-7fdz4ni4s",
+    "saleDate": "2025-12-31T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "combo-cafe-pastel",
+        "productName": "Café artesanal caliente + pastel del día",
+        "quantity": 4,
+        "price": 13000
+      }
+    ],
+    "total": 52000,
+    "paymentMethod": "nequi",
+    "notes": null,
+    "createdAt": "2026-01-18T02:55:49.501Z",
+    "updatedAt": "2026-01-18T02:55:49.501Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768705024626-iy1p0xq9u",
+    "saleDate": "2026-01-03T14:00:00.000Z",
+    "hour": 14,
+    "items": [
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (Empanada, Buñuelo)",
+        "quantity": 1,
+        "price": 69000
+      }
+    ],
+    "total": 69000,
+    "paymentMethod": null,
+    "notes": "Ver detalle",
+    "createdAt": "2026-01-18T02:57:04.626Z",
+    "updatedAt": "2026-01-18T02:57:04.626Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768705024626-0x84rzh7l",
+    "saleDate": "2026-01-04T15:00:00.000Z",
+    "hour": 15,
+    "items": [
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (Empanada, Buñuelo)",
+        "quantity": 1,
+        "price": 64000
+      }
+    ],
+    "total": 64000,
+    "paymentMethod": null,
+    "notes": "Ver detalle",
+    "createdAt": "2026-01-18T02:57:04.626Z",
+    "updatedAt": "2026-01-18T02:57:04.626Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768705024626-ck918keyd",
+    "saleDate": "2026-01-05T16:00:00.000Z",
+    "hour": 16,
+    "items": [
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (Empanada, Buñuelo)",
+        "quantity": 1,
+        "price": 196000
+      }
+    ],
+    "total": 196000,
+    "paymentMethod": "nequi",
+    "notes": "Venta Nequi – Mauricio Ortiz",
+    "createdAt": "2026-01-18T02:57:04.626Z",
+    "updatedAt": "2026-01-18T02:57:04.626Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768705024626-95rfna5m6",
+    "saleDate": "2026-01-06T18:00:00.000Z",
+    "hour": 18,
+    "items": [
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (Empanada, Buñuelo)",
+        "quantity": 1,
+        "price": 337000
+      }
+    ],
+    "total": 337000,
+    "paymentMethod": null,
+    "notes": "Incluye entrada Sebastián",
+    "createdAt": "2026-01-18T02:57:04.626Z",
+    "updatedAt": "2026-01-18T02:57:04.626Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768705024626-vs699m2c3",
+    "saleDate": "2026-01-07T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (Empanada, Buñuelo)",
+        "quantity": 1,
+        "price": 15000
+      }
+    ],
+    "total": 15000,
+    "paymentMethod": null,
+    "notes": "Ver detalle",
+    "createdAt": "2026-01-18T02:57:04.626Z",
+    "updatedAt": "2026-01-18T02:57:04.626Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768705024627-tzxr9niuc",
+    "saleDate": "2026-01-14T14:00:00.000Z",
+    "hour": 14,
+    "items": [
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (Empanada, Buñuelo)",
+        "quantity": 1,
+        "price": 77000
+      }
+    ],
+    "total": 77000,
+    "paymentMethod": "nequi",
+    "notes": "Cuadra con Nequi",
+    "createdAt": "2026-01-18T02:57:04.627Z",
+    "updatedAt": "2026-01-18T02:57:04.627Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768705024627-cs79z583x",
+    "saleDate": "2026-01-15T13:00:00.000Z",
+    "hour": 13,
+    "items": [
+      {
+        "productId": "cerveza-budweiser",
+        "productName": "Cerveza Budweiser",
+        "quantity": 3,
+        "price": 3500
+      }
+    ],
+    "total": 10000,
+    "paymentMethod": null,
+    "notes": "Budweiser",
+    "createdAt": "2026-01-18T02:57:04.627Z",
+    "updatedAt": "2026-01-18T02:57:04.627Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768705024627-4raapk186",
+    "saleDate": "2026-01-16T15:00:00.000Z",
+    "hour": 15,
+    "items": [
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (Empanada, Buñuelo)",
+        "quantity": 1,
+        "price": 20000
+      }
+    ],
+    "total": 20000,
+    "paymentMethod": null,
+    "notes": "Ver detalle",
+    "createdAt": "2026-01-18T02:57:04.627Z",
+    "updatedAt": "2026-01-18T02:57:04.627Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768843907626-o4fyt4fzg",
+    "saleDate": "2026-01-19T20:00:00.000Z",
+    "hour": 20,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker 330cm3",
+        "quantity": 3,
+        "unitPrice": 3500,
+        "totalPrice": 10500
+      }
+    ],
+    "total": 10500,
+    "paymentMethod": "efectivo",
+    "notes": "sebastian lugo",
+    "createdAt": "2026-01-19T17:31:47.626Z",
+    "updatedAt": "2026-01-19T19:22:25.929Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768843907628-lxccmynjn",
+    "saleDate": "2026-01-16T20:00:00.000Z",
+    "hour": 20,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker 330cm3",
+        "quantity": 3,
+        "unitPrice": 3500,
+        "totalPrice": 10500
+      }
+    ],
+    "total": 10500,
+    "paymentMethod": "efectivo",
+    "notes": null,
+    "createdAt": "2026-01-19T17:31:47.628Z",
+    "updatedAt": "2026-01-19T18:46:39.994Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768845945713-li37b9wsv",
+    "saleDate": "2026-01-18T20:00:00.000Z",
+    "hour": 20,
+    "items": [
+      {
+        "productId": "cerveza-budweiser",
+        "productName": "Cerveza Budweiser",
+        "quantity": 3,
+        "unitPrice": 5000,
+        "totalPrice": 15000
+      },
+      {
+        "productId": "cerveza-heineken",
+        "productName": "Cerveza Heineken",
+        "quantity": 6,
+        "unitPrice": 5000,
+        "totalPrice": 30000
+      },
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker 330cm3",
+        "quantity": 3,
+        "unitPrice": 4500,
+        "totalPrice": 13500
+      },
+      {
+        "productId": "prod-1768843715583-n44rw1kv2",
+        "productName": "Cigarrillo",
+        "quantity": 1,
+        "unitPrice": 1000,
+        "totalPrice": 1000
+      },
+      {
+        "productId": "tequila-olmeca-shot",
+        "productName": "Shot Tequila Olmeca",
+        "quantity": 4,
+        "unitPrice": 12000,
+        "totalPrice": 48000
+      }
+    ],
+    "total": 108000,
+    "paymentMethod": "efectivo",
+    "notes": null,
+    "createdAt": "2026-01-19T18:05:45.713Z",
+    "updatedAt": "2026-01-19T19:03:42.280Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768845945726-xd9z7cety",
+    "saleDate": "2026-01-18T20:00:00.000Z",
+    "hour": 20,
+    "items": [
+      {
+        "productId": "cerveza-budweiser",
+        "productName": "Cerveza Budweiser",
+        "quantity": 3,
+        "unitPrice": 5000,
+        "totalPrice": 15000
+      },
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker 330cm3",
+        "quantity": 7,
+        "unitPrice": 4500,
+        "totalPrice": 31500
+      },
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada ",
+        "quantity": 2,
+        "unitPrice": 5000,
+        "totalPrice": 10000
+      }
+    ],
+    "total": 56500,
+    "paymentMethod": "efectivo",
+    "notes": null,
+    "createdAt": "2026-01-19T18:05:45.726Z",
+    "updatedAt": "2026-01-19T18:46:53.876Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768850597179-ipwv4m24l",
+    "saleDate": "2026-01-16T14:00:00.000Z",
+    "hour": 14,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker 330cm3",
+        "quantity": 4,
+        "unitPrice": 3500,
+        "totalPrice": 14000
+      }
+    ],
+    "total": 14000,
+    "paymentMethod": "nequi",
+    "notes": null,
+    "createdAt": "2026-01-19T19:23:17.179Z",
+    "updatedAt": "2026-01-19T19:23:17.179Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768878867305-47pf96fb7",
+    "saleDate": "2026-01-20T22:00:00.000Z",
+    "hour": 22,
+    "items": [
+      {
+        "productId": "vodka-smirnoff-shot",
+        "productName": "Vodka Smirnoff",
+        "quantity": 1,
+        "unitPrice": 11000,
+        "totalPrice": 11000
+      },
+      {
+        "productId": "tequila-olmeca-shot",
+        "productName": "Shot Tequila Olmeca",
+        "quantity": 1,
+        "unitPrice": 12000,
+        "totalPrice": 12000
+      }
+    ],
+    "total": 20000,
+    "paymentMethod": "efectivo",
+    "notes": null,
+    "createdAt": "2026-01-20T03:14:27.305Z",
+    "updatedAt": "2026-01-20T03:14:27.305Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1768959427267-flylu7tj7",
+    "saleDate": "2026-01-21T20:00:00.000Z",
+    "hour": 20,
+    "items": [
+      {
+        "productId": "pastel-dia",
+        "productName": "Pastel del día",
+        "quantity": 1,
+        "unitPrice": 7000,
+        "totalPrice": 7000
+      }
+    ],
+    "total": 7000,
+    "paymentMethod": "efectivo",
+    "notes": "jose ",
+    "createdAt": "2026-01-21T01:37:07.267Z",
+    "updatedAt": "2026-01-21T01:37:07.267Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769218529782-j440klula",
+    "saleDate": "2026-01-21T14:00:00.000Z",
+    "hour": 14,
+    "items": [
+      {
+        "productId": "gin-gordons-shot",
+        "productName": "Ginebra Gordon's",
+        "quantity": 2,
+        "unitPrice": 10000,
+        "totalPrice": 20000
+      }
+    ],
+    "total": 20000,
+    "paymentMethod": "efectivo",
+    "notes": "Venta de 2 shots a 10.000 cada uno",
+    "createdAt": "2026-01-24T01:35:29.782Z",
+    "updatedAt": "2026-01-24T01:35:29.782Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769218653927-pdct7h6fr",
+    "saleDate": "2026-01-22T10:00:00.000Z",
+    "hour": 10,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada ",
+        "quantity": 2,
+        "unitPrice": 5000,
+        "totalPrice": 10000
+      }
+    ],
+    "total": 10000,
+    "paymentMethod": "nequi",
+    "notes": "Venta de 2 hervidos a 5.000 cada uno",
+    "createdAt": "2026-01-24T01:37:33.927Z",
+    "updatedAt": "2026-01-24T01:37:33.927Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769218771268-prj4v1m16",
+    "saleDate": "2026-01-22T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker 330cm3",
+        "quantity": 11,
+        "unitPrice": 3500,
+        "totalPrice": 38500
+      },
+      {
+        "productId": "prod-1768843715583-n44rw1kv2",
+        "productName": "Cigarrillo",
+        "quantity": 1,
+        "unitPrice": 5500,
+        "totalPrice": 5500
+      },
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada ",
+        "quantity": 3,
+        "unitPrice": 5000,
+        "totalPrice": 15000
+      },
+      {
+        "productId": "bebida-1767478306369-c8s8nr6nh",
+        "productName": "Cóctel moscowmule",
+        "quantity": 3,
+        "unitPrice": 15000,
+        "totalPrice": 45000
+      }
+    ],
+    "total": 104000,
+    "paymentMethod": "nequi",
+    "notes": "Venta: 11 Poker (cobradas a 4.000, precio real 3.500), diferencia como cigarrillos, 3 hervidos, 3 moscowmule",
+    "createdAt": "2026-01-24T01:39:31.268Z",
+    "updatedAt": "2026-01-24T01:44:30.790Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769231497804-i7esck4l2",
+    "saleDate": "2026-01-24T00:00:00.000Z",
+    "hour": 0,
+    "items": [
+      {
+        "productId": "bebida-1767478306369-c8s8nr6nh",
+        "productName": "Cóctel moscowmule",
+        "quantity": 4,
+        "unitPrice": 15000,
+        "totalPrice": 60000
+      }
+    ],
+    "total": 60000,
+    "paymentMethod": "nequi",
+    "notes": "ing harold",
+    "createdAt": "2026-01-24T05:11:37.804Z",
+    "updatedAt": "2026-01-24T05:11:37.804Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769814535451-1p4fcq7jv",
+    "saleDate": "2026-01-30T18:00:00.000Z",
+    "hour": 18,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada ",
+        "quantity": 2,
+        "unitPrice": 5000,
+        "totalPrice": 10000
+      }
+    ],
+    "total": 10000,
+    "paymentMethod": "nequi",
+    "notes": "Cliente Organanicos",
+    "createdAt": "2026-01-30T23:08:55.451Z",
+    "updatedAt": "2026-02-01T04:35:00.185Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769814535452-stouvqcv8",
+    "saleDate": "2026-01-30T18:00:00.000Z",
+    "hour": 18,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker 330cm3",
+        "quantity": 2,
+        "unitPrice": 3500,
+        "totalPrice": 7000
+      }
+    ],
+    "total": 7000,
+    "paymentMethod": null,
+    "notes": "Cliente Sebastian",
+    "createdAt": "2026-01-30T23:08:55.452Z",
+    "updatedAt": "2026-02-01T04:23:10.546Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769814735949-rnfr26pio",
+    "saleDate": "2026-01-30T23:00:00.000Z",
+    "hour": 23,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada ",
+        "quantity": 6,
+        "unitPrice": 5000,
+        "totalPrice": 30000
+      },
+      {
+        "productId": "cerveza-aguila-330",
+        "productName": "Cerveza Águila 330cm3",
+        "quantity": 2,
+        "unitPrice": 3500,
+        "totalPrice": 7000
+      }
+    ],
+    "total": 37000,
+    "paymentMethod": null,
+    "notes": "Clientes organicos",
+    "createdAt": "2026-01-30T23:12:15.949Z",
+    "updatedAt": "2026-02-01T04:34:09.648Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769918176675-tavc4h32s",
+    "saleDate": "2026-01-31T19:00:00.000Z",
+    "hour": 19,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker 330cm3",
+        "quantity": 6,
+        "unitPrice": 3500,
+        "totalPrice": 21000
+      }
+    ],
+    "total": 21000,
+    "paymentMethod": "nequi",
+    "notes": null,
+    "createdAt": "2026-02-01T03:56:16.669Z",
+    "updatedAt": "2026-02-01T04:33:33.061Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769918176718-r0kdx3srx",
+    "saleDate": "2026-01-31T19:00:00.000Z",
+    "hour": 19,
+    "items": [
+      {
+        "productId": "cerveza-heineken",
+        "productName": "Cerveza Heineken",
+        "quantity": 6,
+        "unitPrice": 3500,
+        "totalPrice": 21000
+      }
+    ],
+    "total": 21000,
+    "paymentMethod": "nequi",
+    "notes": null,
+    "createdAt": "2026-02-01T03:56:16.669Z",
+    "updatedAt": "2026-02-01T04:33:16.016Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769918176718-b0ar5kb93",
+    "saleDate": "2026-01-31T19:00:00.000Z",
+    "hour": 19,
+    "items": [
+      {
+        "productId": "prod-1768501043986-dzy4iyvgk",
+        "productName": "Aguardiente Nariño",
+        "quantity": 1,
+        "unitPrice": 27500,
+        "totalPrice": 27500
+      }
+    ],
+    "total": 27500,
+    "paymentMethod": "nequi",
+    "notes": "Media aguardiente Nariño",
+    "createdAt": "2026-02-01T03:56:16.669Z",
+    "updatedAt": "2026-02-01T04:32:51.698Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769918176718-7jzoiv1wo",
+    "saleDate": "2026-01-31T19:00:00.000Z",
+    "hour": 19,
+    "items": [
+      {
+        "productId": "vodka-smirnoff-botella",
+        "productName": "Vodka Smirnoff tamarindo",
+        "quantity": 1,
+        "unitPrice": 35000,
+        "totalPrice": 35000
+      }
+    ],
+    "total": 35000,
+    "paymentMethod": "nequi",
+    "notes": "Mitad Smirnoff tamarindo",
+    "createdAt": "2026-02-01T03:56:16.669Z",
+    "updatedAt": "2026-02-01T04:32:34.492Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769918176718-wia2jxk1c",
+    "saleDate": "2026-01-31T19:00:00.000Z",
+    "hour": 19,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 1,
+        "unitPrice": 7000,
+        "totalPrice": 7000
+      }
+    ],
+    "total": 7000,
+    "paymentMethod": "efectivo",
+    "notes": "Hervido #1",
+    "createdAt": "2026-02-01T03:56:16.669Z",
+    "updatedAt": "2026-02-01T04:32:21.173Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769918176718-aeq69ntzl",
+    "saleDate": "2026-01-31T19:00:00.000Z",
+    "hour": 19,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 1,
+        "unitPrice": 7000,
+        "totalPrice": 7000
+      }
+    ],
+    "total": 7000,
+    "paymentMethod": "efectivo",
+    "notes": "Hervido #2",
+    "createdAt": "2026-02-01T03:56:16.669Z",
+    "updatedAt": "2026-02-01T04:18:34.489Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769918176719-96iiwnsjd",
+    "saleDate": "2026-01-31T19:00:00.000Z",
+    "hour": 19,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 1,
+        "unitPrice": 7000,
+        "totalPrice": 7000
+      }
+    ],
+    "total": 7000,
+    "paymentMethod": "efectivo",
+    "notes": "Hervido #3",
+    "createdAt": "2026-02-01T03:56:16.669Z",
+    "updatedAt": "2026-02-01T04:17:58.465Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769918330663-btdoqdv84",
+    "saleDate": "2026-01-30T18:00:00.000Z",
+    "hour": 18,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 2,
+        "unitPrice": 7000,
+        "totalPrice": 14000
+      }
+    ],
+    "total": 14000,
+    "paymentMethod": "nequi",
+    "notes": null,
+    "createdAt": "2026-02-01T03:58:50.663Z",
+    "updatedAt": "2026-02-01T04:31:24.794Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769918463128-c8godzhfj",
+    "saleDate": "2026-01-30T17:00:00.000Z",
+    "hour": 17,
+    "items": [
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (Empanada, Buñuelo)",
+        "quantity": 1,
+        "unitPrice": 3000,
+        "totalPrice": 3000
+      },
+      {
+        "productId": "cafe-negro",
+        "productName": "Café negro artesanal",
+        "quantity": 1,
+        "unitPrice": 4000,
+        "totalPrice": 4000
+      }
+    ],
+    "total": 7000,
+    "paymentMethod": "efectivo",
+    "notes": null,
+    "createdAt": "2026-02-01T04:01:03.128Z",
+    "updatedAt": "2026-02-01T04:30:50.253Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769919360966-6pm2herv",
+    "saleDate": "2026-01-30T18:00:00.000Z",
+    "hour": 18,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 2,
+        "unitPrice": 7000,
+        "totalPrice": 14000
+      }
+    ],
+    "total": 14000,
+    "paymentMethod": "nequi",
+    "notes": null,
+    "createdAt": "2026-02-01T04:16:00.966Z",
+    "updatedAt": "2026-02-01T04:34:28.411Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1769919360971-5pmcafe",
+    "saleDate": "2026-01-30T17:00:00.000Z",
+    "hour": 17,
+    "items": [
+      {
+        "productId": "cafe-negro",
+        "productName": "Café negro artesanal",
+        "quantity": 1,
+        "unitPrice": 4000,
+        "totalPrice": 4000
+      },
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (Empanada, Buñuelo)",
+        "quantity": 1,
+        "unitPrice": 3000,
+        "totalPrice": 3000
+      }
+    ],
+    "total": 7000,
+    "paymentMethod": "efectivo",
+    "notes": null,
+    "createdAt": "2026-02-01T04:16:00.966Z",
+    "updatedAt": "2026-02-01T04:31:09.588Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1770572624919-9p6ro00il",
+    "saleDate": "2026-02-05T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 1,
+        "unitPrice": 7000,
+        "totalPrice": 7000
+      },
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (Empanada, Buñuelo)",
+        "quantity": 1,
+        "unitPrice": 3000,
+        "totalPrice": 3000
+      }
+    ],
+    "total": 10000,
+    "paymentMethod": null,
+    "notes": "Jueves 5 feb",
+    "createdAt": "2026-02-08T17:43:44.919Z",
+    "updatedAt": "2026-02-08T17:43:44.919Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1770572624924-e4079gcfs",
+    "saleDate": "2026-02-06T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 1,
+        "unitPrice": 5000,
+        "totalPrice": 5000
+      },
+      {
+        "productId": "pastel-dia",
+        "productName": "Pastel del día",
+        "quantity": 1,
+        "unitPrice": 3000,
+        "totalPrice": 3000
+      }
+    ],
+    "total": 8000,
+    "paymentMethod": null,
+    "notes": "Hervido + bizcocho",
+    "createdAt": "2026-02-08T17:43:44.919Z",
+    "updatedAt": "2026-02-08T17:43:44.919Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1770572624925-wmo4t0bwa",
+    "saleDate": "2026-02-06T14:00:00.000Z",
+    "hour": 14,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 6,
+        "unitPrice": 7000,
+        "totalPrice": 42000
+      },
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker 330cm3",
+        "quantity": 2,
+        "unitPrice": 3500,
+        "totalPrice": 7000
+      }
+    ],
+    "total": 49000,
+    "paymentMethod": null,
+    "notes": "Mauricio",
+    "createdAt": "2026-02-08T17:43:44.919Z",
+    "updatedAt": "2026-02-08T17:43:44.919Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1770572624925-t4gh0gjzc",
+    "saleDate": "2026-02-06T15:00:00.000Z",
+    "hour": 15,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 4,
+        "unitPrice": 7000,
+        "totalPrice": 28000
+      },
+      {
+        "productId": "bebida-1767478306369-c8s8nr6nh",
+        "productName": "Cóctel Chapil",
+        "quantity": 2,
+        "unitPrice": 7000,
+        "totalPrice": 14000
+      },
+      {
+        "productId": "prod-1768843715583-n44rw1kv2",
+        "productName": "Cigarrillo",
+        "quantity": 3,
+        "unitPrice": 1000,
+        "totalPrice": 3000
+      }
+    ],
+    "total": 45000,
+    "paymentMethod": null,
+    "notes": "Sr. edificio 505",
+    "createdAt": "2026-02-08T17:43:44.919Z",
+    "updatedAt": "2026-02-08T17:43:44.919Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1770572624925-9pf7fqpze",
+    "saleDate": "2026-02-06T16:00:00.000Z",
+    "hour": 16,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker 330cm3",
+        "quantity": 6,
+        "unitPrice": 2916,
+        "totalPrice": 17496
+      }
+    ],
+    "total": 17500,
+    "paymentMethod": null,
+    "notes": "Don Iván - 6 cervezas",
+    "createdAt": "2026-02-08T17:43:44.919Z",
+    "updatedAt": "2026-02-08T17:43:44.919Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1770572624925-icmd975g7",
+    "saleDate": "2026-02-07T14:00:00.000Z",
+    "hour": 14,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker 330cm3",
+        "quantity": 3,
+        "unitPrice": 3500,
+        "totalPrice": 10500
+      },
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 5,
+        "unitPrice": 7000,
+        "totalPrice": 35000
+      }
+    ],
+    "total": 45500,
+    "paymentMethod": null,
+    "notes": "Mauricio",
+    "createdAt": "2026-02-08T17:43:44.919Z",
+    "updatedAt": "2026-02-08T17:43:44.919Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1770684223435-g6fnt8fwk",
+    "saleDate": "2026-02-10T19:00:00.000Z",
+    "hour": 19,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker 330cm3",
+        "quantity": 12,
+        "unitPrice": 3500,
+        "totalPrice": 42000
+      }
+    ],
+    "total": 42000,
+    "paymentMethod": "efectivo",
+    "notes": "Don Ivan ",
+    "createdAt": "2026-02-10T00:43:43.435Z",
+    "updatedAt": "2026-02-10T00:43:43.435Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1770684328046-0rhe9d7wh",
+    "saleDate": "2026-02-10T19:00:00.000Z",
+    "hour": 19,
+    "items": [
+      {
+        "productId": "cafe-negro",
+        "productName": "Café negro artesanal",
+        "quantity": 3,
+        "unitPrice": 4000,
+        "totalPrice": 12000
+      }
+    ],
+    "total": 9000,
+    "paymentMethod": "efectivo",
+    "notes": null,
+    "createdAt": "2026-02-10T00:45:28.046Z",
+    "updatedAt": "2026-02-10T00:45:28.046Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1770684460133-di8r9859m",
+    "saleDate": "2026-02-09T19:00:00.000Z",
+    "hour": 19,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker 330cm3",
+        "quantity": 12,
+        "unitPrice": 3500,
+        "totalPrice": 42000
+      }
+    ],
+    "total": 42000,
+    "paymentMethod": null,
+    "notes": "12 cervezas Poker — 7:46pm",
+    "createdAt": "2026-02-10T00:47:40.129Z",
+    "updatedAt": "2026-02-10T00:47:40.129Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1770684864461-h1tioyo43",
+    "saleDate": "2026-02-10T19:00:00.000Z",
+    "hour": 19,
+    "items": [
+      {
+        "productId": "cafe-negro",
+        "productName": "Café negro artesanal",
+        "quantity": 3,
+        "unitPrice": 4000,
+        "totalPrice": 12000
+      }
+    ],
+    "total": 10500,
+    "paymentMethod": "efectivo",
+    "notes": null,
+    "createdAt": "2026-02-10T00:54:24.461Z",
+    "updatedAt": "2026-02-10T00:54:24.461Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1770685077576-q7qreztwc",
+    "saleDate": "2026-02-10T19:00:00.000Z",
+    "hour": 19,
+    "items": [
+      {
+        "productId": "cafe-negro",
+        "productName": "Café negro artesanal",
+        "quantity": 3,
+        "unitPrice": 4000,
+        "totalPrice": 12000
+      }
+    ],
+    "total": 12000,
+    "paymentMethod": "efectivo",
+    "notes": null,
+    "createdAt": "2026-02-10T00:57:57.576Z",
+    "updatedAt": "2026-02-10T00:57:57.576Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1770685372826-wbaok2zln",
+    "saleDate": "2026-02-09T20:00:00.000Z",
+    "hour": 20,
+    "items": [
+      {
+        "productId": "cafe-negro",
+        "productName": "Café negro artesanal",
+        "quantity": 3,
+        "unitPrice": 4000,
+        "totalPrice": 12000
+      }
+    ],
+    "total": 10500,
+    "paymentMethod": "efectivo",
+    "notes": "vecinos local",
+    "createdAt": "2026-02-10T01:02:52.826Z",
+    "updatedAt": "2026-02-10T01:02:52.826Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1771001520233-rsdixoupk",
+    "saleDate": "2026-02-12T22:00:00.000Z",
+    "hour": 22,
+    "items": [
+      {
+        "productId": "prod-1770687422697-le373wgmo",
+        "productName": "Cerveza michelada",
+        "quantity": 2,
+        "unitPrice": 5000,
+        "totalPrice": 10000
+      }
+    ],
+    "total": 10000,
+    "paymentMethod": "efectivo",
+    "notes": "Oscar Mono — 2 cervezas micheladas — 10pm",
+    "createdAt": "2026-02-13T16:52:00.233Z",
+    "updatedAt": "2026-02-24T01:51:46.116Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1771001634157-i0nch7xit",
+    "saleDate": "2026-02-11T15:00:00.000Z",
+    "hour": 15,
+    "items": [
+      {
+        "productId": "cafe-negro",
+        "productName": "Café negro artesanal",
+        "quantity": 2,
+        "unitPrice": 4000,
+        "totalPrice": 8000
+      },
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (empanada o buñuelo)",
+        "quantity": 2,
+        "unitPrice": 2000,
+        "totalPrice": 4000
+      }
+    ],
+    "total": 12000,
+    "paymentMethod": "efectivo",
+    "notes": "el vecino 201 olimpo — 2 cafés + 2 galletas — 3:00pm",
+    "createdAt": "2026-02-13T16:53:54.157Z",
+    "updatedAt": "2026-02-24T01:51:18.370Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1771051217889-lwulw8liz",
+    "saleDate": "2026-02-14T23:00:00.000Z",
+    "hour": 23,
+    "items": [
+      {
+        "productId": "bebida-1767478463497-c2aya0ta0",
+        "productName": "Cóctel de Campari",
+        "quantity": 2,
+        "unitPrice": 15000,
+        "totalPrice": 30000
+      }
+    ],
+    "total": 30000,
+    "paymentMethod": "efectivo",
+    "notes": "cuchito con la amiga",
+    "createdAt": "2026-02-14T06:40:17.889Z",
+    "updatedAt": "2026-02-24T02:57:45.345Z",
+    "mesa": "Mesa circular 2"
+  },
+  {
+    "id": "sale-1771898223503-d9yipmku3",
+    "saleDate": "2026-02-13T21:00:00.000Z",
+    "hour": 21,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 10,
+        "unitPrice": 7000,
+        "totalPrice": 70000
+      }
+    ],
+    "total": 70000,
+    "paymentMethod": "nequi",
+    "notes": "jose, blanca y george",
+    "createdAt": "2026-02-24T01:57:03.503Z",
+    "updatedAt": "2026-02-24T01:57:56.038Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1771898422822-qt3p2y42y",
+    "saleDate": "2026-02-13T22:00:00.000Z",
+    "hour": 22,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 7,
+        "unitPrice": 7000,
+        "totalPrice": 49000
+      }
+    ],
+    "total": 49000,
+    "paymentMethod": "efectivo",
+    "notes": "guillermo",
+    "createdAt": "2026-02-24T02:00:22.822Z",
+    "updatedAt": "2026-02-24T02:00:22.822Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1771898860671-vdq5fd12k",
+    "saleDate": "2026-02-13T11:00:00.000Z",
+    "hour": 11,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 18,
+        "unitPrice": 7000,
+        "totalPrice": 126000
+      }
+    ],
+    "total": 126000,
+    "paymentMethod": "efectivo",
+    "notes": "señores cuchitos",
+    "createdAt": "2026-02-24T02:07:40.671Z",
+    "updatedAt": "2026-02-24T02:10:50.870Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1771899345471-43d9412yv",
+    "saleDate": "2026-02-13T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "cerveza-club-colombia-330",
+        "productName": "Cerveza Club Colombia",
+        "quantity": 2,
+        "unitPrice": 4000,
+        "totalPrice": 8000
+      },
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 2,
+        "unitPrice": 7000,
+        "totalPrice": 14000
+      }
+    ],
+    "total": 22000,
+    "paymentMethod": "efectivo",
+    "notes": "Maricio",
+    "createdAt": "2026-02-24T02:15:45.471Z",
+    "updatedAt": "2026-02-24T02:15:45.471Z",
+    "mesa": "Barra"
+  },
+  {
+    "id": "sale-1771900531495-zxw1f3u8n",
+    "saleDate": "2026-02-13T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "cerveza-club-colombia-330",
+        "productName": "Cerveza Club Colombia",
+        "quantity": 6,
+        "unitPrice": 4000,
+        "totalPrice": 24000
+      },
+      {
+        "productId": "prod-1768501042805-nuujaxetr",
+        "productName": "Aguardiente Amarillo",
+        "quantity": 1,
+        "unitPrice": 70000,
+        "totalPrice": 70000
+      }
+    ],
+    "total": 94000,
+    "paymentMethod": "nequi",
+    "notes": "Pelados raros",
+    "createdAt": "2026-02-24T02:35:31.496Z",
+    "updatedAt": "2026-02-24T02:35:31.496Z",
+    "mesa": "Barra"
+  },
+  {
+    "id": "sale-1771900802158-dg9b4axq1",
+    "saleDate": "2026-02-13T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "cerveza-club-colombia-330",
+        "productName": "Cerveza Club Colombia",
+        "quantity": 2,
+        "unitPrice": 4000,
+        "totalPrice": 8000
+      },
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 2,
+        "unitPrice": 7000,
+        "totalPrice": 14000
+      }
+    ],
+    "total": 22000,
+    "paymentMethod": "efectivo",
+    "notes": "mauricio presento mama",
+    "createdAt": "2026-02-24T02:40:02.158Z",
+    "updatedAt": "2026-02-24T02:40:02.158Z",
+    "mesa": "Barra"
+  },
+  {
+    "id": "sale-1772644552537-tmdliall3",
+    "saleDate": "2026-02-16T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker",
+        "quantity": 3,
+        "unitPrice": 3500,
+        "totalPrice": 10500
+      }
+    ],
+    "total": 10500,
+    "paymentMethod": "efectivo",
+    "notes": "Don ivan partido champions",
+    "createdAt": "2026-03-04T17:15:52.537Z",
+    "updatedAt": "2026-03-04T17:15:52.537Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772645024451-y44q7p21v",
+    "saleDate": "2026-02-16T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker",
+        "quantity": 2,
+        "unitPrice": 3500,
+        "totalPrice": 7000
+      },
+      {
+        "productId": "cig-marlboro-morado",
+        "productName": "Marlboro Morado",
+        "quantity": 1,
+        "unitPrice": 1000,
+        "totalPrice": 1000
+      }
+    ],
+    "total": 8000,
+    "paymentMethod": "efectivo",
+    "notes": "osito amigo sebastian",
+    "createdAt": "2026-03-04T17:23:44.451Z",
+    "updatedAt": "2026-03-04T17:23:44.451Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772645075730-p7uoek1s4",
+    "saleDate": "2026-02-16T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker",
+        "quantity": 2,
+        "unitPrice": 3500,
+        "totalPrice": 7000
+      }
+    ],
+    "total": 7000,
+    "paymentMethod": "efectivo",
+    "notes": "britanico champions",
+    "createdAt": "2026-03-04T17:24:35.730Z",
+    "updatedAt": "2026-03-04T17:24:35.730Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772647118647-en5pi9evv",
+    "saleDate": "2026-02-17T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 10,
+        "unitPrice": 7000,
+        "totalPrice": 70000
+      },
+      {
+        "productId": "cerveza-heineken",
+        "productName": "Cerveza Heineken",
+        "quantity": 1,
+        "unitPrice": 5000,
+        "totalPrice": 5000
+      },
+      {
+        "productId": "media-aguardiente-narino",
+        "productName": "Media Aguardiente Nariño",
+        "quantity": 1,
+        "unitPrice": 35000,
+        "totalPrice": 35000
+      }
+    ],
+    "total": 110000,
+    "paymentMethod": "efectivo-aporte",
+    "notes": "[APORTE] Pagó $70.000 de $110.000 (deuda $40.000 a nombre de mauricio.)",
+    "createdAt": "2026-03-04T17:58:38.647Z",
+    "updatedAt": "2026-03-04T17:58:38.647Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772647839276-9m8pderko",
+    "saleDate": "2026-02-19T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 8,
+        "unitPrice": 7000,
+        "totalPrice": 56000
+      },
+      {
+        "productId": "cerveza-club-colombia-330",
+        "productName": "Cerveza Club Colombia",
+        "quantity": 4,
+        "unitPrice": 4000,
+        "totalPrice": 16000
+      },
+      {
+        "productId": "bebida-1767478306369-c8s8nr6nh",
+        "productName": "Moscow Mule",
+        "quantity": 1,
+        "unitPrice": 15000,
+        "totalPrice": 15000
+      }
+    ],
+    "total": 87000,
+    "paymentMethod": "efectivo",
+    "notes": "equipo emssanar ",
+    "createdAt": "2026-03-04T18:10:39.276Z",
+    "updatedAt": "2026-03-04T18:14:27.226Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772647989144-sd67464tb",
+    "saleDate": "2026-02-18T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 5,
+        "unitPrice": 7000,
+        "totalPrice": 35000
+      }
+    ],
+    "total": 35000,
+    "paymentMethod": "nequi",
+    "notes": "mauricio ",
+    "createdAt": "2026-03-04T18:13:09.144Z",
+    "updatedAt": "2026-03-04T18:13:09.144Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772648161648-7k3l5gcfx",
+    "saleDate": "2026-02-19T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 1,
+        "unitPrice": 7000,
+        "totalPrice": 7000
+      }
+    ],
+    "total": 7000,
+    "paymentMethod": "efectivo",
+    "notes": "vecino edificio",
+    "createdAt": "2026-03-04T18:16:01.648Z",
+    "updatedAt": "2026-03-04T18:16:01.648Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772648479672-mcnx525mo",
+    "saleDate": "2026-02-19T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "cerveza-budweiser",
+        "productName": "Cerveza Budweiser",
+        "quantity": 4,
+        "unitPrice": 3500,
+        "totalPrice": 14000
+      },
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 2,
+        "unitPrice": 7000,
+        "totalPrice": 14000
+      }
+    ],
+    "total": 28000,
+    "paymentMethod": "nequi",
+    "notes": "Oscar guerror en la barra",
+    "createdAt": "2026-03-04T18:21:19.672Z",
+    "updatedAt": "2026-03-04T18:21:19.672Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772661681998-pfsshd9yt",
+    "saleDate": "2026-02-23T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "cerveza-budweiser",
+        "productName": "Cerveza Budweiser",
+        "quantity": 8,
+        "unitPrice": 3500,
+        "totalPrice": 28000
+      },
+      {
+        "productId": "cig-marlboro-morado",
+        "productName": "Marlboro Morado",
+        "quantity": 2,
+        "unitPrice": 1000,
+        "totalPrice": 2000
+      }
+    ],
+    "total": 30000,
+    "paymentMethod": "nequi",
+    "notes": "vecino que pidió el cable para cargar",
+    "createdAt": "2026-03-04T22:01:21.998Z",
+    "updatedAt": "2026-03-04T22:01:21.998Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772661881157-ts4a7xjdj",
+    "saleDate": "2026-02-25T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 2,
+        "unitPrice": 7000,
+        "totalPrice": 14000
+      },
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (empanada o buñuelo)",
+        "quantity": 2,
+        "unitPrice": 3000,
+        "totalPrice": 6000
+      }
+    ],
+    "total": 20000,
+    "paymentMethod": "nequi",
+    "notes": "venta sonia a clientes organicos",
+    "createdAt": "2026-03-04T22:04:41.157Z",
+    "updatedAt": "2026-03-04T22:04:41.157Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772662034380-778e4jfx6",
+    "saleDate": "2026-03-03T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "cafe-negro",
+        "productName": "Café negro artesanal",
+        "quantity": 1,
+        "unitPrice": 4000,
+        "totalPrice": 4000
+      }
+    ],
+    "total": 4000,
+    "paymentMethod": "efectivo",
+    "notes": "vecino del tequila ",
+    "createdAt": "2026-03-04T22:07:14.380Z",
+    "updatedAt": "2026-03-04T22:07:14.380Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772666871725-p46zrn5iz",
+    "saleDate": "2026-03-04T18:00:00.000Z",
+    "hour": 18,
+    "items": [
+      {
+        "productId": "cafe-negro",
+        "productName": "Café negro artesanal",
+        "quantity": 2,
+        "unitPrice": 4000,
+        "totalPrice": 8000
+      },
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (empanada o buñuelo)",
+        "quantity": 1,
+        "unitPrice": 3000,
+        "totalPrice": 3000
+      }
+    ],
+    "total": 11000,
+    "paymentMethod": "nequi",
+    "notes": "café inga de aponte",
+    "createdAt": "2026-03-04T23:27:51.725Z",
+    "updatedAt": "2026-03-04T23:27:51.725Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772679539684-vq90dm836",
+    "saleDate": "2026-03-03T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 4,
+        "unitPrice": 7000,
+        "totalPrice": 28000
+      },
+      {
+        "productId": "prod-aromatica",
+        "productName": "Aromática",
+        "quantity": 2,
+        "unitPrice": 4000,
+        "totalPrice": 8000
+      },
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (empanada o buñuelo)",
+        "quantity": 2,
+        "unitPrice": 3000,
+        "totalPrice": 6000
+      },
+      {
+        "productId": "sandwich-dia",
+        "productName": "Sándwich del día",
+        "quantity": 1,
+        "unitPrice": 10000,
+        "totalPrice": 10000
+      },
+      {
+        "productId": "cerveza-club-colombia-330",
+        "productName": "Cerveza Club Colombia",
+        "quantity": 1,
+        "unitPrice": 4000,
+        "totalPrice": 4000
+      },
+      {
+        "productId": "prod-suspiros",
+        "productName": "Suspiros",
+        "quantity": 2,
+        "unitPrice": 1000,
+        "totalPrice": 2000
+      }
+    ],
+    "total": 58000,
+    "paymentMethod": "efectivo-aporte",
+    "notes": "Mauricio con el sobrino  [APORTE] Pagó $0 de $58.000 (deuda $58.000 a nombre de Mauricio)",
+    "createdAt": "2026-03-05T02:58:59.684Z",
+    "updatedAt": "2026-03-05T02:58:59.684Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772680905315-gtytkpbeo",
+    "saleDate": "2026-03-03T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 4,
+        "unitPrice": 7000,
+        "totalPrice": 28000
+      },
+      {
+        "productId": "prod-1770687422697-le373wgmo",
+        "productName": "Cerveza michelada",
+        "quantity": 1,
+        "unitPrice": 5000,
+        "totalPrice": 5000
+      },
+      {
+        "productId": "gin-gordons-shot",
+        "productName": "Shot ginebra",
+        "quantity": 1,
+        "unitPrice": 12000,
+        "totalPrice": 12000
+      }
+    ],
+    "total": 45000,
+    "paymentMethod": "nequi",
+    "notes": "compra erika y ferney",
+    "createdAt": "2026-03-05T03:21:45.315Z",
+    "updatedAt": "2026-03-05T03:21:45.315Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772680954826-eoq0jmnkf",
+    "saleDate": "2026-03-04T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "cerveza-poker-330",
+        "productName": "Cerveza Poker",
+        "quantity": 2,
+        "unitPrice": 3500,
+        "totalPrice": 7000
+      }
+    ],
+    "total": 7000,
+    "paymentMethod": "efectivo",
+    "notes": "don ivan",
+    "createdAt": "2026-03-05T03:22:34.826Z",
+    "updatedAt": "2026-03-05T03:22:34.826Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772680986261-vi6caad13",
+    "saleDate": "2026-03-04T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 2,
+        "unitPrice": 7000,
+        "totalPrice": 14000
+      }
+    ],
+    "total": 14000,
+    "paymentMethod": "efectivo",
+    "notes": "sras universidad",
+    "createdAt": "2026-03-05T03:23:06.261Z",
+    "updatedAt": "2026-03-05T03:23:06.261Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772682136027-4r30l0ajo",
+    "saleDate": "2026-03-04T12:00:00.000Z",
+    "hour": 12,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 4,
+        "unitPrice": 7000,
+        "totalPrice": 28000
+      }
+    ],
+    "total": 28000,
+    "paymentMethod": "efectivo",
+    "notes": "vecino edificio ",
+    "createdAt": "2026-03-05T03:42:16.027Z",
+    "updatedAt": "2026-03-05T03:42:16.027Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1772997552673-dnzzvo0pw",
+    "saleDate": "2026-03-06T19:00:00.000Z",
+    "hour": 19,
+    "items": [
+      {
+        "productId": "bebida-limonada",
+        "productName": "Limonada",
+        "quantity": 2,
+        "unitPrice": 7500,
+        "totalPrice": 15000
+      },
+      {
+        "productId": "acompanante",
+        "productName": "Acompañante del día (Empanada)",
+        "quantity": 1,
+        "unitPrice": 3000,
+        "totalPrice": 3000
+      }
+    ],
+    "total": 18000,
+    "paymentMethod": "efectivo-aporte",
+    "notes": "[APORTE] Pagó $14.000 de $18.000 (deuda $4.000 a nombre de Vecino)",
+    "createdAt": "2026-03-08T19:19:12.673Z",
+    "updatedAt": "2026-03-08T19:19:12.673Z",
+    "mesa": "Vecino"
+  },
+  {
+    "id": "sale-1772997552699-z2ze7kuhv",
+    "saleDate": "2026-03-06T20:00:00.000Z",
+    "hour": 20,
+    "items": [
+      {
+        "productId": "tequila-olmeca-shot",
+        "productName": "Tequila (shot)",
+        "quantity": 1,
+        "unitPrice": 10000,
+        "totalPrice": 10000
+      },
+      {
+        "productId": "acompanante",
+        "productName": "Empanada",
+        "quantity": 2,
+        "unitPrice": 4000,
+        "totalPrice": 8000
+      },
+      {
+        "productId": "bebida-soda",
+        "productName": "Soda",
+        "quantity": 1,
+        "unitPrice": 3000,
+        "totalPrice": 3000
+      },
+      {
+        "productId": "botella-generica",
+        "productName": "Botella de licor",
+        "quantity": 2,
+        "unitPrice": 175000,
+        "totalPrice": 350000
+      },
+      {
+        "productId": "cerveza-club-colombia-330",
+        "productName": "Cerveza",
+        "quantity": 1,
+        "unitPrice": 4000,
+        "totalPrice": 4000
+      }
+    ],
+    "total": 375000,
+    "paymentMethod": "efectivo",
+    "notes": "Mariana Estuduantes: tequila, 2 empanadas, soda, 2 botellas, 1 cerveza. Pendiente: 1 copa $7.000.",
+    "createdAt": "2026-03-08T19:19:12.699Z",
+    "updatedAt": "2026-03-08T19:20:42.808Z",
+    "mesa": "Mauri"
+  },
+  {
+    "id": "sale-1772997552730-8ln2tnscd",
+    "saleDate": "2026-03-06T21:00:00.000Z",
+    "hour": 21,
+    "items": [
+      {
+        "productId": "refajo",
+        "productName": "Refajo",
+        "quantity": 1,
+        "unitPrice": 5000,
+        "totalPrice": 5000
+      },
+      {
+        "productId": "cafe-negro",
+        "productName": "Café negro artesanal",
+        "quantity": 1,
+        "unitPrice": 4000,
+        "totalPrice": 4000
+      },
+      {
+        "productId": "papas",
+        "productName": "Papas",
+        "quantity": 1,
+        "unitPrice": 7000,
+        "totalPrice": 7000
+      },
+      {
+        "productId": "cerveza-club-colombia-330",
+        "productName": "Cerveza",
+        "quantity": 2,
+        "unitPrice": 4000,
+        "totalPrice": 8000
+      }
+    ],
+    "total": 82000,
+    "paymentMethod": "efectivo-aporte",
+    "notes": "[APORTE] Pagó $74.000 de $82.000 (deuda $8.000 a nombre de Mauricio - Mesa 2). Incluye deuda anterior $58.000.",
+    "createdAt": "2026-03-08T19:19:12.730Z",
+    "updatedAt": "2026-03-08T19:19:12.730Z",
+    "mesa": "Mesa 2 - Mauricio"
+  },
+  {
+    "id": "sale-1772997552756-fh7c5k68k",
+    "saleDate": "2026-03-06T22:00:00.000Z",
+    "hour": 22,
+    "items": [
+      {
+        "productId": "cerveza-club-colombia-330",
+        "productName": "Cerveza Club Colombia 330cm3",
+        "quantity": 3,
+        "unitPrice": 4000,
+        "totalPrice": 12000
+      },
+      {
+        "productId": "cigarro-suelto",
+        "productName": "Cigarro suelto",
+        "quantity": 1,
+        "unitPrice": 1000,
+        "totalPrice": 1000
+      }
+    ],
+    "total": 13000,
+    "paymentMethod": "efectivo",
+    "notes": "Oscar Guerrero: 3 Club, 1 cigarro.",
+    "createdAt": "2026-03-08T19:19:12.756Z",
+    "updatedAt": "2026-03-08T19:19:12.756Z",
+    "mesa": "Oscar Guerrero"
+  },
+  {
+    "id": "sale-1772997552773-5vwyqrfnr",
+    "saleDate": "2026-03-06T23:00:00.000Z",
+    "hour": 23,
+    "items": [
+      {
+        "productId": "vodka-smirnoff-media",
+        "productName": "1/2 botella Vodka Smirnoff",
+        "quantity": 1,
+        "unitPrice": 35000,
+        "totalPrice": 35000
+      }
+    ],
+    "total": 35000,
+    "paymentMethod": "efectivo",
+    "notes": "Ing. Harold: 1/2 botella Smirnoff.",
+    "createdAt": "2026-03-08T19:19:12.773Z",
+    "updatedAt": "2026-03-08T19:19:12.773Z",
+    "mesa": "Ing. Harold"
+  },
+  {
+    "id": "sale-1773189651500-pyoi6zb2m",
+    "saleDate": "2026-03-09T14:00:00.000Z",
+    "hour": 14,
+    "items": [
+      {
+        "productId": "bebida-1767479537737-5pcmv20sn",
+        "productName": "Hervido de fruta de temporada",
+        "quantity": 1,
+        "unitPrice": 6000,
+        "totalPrice": 6000
+      },
+      {
+        "productId": "cerveza-club-colombia-330",
+        "productName": "Cerveza Club Colombia 330cm3",
+        "quantity": 1,
+        "unitPrice": 4500,
+        "totalPrice": 4500
+      }
+    ],
+    "total": 10500,
+    "paymentMethod": "efectivo",
+    "notes": "Ventas 9 marzo: 1 hervido + 1 cerveza.",
+    "createdAt": "2026-03-11T00:40:51.500Z",
+    "updatedAt": "2026-03-11T00:40:51.500Z",
+    "mesa": null
+  },
+  {
+    "id": "sale-1773189651626-ocgrqngs1",
+    "saleDate": "2026-03-10T14:00:00.000Z",
+    "hour": 14,
+    "items": [
+      {
+        "productId": "cerveza-club-colombia-330",
+        "productName": "Cerveza Club Colombia 330cm3",
+        "quantity": 1,
+        "unitPrice": 3500,
+        "totalPrice": 3500
+      },
+      {
+        "productId": "cig-marlboro-rojo",
+        "productName": "Cigarrillo Marlboro rojo",
+        "quantity": 2,
+        "unitPrice": 1000,
+        "totalPrice": 2000
+      }
+    ],
+    "total": 5500,
+    "paymentMethod": "efectivo",
+    "notes": "Ventas 10 marzo: 1 cerveza + 2 cigarrillos.",
+    "createdAt": "2026-03-11T00:40:51.626Z",
+    "updatedAt": "2026-03-11T00:40:51.626Z",
+    "mesa": null
+  }
+]
