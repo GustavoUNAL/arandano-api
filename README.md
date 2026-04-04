@@ -1,99 +1,90 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
-
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
-
-```bash
-$ npm install
-```
-
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
-```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
-```
-
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
-
-## Resources
-
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 # arandano-api
+
+API en [NestJS](https://nestjs.com/) con **Prisma** y **PostgreSQL**: menú, inventario, lotes de compra, aportes de socios, ventas y datos auxiliares.
+
+## Requisitos
+
+- Node.js (LTS recomendado)
+- PostgreSQL
+- Variables en `.env` (al menos `DATABASE_URL`)
+
+## Instalación
+
+```bash
+npm install
+npm run db:generate
+```
+
+## Aplicación
+
+```bash
+npm run start:dev    # desarrollo con recarga
+npm run build        # compilar
+npm run start:prod   # producción (tras build)
+npm run test         # tests unitarios
+```
+
+## Base de datos
+
+### Migraciones
+
+```bash
+npm run db:migrate      # prisma migrate deploy (CI / prod)
+npm run db:migrate:dev  # crear/aplicar migración en desarrollo
+```
+
+Incluye la tabla `purchase_lots` (lotes de compra históricos enlazados por `inventory.lot`).
+
+### Verificar consistencia de datos locales
+
+Comprueba que `inventory.json`, `inventory-purchase-lots.tsv` y los `productId` de ingredientes en `recipes.json` estén alineados:
+
+```bash
+npm run db:verify-data
+```
+
+Última verificación esperada: **222** ítems de inventario, **30** lotes distintos, **222** líneas en el TSV con los mismos `item_id`, y recetas sin referencias rotas.
+
+### Inventario, socios y lotes
+
+Los ítems viven en `prisma/data/tables/inventory.json` (ids estables `inv-…`). El export tabular de lotes se regenera desde ese JSON:
+
+| Comando | Descripción |
+| --------|-------------|
+| `npm run db:export-inventory-lots-tsv` | Escribe `prisma/data/inventory-purchase-lots.tsv` |
+| `npm run db:import-inventory-partners` | Upsert de `inventory` + `PartnerContribution` (INSUMO) inferido por socio |
+| `npm run db:register-purchase-lots` | Upsert de `purchase_lots` (agregados por código de lote) |
+
+Orden sugerido en una base nueva (tras migraciones y categorías necesarias):
+
+1. `npm run db:import-inventory-partners`
+2. `npm run db:register-purchase-lots`
+
+Opciones útiles: `--dry-run` en ambos scripts; el de socios acepta `--skip-delete-contributions` para no borrar aportes marcados con el prefijo de importación.
+
+### Otros scripts de datos
+
+| Comando | Descripción |
+| --------|-------------|
+| `npm run db:import-organized` | Import desde `prisma/data/organized-dump.json` (asigna ids nuevos; no preserva `inv-…` del JSON de inventario) |
+| `npm run db:sync-products` | Productos desde `prisma/data/lista-productos.csv` |
+| `npm run db:import-sales-json` | Ventas desde JSON |
+| `npm run db:backfill-sale-lines` | Rellena costos en líneas de venta |
+| `npm run db:purge-soft-deleted` | Elimina físicamente productos soft-deleted |
+| `npm run db:seed-menu-recipes` | Siembra recetas de menú (cafetería, bar, comida) |
+
+Exploración: `npm run db:studio`.
+
+## Estructura relevante
+
+- `prisma/schema.prisma` — modelos (`Inventory`, `PurchaseLot`, `Partner`, `PartnerContribution`, …)
+- `prisma/data/tables/` — tablas en JSON para dumps / import
+- `scripts/` — importadores y utilidades de datos
+
+## Documentación NestJS
+
+Plantilla original del framework: [documentación NestJS](https://docs.nestjs.com).
+
+## Licencia
+
+UNLICENSED (privado).

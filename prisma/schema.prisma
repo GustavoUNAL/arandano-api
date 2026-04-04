@@ -155,6 +155,24 @@ model Inventory {
   @@map("inventory")
 }
 
+/// Lote de compra histórico (misma factura o visita). Se enlaza con `inventory.lot` por `code`.
+model PurchaseLot {
+  id           String   @id @default(cuid())
+  code         String   @unique
+  purchaseDate DateTime @map("purchase_date") @db.Timestamptz(6)
+  supplier     String?
+  notes        String?
+
+  itemCount  Int      @default(0) @map("item_count")
+  totalValue Decimal? @map("total_value") @db.Decimal(12, 2)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([purchaseDate], map: "idx_purchase_lots_purchase_date")
+  @@map("purchase_lots")
+}
+
 /// Una receta por producto (`product_id` único). Columna SQL `yield` mapeada a `recipeYield` (evita palabra reservada en TS).
 model Recipe {
   id        String  @id @default(cuid())

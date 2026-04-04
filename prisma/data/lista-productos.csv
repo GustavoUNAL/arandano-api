@@ -1,0 +1,80 @@
+☕ CAFETERÍA,,,,
+,,,,
+Nombre, Descripción, Precio, Tamaño,Categoría
+Aromática con fruta,6 oz de agua con aromáticas y fruta,7000,6 oz,cafeteria
+Soda italiana,"12 oz soda con sirope, limón y opcional sal o picante",10000,12 oz,cafeteria
+Vaso de leche,8 oz de leche de vaca,5000,8 oz,cafeteria
+Affogato,2 oz espresso con helado de vainilla,10000,2 oz,cafeteria
+Café irlandés,3 oz café + 2 oz whisky + 2 oz leche,17000,7 oz,cafeteria
+Café aromatizado,6 oz de Café Nariñense con canela o vainilla,5000,6 oz,cafeteria
+Aromática,6 oz de agua con aromáticas,3000,6 oz,cafeteria
+Leche achocolatada,6 oz leche con chocolate en polvo,5000,6 oz,cafeteria
+Jarra de aromática con fruta,1 litro de aromática,10000,33 oz,cafeteria
+Café con leche,6 oz de Café Nariñense con leche,5000,6 oz,cafeteria
+Café negro artesanal,6 oz de Café Nariñense preparado al momento de servir,4000,6 oz,cafeteria
+Carajillo,4 oz de café con 2 oz de aguardiente,8000,6 oz,cafeteria
+Café frapé,6 oz café frío granizado con leche,8000,6 oz,cafeteria
+,,,,
+🍺 BAR,,,,
+,,,,
+Nombre, Descripción, Precio, Tamaño,Categoría
+Cerveza Poker,cerveza nacional,3500,330 ml,bar
+Cerveza Coronita,cerveza importada rubia,3500,210 ml,bar
+Cerveza Pokeron,cerveza nacional rubia,6000,750 ml,bar
+Cerveza Club Colombia,cerveza nacional rubia o roja,4000,330 ml,bar
+Cerveza Michelada,"cerveza con limón, sal o picante",7000,330 ml,bar
+Cerveza Budweiser,cerveza importada rubia,3500,269 ml,bar
+,,,,
+🍹 CÓCTELES,,,,
+,,,,
+Nombre, Descripción, Precio, Tamaño,Categoría
+Hervidos,12 oz de coctel de frutas cítricas con 2 oz licor artesanal,7000,12 oz,cocteles
+Jarra de hervidos,1 litro de cóctel de frutas cítricas calientes con 10 oz de licor artesanal,25000,33 oz,cocteles
+Cóctel arándano,12 oz granizado de arándano con 2 oz ginebra,15000,12 oz,cocteles
+Margarita,10 oz mezcla de limón con 2 oz tequila,15000,10 oz,cocteles
+Piña colada,12 oz crema de coco y piña con 2 oz ron,15000,12 oz,cocteles
+Negroni,12 oz soda con 2 oz Campari y naranja,15000,12 oz,cocteles
+Moscow mule,12 oz ginger beer con 2 oz vodka,15000,12 oz,cocteles
+Gin Tonic,12 oz tónica con 2 oz ginebra,15000,12 oz,cocteles
+Whisky en las rocas,2 oz whisky con hielo,22000,2 oz,cocteles
+,,,,
+🥃 SHOTS,,,,
+,,,,
+Nombre, Descripción, Precio, Tamaño,Categoría
+Shot Vodka,1 oz vodka con limón y sal o ají,6000,1 oz,shots
+Shot Tequila,1 oz tequila con limón y sal,8000,1 oz,shots
+Shot Brandy,1 oz brandy con cereza,5000,1 oz,shots
+Shot Aguardiente,1 oz aguardiente con limón y sal o ají,6000,1 oz,shots
+Shot Whisky,1 oz whisky solo o con limón,12000,1 oz,shots
+Shot Ginebra,1 oz ginebra con aceituna o limón,7000,1 oz,shots
+Shot Ron,1 oz ron con limón o cereza,5000,1 oz,shots
+,,,,
+🍾 BOTELLAS,,,,
+,,,,
+Nombre, Descripción, Precio, Tamaño,Categoría
+Aguardiente Nariño o Amarillo,750 ml aguardiente tradicional,65000,750 ml,botellas
+Ginebra Gordon’s,750 ml ginebra clásica,95000,750 ml,botellas
+Tequila Olmeca,750 ml tequila joven,110000,750 ml,botellas
+Whisky Old Parr,750 ml whisky escocés,170000,750 ml,botellas
+Vino tinto,750 ml vino tinto,65000,750 ml,botellas
+Vodka Smirnoff Tamarindo,750 ml vodka sabor tamarindo,70000,750 ml,botellas
+,,,,
+🍴 COMIDA,,,,
+,,,,
+Nombre, Descripción, Precio, Tamaño,Categoría
+Porción de galletas,3 galletas artesanales,5000,3 unit,comida
+Empanadas,1 empanada de carne o pollo,3500,1 unit,comida
+Tostadas,1 tostada integral con mantequilla o mermelada,2000,1 unit,comida
+Hot Dog,"Pan suave con salchicha premium, queso, papa triturada, salsas y jalapeños.",11000,1 unit,comida
+Hot Dog en combo,1 Hot Dog con vaso de gaseosa y papas chips,15000,1 unit,comida
+,,,,
+🎯 COMBOS,,,,
+,,,,
+Nombre, Descripción, Precio, Tamaño,Categoría
+Combo Lunes Micheladas,"2 cervezas micheladas (limón, sal o picante)",13000,1 unit,combos
+Combo Martes Café,Café negro + 2 tostadas con mantequilla o mermelada,6500,1 unit,combos
+Combo Miércoles Jarra,Jarra de hervido (1 litro de cóctel caliente con licor),20000,1 unit,combos
+Combo Jueves Hervidos,2 hervidos (cóctel caliente de frutas con licor),12000,1 unit,combos
+Combo Viernes Shots,"3 shots (aguardiente, ron o brandy)",13000,1 unit,combos
+Combo Viernes Moscow Mule,2 cócteles Moscow Mule (vodka + ginger beer),25000,1 unit,combos
+Combo Sábado Frappé,Café frappé + 1 galleta artesanal,9500,1 unit,combos

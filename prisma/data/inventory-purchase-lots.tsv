@@ -1,0 +1,223 @@
+lot	purchaseDate	supplier	item_name	item_id	code	quantity	unit	unitPrice	totalValue	notes
+PATY-20260103-001	2026-01-03	Patty	Ponqué Ramo	inv-1767483353901-kx2to8c6y	PAN-001	0	Unidad	18590	0	Actualización de precio
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Club Colombia Trigo	inv-1767483353905-n6abubp0m	CE-005	0	Lata	3648.33	0	Nuevo producto
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Poker latas	inv-1767483353905-q1dvhqyit	CE-001	26	Lata	2666.67	69333.42	Nuevo producto
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Four Loko	inv-1767483353905-rculqbs47	CE-006	0	Lata	15000	0	Nuevo producto
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Águila lata	inv-1767483353905-sje33kukt	CE-003	6	Lata	3500	21000	Nuevo producto
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Poker latones	inv-1767483353905-uqwddngmo	CE-002	3	Latón	3333.33	9999.99	Nuevo producto
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Águila latón	inv-1767483353905-uteot8kax	CE-004	0	Latón	4000	0	Nuevo producto
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Aguardiente	inv-1767483353908-agu-est	AGU-EST	1	Botella	51900	51900	Completa
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Aguardiente Nariño	inv-1767483353908-agu-nar	AGU-NAR	1	Botella	51900	51900	Completas
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Smirnoff Tamarindo	inv-1767483353908-c1ooa4r20	VOD-SMI-TAM	1	Botella	54750	54750	Nuevo sabor
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Chapil artesanal	inv-1767483353908-cha-art	CHA-ART	0	Botella	10000	0	Media
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Coñac Domecq	inv-1767483353908-con-dom	COÑ-DOM	0	Botella	15000	0	Baja cantidad
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Vodka Moskovskaya	inv-1767483353908-dlloi6yve	VOD-MOS	0	Botella	58800	0	Buena rotación
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Vino Cruzares	inv-1767483353908-gmu0i0sa7	VIN-CRU	0	Botella	20000	0	Económico
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Vino Santa Elena	inv-1767483353908-gqfhutm09	VIN-SE	2	Botella	66900	133800	Cosecha 2024
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Ginebra Gordon's	inv-1767483353908-mr8nlyywm	GIN-GOR	1	Botella	78600	78600	Clásico
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Tequila 1800	inv-1767483353908-teq-1800	TEQ-1800	0	Botella	110000	0	Media gastada
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	José Cuervo Tequila	inv-1767483353908-teq-jc	TEQ-JC	0	Botella	110000	0	1/4 inventario
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Aperitivo Campari Milano	inv-1767483353908-u55v6zs0u	CAM-MIL	1	Botella	121900	121900	Importado
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Whisky Old Par	inv-1767483353908-whi-op	WHI-OP	0	Botella	42000	0	1/4 inventario
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Whisky Something Special	inv-1767483353908-whi-ss	WHI-SS	1	Botella	12500	12500	Media
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Whisky Duggan's Dew	inv-1767483353908-y3b53io8x	WHI-DD	1	Botella	48000	48000	Oferta limitada
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Tequila Olmeca Blanco	inv-1767483353908-y9q9alloi	TEQ-OLM	1	Botella	81500	81500	Stock alto
+PROVEEDORNOE-20241229-001	2024-12-29	Proveedor no especificado	Vino tinto Cata Vieja	inv-1767483353908-yecytqq00	VIN-CV	0	Botella	22900	0	Promoción 2x1
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Hielo bolsa	inv-1767483353913-1889mnu82	HIE-001	0	Bolsa	12000	0	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Sirope arándanos	inv-1767483353913-4i345h1fq	SYR-001	1	Botella	20000	20000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Tajín	inv-1767483353913-8vb41ck7n	COND-001	0	Unidad	5700	0	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Base cóctel Brissart granadina	inv-1767483353913-hjd3452mp	BASE-001	1	Botella	25200	25200	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Base cóctel Finest Call Triple Sec	inv-1767483353913-jb8887h9r	BASE-003	0	Botella	33300	0	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Bretaña personal x6	inv-1767483353913-kkkqg7bwc	REF-001	0	Paquete	12000	0	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Syrup Finest Call Blue Curacao	inv-1767483353913-qr9j8fm77	SYR-002	1	Botella	33300	33300	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Base cóctel Brissart maracuyá	inv-1767483353913-r7pklcu5h	BASE-002	1	Botella	25200	25200	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Bretaña	inv-1767483353913-ttz27x8mn	REF-002	0	Botella	5000	0	
+PROVEEDORNOE-20250103-001	2025-01-03	Proveedor no especificado	Leche Alquería semidescremada	inv-1767483353917-ser4dw1e8	LEC-ALS-1L	0	Bolsa	6000	0	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Domos para tortas	inv-1767483353921-0k33w9jh5	MN-DOM001	2	Unidad	135000	270000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Copa coctel margarita	inv-1767483353921-24prmoz3t	MN-COM001	5	Unidad	9000	45000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Parlante HK Onyx 2	inv-1767483353921-3dj8riyht	EL-PAR001	1	Unidad	700000	700000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Bombillo Philips 5.5W	inv-1767483353921-5f90elhbh	EL-BOM001	1	Unidad	2950	2950	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Vaso Moscow Mule	inv-1767483353921-6vsarl10x	MN-VMM001	6	Unidad	35000	210000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Cucharilla larga	inv-1767483353921-a1032pils	MN-CUC001	1	Unidad	2500	2500	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Mug Bourbon Nashville Café	inv-1767483353921-cjvtdvidh	MN-MUG001	3	Unidad	3966.67	11900	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Colador de café	inv-1767483353921-dwks9mhx0	UT-COL001	2	Unidad	2950	5900	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Prensa francesa	inv-1767483353921-gq1yk5z5x	UT-PRF001	2	Unidad	20000	40000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Combo mesa y sillas	inv-1767483353921-heejtdc7k	MB-COM001	1	Unidad	350000	350000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Nevera usada	inv-1767483353921-jeaol1ls8	MB-NEV001	1	Unidad	1000000	1000000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Vasos cerveza grande	inv-1767483353921-mgo7govsz	MN-CEG001	6	Unidad	5000	30000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Vasos plásticos para vino	inv-1767483353921-qi0havlkm	MN-VIV001	6	Unidad	7000	42000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Papelera / Basurero negra	inv-1767483353921-u5qggrpko	UT-PPL001	1	Unidad	32500	32500	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Termo café	inv-1767483353921-ufr8l4s5s	MN-TER001	1	Unidad	40000	40000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Vaso tinto	inv-1767483353921-vgarot6ts	MN-VTI001	3	Unidad	3666.67	11000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Vasos cerveza pequeño	inv-1767483353921-wd3u0uxxd	MN-CEP001	6	Unidad	4000	24000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Pocillo café semi liso	inv-1767483353921-xiwz9ce3l	MN-POC001	3	Unidad	3900	11700	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Cenicero	inv-1767483353922-18gprsfx1	UT-CEN001	1	Unidad	100000	100000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Mesa Rimax	inv-1767483353922-5h0n8o5j0	MB-MES001	1	Unidad	100000	100000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Tabla para picar	inv-1767483353922-9gphugxoi	UT-TAP001	1	Unidad	600000	600000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Velas x12	inv-1767483353922-f1f60u9ca	INS-VEL001	0	Set	7000	0	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Encendedor para velas	inv-1767483353922-ikhc4vyhq	INS-ENC001	1	Unidad	6000	6000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Exprimidor metálico	inv-1767483353922-j063f9gib	UT-EXP001	1	Unidad	16000	16000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Cafetera moka	inv-1767483353922-nsw7b21rh	UT-CFM001	1	Unidad	30000	30000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Letrero luminoso	inv-1767483353922-q3qmv2vcv	EL-LEL001	1	Unidad	500000	500000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Ganchos sujetadores	inv-1767483353922-qqq2lpoo0	INS-GAN001	1	Unidad	8000	8000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Copas shot x12	inv-1767483353922-rw7y8iafe	MN-CPS001	1	Set	32000	32000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Cuchillos x3	inv-1767483353922-s7hrvd8qf	MN-CUC002	1	Set	12000	12000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Tijera	inv-1767483353922-vtavwaccv	UT-TIJ001	1	Unidad	10000	10000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Caja de madera	inv-1767483353922-yn99umkho	MB-CAJ001	1	Unidad	14000	14000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Limpión microfibra carros	inv-1767483353924-3w6k0hshd	LIM-001	1	Unidad	4200	4200	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Papel toalla Scott	inv-1767483353924-64dp267fv	INS-001	1	Rollo	16000	16000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Jabón de loza	inv-1767483353924-6uvxurwqu	LIM-002	0	Unidad	5000	0	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Desodorante Speed Stick Ultra Gel	inv-1767483353924-efb85j7pj	ASE-001	1	Unidad	34600	34600	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Recogedor	inv-1767483353924-fiy9i5pzj	LIM-005	1	Unidad	10000	10000	
+PROVEEDORNOE-20250103-001	2025-01-03	Proveedor no especificado	Papel Higiénico	inv-1767483353924-kzrwa9a7p	DES-PH01	1	Unidad	2400	2400	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Servilletas	inv-1767483353924-qfyuq638h	INS-002	0	Paquete	6000	0	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Escoba	inv-1767483353924-uubm2bavd	LIM-004	1	Unidad	10000	10000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Trapeador	inv-1767483353924-vvzbksqce	LIM-003	1	Unidad	10000	10000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Café Sello Rojo	inv-1767483353925-pg25jxttu	CAF-001	0	Paquete	16000	0	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Café Instantáneo	inv-1767483353926-6ynvm45dt	CAF-002	0	Frasco	11000	0	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Bolsa para colar café	inv-1767483353926-i7v18gj8j	UTEN-001	2	Unidad	5900	11800	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Azúcar	inv-1767483353926-tgjwb0599	INS-001	0	Bolsa	5000	0	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Aromáticas	inv-1767483353926-wdcg82vjf	INS-002	1	Unidad	4000	4000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Tapa para Vaso	inv-1767483353927-9qciixvtf	DES-TV6OZ50	1	Pack	4600	4600	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Vaso de Icopor	inv-1767483353927-jqtkdgrno	DES-VI20	1	Pack	6000	6000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Palillos	inv-1767483353927-mfm31g7cv	DES-PAL180	1	Pack	2100	2100	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Caja de Icopor	inv-1767483353927-pnyzk4zys	DES-CI20	1	Pack	13000	13000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Copa Desechable Pequeña	inv-1767483353927-set8m797g	DES-CDP60	1	Pack	8000	8000	
+STOKSONIA-20241201-001	2024-12-01	Proveedor no especificado	Vaso de Papel	inv-1767483353927-xxcwuqi28	DES-VP40	1	Pack	5500	5500	
+PATY-20260103-001	2026-01-03	Patty	Queso Colanta	inv-1767634700399-318ocn17k	INS-QUE-001	1	Unidad	11180	11180	
+PATY-20260103-001	2026-01-03	Patty	Mostaneza Rancho La Constancia	inv-1767634700399-8808431pm	COND-MOS-001	1	Unidad	6900	6900	Compra Patty 2026-01-03
+PATY-20260103-001	2026-01-03	Patty	Cerveza Heineken	inv-1767634700399-9xsb2oh3p	CE-HEI-001	0	Botella	19200	0	
+PATY-20260103-001	2026-01-03	Patty	Soda Bretaña 1500 ml	inv-1767634700399-cahjyh3ll	REF-BRE-1500	0	Botella	3800	0	Compra Patty 2026-01-03
+PATY-20260103-001	2026-01-03	Patty	Mezclador El Sol Dahu ZZI	inv-1767634700399-dy0mgy06q	MEZ-ELS-001	1	Unidad	4900	4900	Compra Patty 2026-01-03
+PATY-20260103-001	2026-01-03	Patty	Ron Viejo de Caldas Tradicional	inv-1767634700399-fstqs8q7k	LIC-RON-VC	2	Botella	51900	103800	Compra Patty 2026-01-03
+PATY-20260103-001	2026-01-03	Patty	Cerveza Budweiser	inv-1767634700399-hntpkqdo6	CE-BUD-001	4	Botella	18000	72000	
+PATY-20260103-001	2026-01-03	Patty	Cinta aislante Tesa	inv-1767634700399-icch1p0gx	UT-CIN-001	2	Unidad	3800	7600	Compra Patty 2026-01-03
+PATY-20260103-001	2026-01-03	Patty	Salsa de tomate Bary doy pack	inv-1767634700399-ngrq41q4f	COND-TOM-001	2	Pack	4100	8200	Compra Patty 2026-01-03
+PATY-20260103-001	2026-01-03	Patty	Mezcla de ají	inv-1767634700399-osyfaln0f	COND-AJI-001	0	Unidad	5350	0	
+PATY-20260103-001	2026-01-03	Patty	Salsa mayonesa Bary doy pack	inv-1767634700399-pir59pq4u	COND-MAY-001	0	Pack	4400	0	Compra Patty 2026-01-03
+PATY-20260103-001	2026-01-03	Patty	Toallas higiénicas Kotex x10	inv-1767634700399-sxq8dp6sg	ASE-KOT-001	2	Paquete	1	2	Compra Patty 2026-01-03
+PATY-20260103-001	2026-01-03	Patty	Cerveza Coronita	inv-1767634700399-whk5cc1js	CE-COR-001	0	Botella	3700	0	
+PATY-20260103-001	2026-01-03	Patty	Bolsa plástica (ICBP)	inv-1767634700400-2hfwyexd7	DES-BOL-001	1	Unidad	70	70	
+PATY-20260103-001	2026-01-03	Patty	Festival palillos doble	inv-1767634700400-2senehds1	PAN-PAL-001	0	Paquete	2100	0	Compra Patty 2026-01-03
+PATY-20260103-001	2026-01-03	Patty	Lechuga batavia	inv-1767634700400-460nmc7uo	INS-LEC-001	1	Unidad	2084	2084	
+PATY-20260103-001	2026-01-03	Patty	Baguette CUI	inv-1767634700400-65n1g60sp	INS-BAG-001	1	Unidad	12500	12500	
+PATY-20260103-001	2026-01-03	Patty	Tapas para vaso 6 oz	inv-1767634700400-6hudp47h6	DES-TAP-6OZ	1	Pack	4600	4600	
+PATY-20260103-001	2026-01-03	Patty	Tomate chonto	inv-1767634700400-ffm5kdp8o	INS-TOM-001	0	Unidad	2668	0	
+PATY-20260103-001	2026-01-03	Patty	Arándanos	inv-1767634700400-h1p7laomc	INS-ARA-001	1	Unidad	25980	25980	
+PATY-20260103-001	2026-01-03	Patty	Sal Refisal para michelar con plato michelador	inv-1767634700400-s86bj4aqm	INS-SAL-001	0	Unidad	15790	0	
+PATY-20260103-001	2026-01-03	Patty	Jamón Cuisine	inv-1767634700400-s8kbeya60	INS-JAM-001	1	Unidad	19990	19990	
+PATY-20260103-001	2026-01-03	Patty	Caja de Carioca grande 380 ml	inv-1767634700400-tu01b5e2p	MB-CAR-001	2	Unidad	115000	230000	Compra Patty 2026-01-03
+PATY-20260103-001	2026-01-03	Patty	Tapas para vaso 6 oz bebida caliente	inv-1767635982971-dq62lbug6	DES-TAP-6OZ-HOT	1	Pack	4600	4600	
+PATY-20260103-001	2026-01-03	Patty	Marlboro morado azul x20	inv-1767635982972-854kbkj9i	TAB-MAR-AZU	3	Cajetilla	14400	43200	Producto regulado - Control aparte
+PATY-20260103-001	2026-01-03	Patty	Marlboro verde x20	inv-1767635982972-mphbtepu0	TAB-MAR-VER	3	Cajetilla	14400	43200	Producto regulado - Control aparte
+PATY-20260103-001	2026-01-03	Patty	Marlboro rojo x20	inv-1767635982972-nhrn3uido	TAB-MAR-ROJ	1	Cajetilla	13700	13700	Producto regulado - Control aparte
+EXITO-20260104-001	2026-01-04	Éxito	Soda	inv-1767636242767-v0twstdbw	REF-BRE-EXI	9	Unidad	444.44	3999.96	2 pacas de 18 sodas cada una
+EXITO-20260104-001	2026-01-04	Éxito	Jugo de arándano	inv-1767636242811-2w87n78co	SYR-ARA-EXI	1	Botella	28900	28900	
+EXITO-20260104-001	2026-01-04	Éxito	Cubiertos	inv-1767636242811-qk3zfsenm	UT-CUB-001	1	Set	13000	13000	
+20260105-001	2026-01-05	tiendas	Recipientes plásticos	inv-1767636242812-577hmamt7	UT-REC-001	3	Unidad	2000	6000	
+20260105-001	2026-01-05	tiendas	Frutas para hervidos	inv-1767636242812-x85xirex1	INS-FRU-001	0	Libra	6500	0	2 libras
+EXITO-20260104-001	2026-01-04	Éxito	Bebida chocolate polvo	inv-1767640832359-kawr591vu	SYR-CHO-001	1	Unidad	16100	16100	
+TIENDAESQUINA-20260106-001	2026-01-06	La tienda de la esquina	Queso mozzarella	inv-1767665578906-3zcto1go9	INS-QUE-MOZ-001	0	Unidad	7000	0	
+TIENDAESQUINA-20260106-001	2026-01-06	La tienda de la esquina	Pulpas de fruta para cócteles	inv-1767665578949-tetvpdjx3	SYR-PUL-001	0	Unidad	13000	0	
+TIENDAESQUIN-20260107-001	2026-01-07	Tienda esquina 	Leche Colácteos 	inv-1767751844829-0e9objdc2		0	Unidad	5000	0	
+ALKOSTO-20260106-001	2026-01-06	Alkosto	Vodka	inv-1767842433563-tmr514z8b		0	Botella	70500	0	Comprado en Alkosto el 6 de enero de 2026
+ALKOSTO-20260106-001	2026-01-06	Alkosto	Jamón	inv-1767842433593-7odfezdjy		0	Unidad	13000	0	Comprado en Alkosto el 6 de enero de 2026
+ALKOSTO-20260106-001	2026-01-06	Alkosto	Ginebra	inv-1767842433593-eqs9zytua		1	Botella	64500	64500	Comprado en Alkosto el 6 de enero de 2026
+ALKOSTO-20260106-001	2026-01-06	Alkosto	Aguardiente Nariño	inv-1767842433593-gh2bglh3w		1	Botella	48000	48000	Comprado en Alkosto el 6 de enero de 2026
+ALKOSTO-20260106-001	2026-01-06	Alkosto	Queso	inv-1767842433594-4p1mkpoxn		0	Unidad	14000	0	Comprado en Alkosto el 6 de enero de 2026
+ALKOSTO-20260106-001	2026-01-06	Alkosto	Tomates	inv-1767842433594-ivabna4wj		0	Unidad	4000	0	Comprado en Alkosto el 6 de enero de 2026
+A2SAS-20260108-001	2026-01-08	A2 SAS	Guantes nitrilo negro	inv-1767842689907-lirxhpibc		0	Unidad	1500	0	Comprado en A2 SAS el 7 de enero de 2026
+A2SAS-20260108-001	2026-01-08	A2 SAS	Papel aluminio El Sol (16 m)	inv-1767842689910-mhvcyspek		1	Unidad	6300	6300	Comprado en A2 SAS el 7 de enero de 2026
+A2SAS-20260108-001	2026-01-08	A2 SAS	Tapabocas sujeción 2QY	inv-1767842689910-r2vr5l6nj		0	Unidad	500	0	Comprado en A2 SAS el 7 de enero de 2026
+A2SAS-20260108-001	2026-01-08	A2 SAS	Pitillo biodegradable x 250 und	inv-1767842689911-mk0scroy5		1	Unidad	5400	5400	Comprado en A2 SAS el 7 de enero de 2026
+EXITO-20260108-001	2026-01-08	Éxito	Corazón hojaldra	inv-1767843024081-89vbm55xd		0	Unidad	14900	0	Comprado en Éxito el 7 de enero de 2026
+EXITO-20260108-001	2026-01-08	Éxito	Salsa de tomate	inv-1767843024085-23bxb1c4b		1	Unidad	8640	8640	Comprado en Éxito el 7 de enero de 2026
+EXITO-20260108-001	2026-01-08	Éxito	Mayonesa D&P	inv-1767843024085-3vzrruczr		0	Unidad	16700	0	Comprado en Éxito el 7 de enero de 2026
+EXITO-20260108-001	2026-01-08	Éxito	Bolsa papel Éxito	inv-1767843024085-96v4hbnfp		1	Unidad	600	600	Comprado en Éxito el 7 de enero de 2026
+EXITO-20260108-001	2026-01-08	Éxito	Galleta Liberal Guayaba	inv-1767843024085-eg4rvgtv0		0	Unidad	2300	0	Comprado en Éxito el 7 de enero de 2026 - 4 unidades
+EXITO-20260108-001	2026-01-08	Éxito	Limón Tahití	inv-1767843024085-hi1mtri0d		0	Unidad	1678	0	Comprado en Éxito el 7 de enero de 2026
+EXITO-20260108-001	2026-01-08	Éxito	Tomate cherry	inv-1767843024085-il4gf6m88		1	Unidad	4225	4225	Comprado en Éxito el 7 de enero de 2026
+EXITO-20260108-001	2026-01-08	Éxito	Baguette	inv-1767843024085-kzyqebvls		0	Unidad	7800	0	Comprado en Éxito el 7 de enero de 2026
+PATY-20260103-001	2026-01-03	Patty	Toalla higiénica Kotex tela antibacter	inv-1767844108772-y02sds3pn		1	Unidad	3950	3950	Comprado en Patty el 3 de enero de 2026
+PATY-20260103-001	2026-01-03	Patty	Cinta aislante Tesa colores 10 m	inv-1767844108813-9e4nr33nk		1	Unidad	3800	3800	Comprado en Patty el 3 de enero de 2026
+PATY-20260103-001	2026-01-03	Patty	Salsa de tomate Bary Doy Pack 200 g	inv-1767844108813-pqa0643eh		0	Unidad	4100	0	Comprado en Patty el 3 de enero de 2026
+PATY-20260103-001	2026-01-03	Patty	Mezclador de bambú El Sol x 500 uds	inv-1767844108813-yg05w3ugy		1	Unidad	4900	4900	Comprado en Patty el 3 de enero de 2026
+PATY-20260103-001	2026-01-03	Patty	Salsa mayonesa Bary Doy Pack 200 g	inv-1767844108813-yubsxus1l		1	Unidad	4100	4100	Comprado en Patty el 3 de enero de 2026
+PATY-20260103-001	2026-01-03	Patty	Mostaneza Rancho La Constancia 190 g	inv-1767844108814-4wnraypxt		1	Unidad	6900	6900	Comprado en Patty el 3 de enero de 2026
+PATY-20260103-001	2026-01-03	Patty	Ron Viejo de Caldas Tradicional 750 ml	inv-1767844108814-5wz9kud65		1	Botella	51900	51900	Comprado en Patty el 3 de enero de 2026
+PATY-20260103-001	2026-01-03	Patty	Festival palillos doble punta x 180 uds	inv-1767844108814-9re65nu9v		1	Unidad	2100	2100	Comprado en Patty el 3 de enero de 2026
+JUMBO-20251227-001	2025-12-27	Jumbo	Cerveza Heineken lata	inv-1767844767667-bi0fxw2v1		0	Lata	6450	0	Comprado en Jumbo el 27 de diciembre de 2025
+JUMBO-20251227-001	2025-12-27	Jumbo	Gaseosa Coca-Cola 2.5L	inv-1767844767932-16ve3bbno		0	Botella	15200	0	Comprado en Jumbo el 27 de diciembre de 2025
+JUMBO-20251227-001	2025-12-27	Jumbo	Lechuga batavia (0.458 kg)	inv-1767844768402-5yhkew73j		0	Kilogramo	4580	0	Comprado en Jumbo el 27 de diciembre de 2025
+JUMBO-20251227-001	2025-12-27	Jumbo	Tomate chonto (0.515 kg)	inv-1767844768574-6ocvjq9wb		0	Unidad	5180	0	Comprado en Jumbo el 27 de diciembre de 2025
+JUMBO-20251227-001	2025-12-27	Jumbo	Pan Resplandor	inv-1767844769020-qtl9kt1at		0	Unidad	11500	0	Comprado en Jumbo el 27 de diciembre de 2025
+JUMBO-20251227-001	2025-12-27	Jumbo	Cerveza Budweiser lata	inv-1767844769205-5ywzp24pl		0	Lata	5000	0	Comprado en Jumbo el 27 de diciembre de 2025
+JUMBO-20251227-001	2025-12-27	Jumbo	Baguette Cuisine & Co	inv-1767844879264-64oilkpaa		0	Unidad	12900	0	Comprado en Jumbo el 27 de diciembre de 2025
+JUMBO-20251227-001	2025-12-27	Jumbo	Bolsa plástica	inv-1767844879665-lqk1aybfl		0	Unidad	60	0	Comprado en Jumbo el 27 de diciembre de 2025
+JUMBO-20251227-001	2025-12-27	Jumbo	Mezcla de ají	inv-1767844880071-jkj72xv3l		0	Unidad	3530	0	Comprado en Jumbo el 27 de diciembre de 2025
+JUMBO-20251227-001	2025-12-27	Jumbo	Queso Colanta	inv-1767844880346-fl0zdabrc		0	Unidad	15900	0	Comprado en Jumbo el 27 de diciembre de 2025
+JUMBO-20251227-001	2025-12-27	Jumbo	Arándanos	inv-1767844880780-ii3oc94rz		0	Unidad	11700	0	Comprado en Jumbo el 27 de diciembre de 2025
+TIENDAESQUIN-20260108-001	2026-01-08	Tienda esquina	Limpido	inv-1767845037407-4i575yujh		1	Unidad	2000	2000	Comprado en la tienda de la esquina el 7 de enero de 2026
+TIENDAESQUIN-20260108-001	2026-01-08	Tienda esquina	Fabuloso	inv-1767845038185-bxjmci9tz		0	Unidad	3000	0	Comprado en la tienda de la esquina el 7 de enero de 2026
+TIENDAESQUIN-20260108-001	2026-01-08	Tienda esquina	Papel higiénico	inv-1767845038584-ar3qdmdwi		0	Unidad	2000	0	Comprado en la tienda de la esquina el 7 de enero de 2026
+LAMERCED-20260105-001	2026-01-05	La Merced	Pollo frito	inv-1767845374827-mp9ajpdr1		0	Unidad	34000	0	Comprado en La Merced el 5 de enero de 2026
+CARNESSEBASTIAN-20260106-001	2026-01-06	Carnes del Sebastián	Jamón de cerdo sánduche	inv-1767998047098-dw31jifhe	7700679062103	0	Unidad	7650	0	Comprado en Carnes del Sebastián el 6 de enero de 2026. Presentación: 450 g
+CARNESSEBASTIAN-20260106-001	2026-01-06	Carnes del Sebastián	Queso doble crema Colácteos	inv-1767998048468-cu3r5lzgd	1498	0	Unidad	12400	0	Comprado en Carnes del Sebastián el 6 de enero de 2026. Presentación: 250 g
+PROVEEDORCAFE-20260112-001	2026-01-12	Proveedor Café	Café especial Buesaco	inv-1768697002395-12wwfyhfb	CAF-BUE-400GR	1	Paquete	37000	37000	Café especial Buesaco 400gr (sin moler)
+PROVEEDORCAFE-20260112-001	2026-01-12	Proveedor Café	Café La Jacoba	inv-1768697003637-rorpdal9v	CAF-JAC-500GR	1	Paquete	37000	37000	Café La Jacoba 500gr (molido)
+TIENDAESQUINA-20260119-001	2026-01-19	tienda de la esquina	Café Sello Rojo	inv-1768953803936-gz1gyesjb		0	Gramo	26800	0	Comprado en tienda de la esquina el 19 de enero de 2026 a las 4pm. 245gr por $26.800
+irina	2026-01-23		Aguardiente Nariño	inv-1769226143421-omcm0srwr		1	Botella	42500	42500	
+irina	2026-01-23		Aguardiente Nariño	inv-1769226143421-5mgfjha5u		1	Botella	42500	42500	
+irina	2026-01-23		Domecq	inv-1769226143421-mew32o8t2		1	Botella	46000	46000	
+irina	2026-01-23		Aguardiente Amarillo	inv-1769226143421-7lwuaohu7		1	Botella	44500	44500	
+DOLLARCITY-20260117-F1L11300084	2026-01-17	Dollarcity – Tienda 3057 (Unico Pasto)	Copa de vino 3PK	inv-1769476992014-lw6bedwuo	230616003996	1	Unidad	12000	12000	Factura F1L11300084 - Dollarcity – Tienda 3057 (Unico Pasto). Cliente: Sonia Herrera (59833986). Forma de pago: Contado – Tarjeta. Base: $1.008.403, IVA: $191.597
+DOLLARCITY-20260117-F1L11300084	2026-01-17	Dollarcity – Tienda 3057 (Unico Pasto)	Bolsa ecológica DC grande	inv-1769476992015-xar0fgpka	5052	1	Unidad	2000	2000	Factura F1L11300084 - Dollarcity – Tienda 3057 (Unico Pasto). Cliente: Sonia Herrera (59833986). Forma de pago: Contado – Tarjeta. Base: $168.067, IVA: $31.933
+DOLLARCITY-20260117-F1L11300084	2026-01-17	Dollarcity – Tienda 3057 (Unico Pasto)	Jarra con tapa color 1L	inv-1769476992015-39aibo4m3	667888020843	1	Unidad	12000	12000	Factura F1L11300084 - Dollarcity – Tienda 3057 (Unico Pasto). Cliente: Sonia Herrera (59833986). Forma de pago: Contado – Tarjeta. Base: $1.008.403, IVA: $191.597
+DOLLARCITY-20260117-F1L11300084	2026-01-17	Dollarcity – Tienda 3057 (Unico Pasto)	Perchas de alambre	inv-1769476992015-tokoeb5zk	667888208043	1	Unidad	8000	8000	Factura F1L11300084 - Dollarcity – Tienda 3057 (Unico Pasto). Cliente: Sonia Herrera (59833986). Forma de pago: Contado – Tarjeta. Base: $672.269, IVA: $127.731
+DOLLARCITY-20260117-F1L11300084	2026-01-17	Dollarcity – Tienda 3057 (Unico Pasto)	Frasco vidrio con tapa	inv-1769476992015-70zn70ifa	667888292172	1	Unidad	14000	14000	Factura F1L11300084 - Dollarcity – Tienda 3057 (Unico Pasto). Cliente: Sonia Herrera (59833986). Forma de pago: Contado – Tarjeta. Base: $1.176.471, IVA: $223.529
+DOLLARCITY-20260117-F1L11300084	2026-01-17	Dollarcity – Tienda 3057 (Unico Pasto)	Delantal poliéster cocina	inv-1769476992015-r0v2adtnx	667888357796	1	Unidad	14000	14000	Factura F1L11300084 - Dollarcity – Tienda 3057 (Unico Pasto). Cliente: Sonia Herrera (59833986). Forma de pago: Contado – Tarjeta. Base: $1.176.471, IVA: $223.529
+DOLLARCITY-20260117-F1L11300084	2026-01-17	Dollarcity – Tienda 3057 (Unico Pasto)	Dispensador plástico cromado	inv-1769476992015-eyyrccb8j	667888424801	1	Unidad	16000	16000	Factura F1L11300084 - Dollarcity – Tienda 3057 (Unico Pasto). Cliente: Sonia Herrera (59833986). Forma de pago: Contado – Tarjeta. Base: $1.344.538, IVA: $255.462
+DOLLARCITY-20260117-F1L11300084	2026-01-17	Dollarcity – Tienda 3057 (Unico Pasto)	Maceta grande plástica (x2)	inv-1769476992015-j9u081y4k	667888430918	2	Unidad	16000	32000	Factura F1L11300084 - Dollarcity – Tienda 3057 (Unico Pasto). Cliente: Sonia Herrera (59833986). Forma de pago: Contado – Tarjeta. Base: $1.344.538, IVA: $255.462
+DOLLARCITY-20260117-F1L11300084	2026-01-17	Dollarcity – Tienda 3057 (Unico Pasto)	Cucharas plásticas bolsa	inv-1769476992015-8ibhbvr5q	667888564521	1	Unidad	5000	5000	Factura F1L11300084 - Dollarcity – Tienda 3057 (Unico Pasto). Cliente: Sonia Herrera (59833986). Forma de pago: Contado – Tarjeta. Base: $420.168, IVA: $79.832
+DOLLARCITY-20260117-F1L11300084	2026-01-17	Dollarcity – Tienda 3057 (Unico Pasto)	Contenedor vidrio mosaico	inv-1769476992016-xu03n5p4m	667888604470	1	Unidad	12000	12000	Factura F1L11300084 - Dollarcity – Tienda 3057 (Unico Pasto). Cliente: Sonia Herrera (59833986). Forma de pago: Contado – Tarjeta. Base: $1.008.403, IVA: $191.597
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Papelera roja coltp pedal 25 L	inv-1769477420185-nr0pz0m6o		1	Unidad	32900	32900	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia.
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Uva Red Globe nacional	inv-1769477420186-1i729xuyn		1	Kilogramo	-2	-2	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia. 0,93 kg -pendiente eliminar
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Vaso Can Glass 12 oz	inv-1769477420186-5946xxdax		1	Unidad	16900	16900	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia.
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Copa Lord fondo color 20 oz	inv-1769477420186-co7xyntgf		1	Unidad	14900	14900	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia.
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Copa Martini Avíspero 9.5 oz	inv-1769477420186-auuaccuw2		6	Unidad	6900	41400	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia.
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Salsa Tajín Clásic polvo 142 g	inv-1769477420186-jye67tqkc		1	Unidad	12900	12900	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia.
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Papel Marg Refect Lim/Pimien 115 g	inv-1769477420186-neuqi4kmt		1	Unidad	8500	8500	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia.
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Cuchillo multiuso Ilko 11 cm	inv-1769477420186-uiqen0s34		1	Unidad	12900	12900	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia.
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Mezclador Refisal Michel Rep x6	inv-1769477420187-zyy7d6a15		3	Unidad	8900	26700	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia.
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Copa Nevada Cappuchinero 4.5 oz	inv-1769477420187-2zdcsczyn		1	Unidad	50200	50200	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia.
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Licor Vodka Tropcaya 750 ml	inv-1769477420187-7g9wx3aq6		1	Botella	18200	18200	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia.
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Película plástica Tami Rto x100 mt	inv-1769477420187-4gxga74aj		1	Unidad	32500	32500	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia.
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Estuche 4 pz postre Corona Caribe	inv-1769477420187-c7bn9pz0e		1	Unidad	12900	12900	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia.
+ALKOSTO-20260124-001	2026-01-24	Alkosto centro	Set x4 coladores Arco Iris	inv-1769477420187-pt9exd3ov		1	Set	12900	12900	Comprado en Alkosto centro el 2026-01-24. Pagado por Sonia.
+EXITO-20260129-TV	2026-01-29	Almacenes Éxito Pasto	TV Samsung 40"	inv-1769814963447-no7mo0lh5		1	Unidad	957000	957000	
+EXITO-20260129-TV	2026-01-29	Almacenes Éxito Pasto	Base para el TV	inv-1769814963481-e3lrfe15u		1	Unidad	100000	100000	
+EXITO-20260129-TV	2026-01-29	Almacenes Éxito Pasto	Seguro del TV	inv-1769814963481-185zpo1ks		1	Unidad	70000	70000	
+D1-31012026	2026-01-31	Tiendas D1	Papel higiénico 3H	inv-1769965240723-p3819uwv0		1	Paquete	6700	6700	Compra 2026-01-31 Tiendas D1
+D1-31012026	2026-01-31	Tiendas D1	Gaseosa Coca-Cola	inv-1769965240758-2nxi47xy4		1	Botella	6490	6490	Compra 2026-01-31 Tiendas D1
+D1-31012026	2026-01-31	Tiendas D1	Gaseosa Schweppes	inv-1769965240758-nq7pmvnxc		1	Botella	4750	4750	Compra 2026-01-31 Tiendas D1
+D1-31012026	2026-01-31	Tiendas D1	Moritas de go	inv-1769965240758-57jenlp8n		0	Unidad	4600	0	Compra 2026-01-31 Tiendas D1
+D1-31012026	2026-01-31	Tiendas D1	Limpiador Bic	inv-1769965240758-x1s6mb33k		1	Unidad	6750	6750	Compra 2026-01-31 Tiendas D1
+D1-31012026	2026-01-31	Tiendas D1	Bolsa papelera	inv-1769965240758-n1ixml5ob		2	Unidad	2200	4400	Compra 2026-01-31 Tiendas D1
+D1-31012026	2026-01-31	Tiendas D1	Bolsa hogar	inv-1769965240758-vrggr7yty		1	Unidad	1900	1900	Compra 2026-01-31 Tiendas D1
+D1-31012026	2026-01-31	Tiendas D1	Ambientador	inv-1769965240758-5u3tegwt1		1	Unidad	5850	5850	Compra 2026-01-31 Tiendas D1
+D1-31012026	2026-01-31	Tiendas D1	Lulo 800 g	inv-1769965240759-a27x6gvi4		1	Unidad	5990	5990	Compra 2026-01-31 Tiendas D1
+ESQUINA-20260131	2026-01-31	Tiendas esquina	Azúcar morena	inv-1769965466028-pd9uw5185		1.5	kg	3333	5000	Compra 2026-01-31 Tiendas esquina
+ESQUINA-20260131	2026-01-31	Tiendas esquina	Anís estrellado	inv-1769965466067-ex6tb5ddq		1	Unidad	5000	5000	Compra 2026-01-31 Tiendas esquina
+COMPRA-20260207-001	2026-02-07	Compras 7 feb	Lulo	inv-1770573297943-p46ghnpaq		6	Unidad	1000	6000	Compra 2026-02-07 Compras 7 feb
+COMPRA-20260207-001	2026-02-07	Compras 7 feb	Tomate	inv-1770573297982-lhd30iy0o		2	Unidad	2000	4000	Compra 2026-02-07 Compras 7 feb
+COMPRA-20260207-001	2026-02-07	Compras 7 feb	Albahaca	inv-1770573297982-onsh7ogp5		1	Unidad	2000	2000	Compra 2026-02-07 Compras 7 feb
+COMPRA-20260208-001	2026-02-08	Compras 8 feb	Maracuyá	inv-1770573297982-7kkbumr33		1	Unidad	4000	4000	Compra 2026-02-08 Compras 8 feb
+COMPRA-20260208-001	2026-02-08	Compras 8 feb	Arándanos	inv-1770573297982-976tntdtw		1	Unidad	4000	4000	Compra 2026-02-08 Compras 8 feb
+COMPRA-20260208-001	2026-02-08	Compras 8 feb	Menta	inv-1770573297982-zkeqptt55		1	Unidad	4000	4000	Compra 2026-02-08 Compras 8 feb
+BODEGA-BAVARIA-20260208	2026-02-08	Bodega Bavaria	Cerveza Poker LTA 330 cc	inv-1770684128104-dgjc2z0kh		24	Lata	2666.58	63998	Compra 2026-02-08 Bodega Bavaria. Pago efectivo, aporte Gustavo Arteaga.
+BODEGA-BAVARIA-20260208	2026-02-08	Bodega Bavaria	Cerveza Club Colombia LTA	inv-1770684128140-jxn35umkl		24	Lata	3058.25	73398	Compra 2026-02-08 Bodega Bavaria. Pago efectivo, aporte Gustavo Arteaga.
+BODEGA-BAVARIA-20260208	2026-02-08	Bodega Bavaria	Cerveza Budweiser LTA 269 cc	inv-1770684128141-hd27egu89		24	Lata	2333.38	56001	Compra 2026-02-08 Bodega Bavaria. Pago efectivo, aporte Gustavo Arteaga.
+Paty	2026-02-12	Paty	Triple sec	inv-1771001849777-809qg7jpy		1	Litro	33400	33400	Compra 2026-02-12 Paty. Lo pagó gustavo.
+ChapilDeLosPastos	2026-02-13	Chapil de los pastos	Chapil de los pastos	inv-1771051465478-xs11ux3w6		2	Litro	18000	36000	Compra viernes 13 de febrero 2026, 5pm. 2 L por $36.000.
+Parqueadero	2026-02-13	Parqueadero	Empanadas	inv-1771051787919-5eru0l7pf		6	Unidad	4350	26100	Compra 13 feb 2026 en el parqueadero. 6 empanadas.
+Las Monas	2026-02-13	Tienda Las Monas	Canela, anís y pulpas	inv-1771051787957-l7y838y6y		1	Compra	34000	34000	Compra 13 feb 2026 en tienda Las Monas.

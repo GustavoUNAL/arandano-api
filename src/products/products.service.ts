@@ -10,6 +10,24 @@ type PaginationParams = {
   search?: string;
 };
 
+/** Parsea `Inventory.supplier` generado por los scripts `seed-*-recipes.ts`. */
+function parseRecipeSheetSupplier(s: string | null | undefined): {
+  sheetUnitCost: string | null;
+  sheetQuantity: string | null;
+} {
+  if (!s?.trim()) {
+    return { sheetUnitCost: null, sheetQuantity: null };
+  }
+  const sep = ' | Cantidad (hoja): ';
+  const i = s.indexOf(sep);
+  if (i === -1) {
+    return { sheetUnitCost: s.trim(), sheetQuantity: null };
+  }
+  const head = s.slice(0, i).replace(/^Costo unitario \(hoja\):\s*/i, '').trim();
+  const qty = s.slice(i + sep.length).trim();
+  return { sheetUnitCost: head || null, sheetQuantity: qty || null };
+}
+
 @Injectable()
 export class ProductsService {
   constructor(private readonly prisma: PrismaService) {}
@@ -74,12 +92,51 @@ export class ProductsService {
   async findOne(id: string) {
     const product = await this.prisma.product.findFirst({
       where: { id, deletedAt: null },
-      include: { category: true },
+      include: {
+        category: true,
+        recipe: {
+          include: {
+            ingredients: {
+              include: { inventoryItem: true },
+              orderBy: { id: 'asc' },
+            },
+          },
+        },
+      },
     });
     if (!product) {
       throw new NotFoundException('Product not found');
     }
-    return product;
+
+    const { recipe, ...rest } = product;
+    if (!recipe) {
+      return rest;
+    }
+
+    const lines = recipe.ingredients.map((ing) => {
+      const inv = ing.inventoryItem;
+      const lineTotalCOP = new Prisma.Decimal(ing.quantity).mul(inv.unitCost);
+      const { sheetUnitCost, sheetQuantity } = parseRecipeSheetSupplier(
+        inv.supplier,
+      );
+      return {
+        ingredient: inv.name,
+        quantity: ing.quantity.toString(),
+        unit: ing.unit,
+        unitCostCOP: inv.unitCost.toString(),
+        lineTotalCOP: lineTotalCOP.toFixed(0),
+        sheetUnitCost,
+        sheetQuantity,
+      };
+    });
+
+    return {
+      ...rest,
+      recipe: {
+        recipeYield: recipe.recipeYield.toString(),
+        lines,
+      },
+    };
   }
 
   async update(id: string, dto: UpdateProductDto) {

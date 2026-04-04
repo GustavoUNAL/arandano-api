@@ -80,7 +80,6 @@ function mapProduct(row: Record<string, unknown>) {
     description: row.description != null ? String(row.description) : '',
     category: String(row.category ?? ''),
     type: String(row.type ?? ''),
-    stock: toInt(row.stock, 0),
     imageUrl: row.imageUrl == null ? null : String(row.imageUrl),
     size: row.size != null ? String(row.size) : '',
     minStock: row.minStock == null ? null : toInt(row.minStock),

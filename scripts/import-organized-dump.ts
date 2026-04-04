@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import * as crypto from 'node:crypto';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
@@ -14,12 +15,15 @@ import { Pool } from 'pg';
 function parseArgs() {
   const argv = process.argv.slice(2);
   let file = path.resolve(process.cwd(), 'prisma/data/organized-dump.json');
+  let only: string | null = null;
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--file' && argv[i + 1]) {
       file = path.resolve(argv[++i]);
+    } else if (argv[i] === '--only' && argv[i + 1]) {
+      only = String(argv[++i]);
     }
   }
-  return { file };
+  return { file, only };
 }
 
 function d(iso: string | null | undefined): Date | undefined {
@@ -106,7 +110,7 @@ function taskCategoryString(raw: string): string {
 }
 
 async function main() {
-  const { file } = parseArgs();
+  const { file, only } = parseArgs();
   const url = process.env.DATABASE_URL;
   if (!url) throw new Error('DATABASE_URL no está definida');
 
@@ -132,7 +136,14 @@ async function main() {
   try {
     const { tables } = data;
 
+    const onlyTable = only?.trim() ? only.trim().toLowerCase() : null;
+    const shouldRun = (table: string) => !onlyTable || onlyTable === table;
+
+    if (!shouldRun('products')) {
+      console.log(`Saltando products (only=${onlyTable})`);
+    }
     for (const p of tables.products) {
+      if (!shouldRun('products')) break;
       const row = p as Record<string, unknown>;
       const oldId = String(row.id);
       const id = allocId();
@@ -163,9 +174,13 @@ async function main() {
         },
       });
     }
-    console.log(`products: ${tables.products.length}`);
+    if (shouldRun('products')) console.log(`products: ${tables.products.length}`);
 
+    if (!shouldRun('inventory')) {
+      console.log(`Saltando inventory (only=${onlyTable})`);
+    }
     for (const inv of tables.inventory) {
+      if (!shouldRun('inventory')) break;
       const row = inv as Record<string, unknown>;
       const oldId = String(row.id);
       const id = allocId();
@@ -195,9 +210,13 @@ async function main() {
         },
       });
     }
-    console.log(`inventory: ${tables.inventory.length}`);
+    if (shouldRun('inventory')) console.log(`inventory: ${tables.inventory.length}`);
 
+    if (!shouldRun('recipes')) {
+      console.log(`Saltando recipes (only=${onlyTable})`);
+    }
     for (const r of tables.recipes) {
+      if (!shouldRun('recipes')) break;
       const row = r as Record<string, unknown>;
       const oldProductId = String(row.productId ?? '');
       const newProductId = productMap.get(oldProductId);
@@ -252,9 +271,13 @@ async function main() {
         });
       }
     }
-    console.log(`recipes: ${tables.recipes.length}`);
+    if (shouldRun('recipes')) console.log(`recipes: ${tables.recipes.length}`);
 
+    if (!shouldRun('sales')) {
+      console.log(`Saltando sales (only=${onlyTable})`);
+    }
     for (const s of tables.sales) {
+      if (!shouldRun('sales')) break;
       const row = s as Record<string, unknown>;
       const newSaleId = allocId();
       const items = row.items;
@@ -302,9 +325,13 @@ async function main() {
         },
       });
     }
-    console.log(`sales: ${tables.sales.length}`);
+    if (shouldRun('sales')) console.log(`sales: ${tables.sales.length}`);
 
+    if (!shouldRun('stock_movements')) {
+      console.log(`Saltando stock_movements (only=${onlyTable})`);
+    }
     for (const sm of tables.stock_movements) {
+      if (!shouldRun('stock_movements')) break;
       const row = sm as Record<string, unknown>;
       const oldInv = row.inventoryItemId == null ? null : String(row.inventoryItemId);
       if (!oldInv) continue;
@@ -326,9 +353,14 @@ async function main() {
         },
       });
     }
-    console.log(`stock_movements: ${tables.stock_movements.length}`);
+    if (shouldRun('stock_movements'))
+      console.log(`stock_movements: ${tables.stock_movements.length}`);
 
+    if (!shouldRun('tasks')) {
+      console.log(`Saltando tasks (only=${onlyTable})`);
+    }
     for (const t of tables.tasks) {
+      if (!shouldRun('tasks')) break;
       const row = t as Record<string, unknown>;
       await prisma.task.create({
         data: {
@@ -346,9 +378,13 @@ async function main() {
         },
       });
     }
-    console.log(`tasks: ${tables.tasks.length}`);
+    if (shouldRun('tasks')) console.log(`tasks: ${tables.tasks.length}`);
 
+    if (!shouldRun('expenses')) {
+      console.log(`Saltando expenses (only=${onlyTable})`);
+    }
     for (const e of tables.expenses) {
+      if (!shouldRun('expenses')) break;
       const row = e as Record<string, unknown>;
       const name = normalizeExpenseCategoryName(String(row.category ?? ''));
       const categoryId = await ensureCategory(
@@ -371,8 +407,8 @@ async function main() {
         },
       });
     }
-    console.log(`expenses: ${tables.expenses.length}`);
-    console.log('Importación completada.');
+    if (shouldRun('expenses')) console.log(`expenses: ${tables.expenses.length}`);
+    console.log(`Importación completada${onlyTable ? ` (only=${onlyTable})` : ''}.`);
   } finally {
     await prisma.$disconnect();
     await pool.end();
