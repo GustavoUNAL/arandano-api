@@ -1,14 +1,40 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { CategoryType, Prisma } from '@prisma/client';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { CategoryType, Prisma, RecipeCostKind } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { UpsertRecipeDto } from './dto/upsert-recipe.dto';
 
 type PaginationParams = {
   page: number;
   limit: number;
   search?: string;
+  categoryId?: string;
+  active?: boolean;
+  type?: string;
+  sort?: 'name' | 'price_asc' | 'price_desc';
 };
+
+type IngredientStockStatus =
+  | 'AVAILABLE'
+  | 'LOW'
+  | 'DEPLETED'
+  | 'ARCHIVED';
+
+function ingredientStockStatus(
+  quantity: Prisma.Decimal,
+  minStock: Prisma.Decimal | null,
+  deletedAt: Date | null,
+): IngredientStockStatus {
+  if (deletedAt) return 'ARCHIVED';
+  if (quantity.lte(0)) return 'DEPLETED';
+  if (minStock != null && quantity.lte(minStock)) return 'LOW';
+  return 'AVAILABLE';
+}
 
 /** Parsea `Inventory.supplier` generado por los scripts `seed-*-recipes.ts`. */
 function parseRecipeSheetSupplier(s: string | null | undefined): {
@@ -70,7 +96,19 @@ export class ProductsService {
       ...(params.search?.trim().length
         ? { name: { contains: params.search.trim(), mode: 'insensitive' } }
         : {}),
+      ...(params.categoryId?.trim().length
+        ? { categoryId: params.categoryId.trim() }
+        : {}),
+      ...(params.active !== undefined ? { active: params.active } : {}),
+      ...(params.type?.trim().length ? { type: params.type.trim() } : {}),
     };
+
+    let orderBy: Prisma.ProductOrderByWithRelationInput = { name: 'asc' };
+    if (params.sort === 'price_asc') {
+      orderBy = { price: 'asc' };
+    } else if (params.sort === 'price_desc') {
+      orderBy = { price: 'desc' };
+    }
 
     const [total, data] = await this.prisma.$transaction([
       this.prisma.product.count({ where }),
@@ -78,7 +116,7 @@ export class ProductsService {
         where,
         skip,
         take: limit,
-        orderBy: { name: 'asc' },
+        orderBy,
         include: { category: true },
       }),
     ]);
@@ -97,9 +135,12 @@ export class ProductsService {
         recipe: {
           include: {
             ingredients: {
-              include: { inventoryItem: true },
-              orderBy: { id: 'asc' },
+              include: {
+                inventoryItem: { include: { category: true } },
+              },
+              orderBy: [{ sortOrder: 'asc' }, { id: 'asc' }],
             },
+            costs: { orderBy: { sortOrder: 'asc' } },
           },
         },
       },
@@ -113,13 +154,47 @@ export class ProductsService {
       return rest;
     }
 
-    const lines = recipe.ingredients.map((ing) => {
+    const costs = recipe.costs.map((c) => ({
+      id: c.id,
+      kind: c.kind,
+      name: c.name,
+      quantity: c.quantity?.toString() ?? null,
+      unit: c.unit,
+      lineTotalCOP: c.lineTotalCOP.toFixed(0),
+      sheetUnitCost: c.sheetUnitCost,
+      sortOrder: c.sortOrder,
+    }));
+
+    const lotCodes = [
+      ...new Set(
+        recipe.ingredients
+          .map((i) => i.inventoryItem.lot)
+          .filter((c): c is string => !!c?.trim()),
+      ),
+    ];
+    const purchaseLotRows =
+      lotCodes.length > 0
+        ? await this.prisma.purchaseLot.findMany({
+            where: { code: { in: lotCodes } },
+            select: { id: true, code: true, purchaseDate: true },
+          })
+        : [];
+    const purchaseLotByCode = new Map(
+      purchaseLotRows.map((p) => [p.code, p]),
+    );
+
+    const ingredients = recipe.ingredients.map((ing) => {
       const inv = ing.inventoryItem;
       const lineTotalCOP = new Prisma.Decimal(ing.quantity).mul(inv.unitCost);
       const { sheetUnitCost, sheetQuantity } = parseRecipeSheetSupplier(
         inv.supplier,
       );
+      const lotCode = inv.lot?.trim() || null;
+      const pl = lotCode ? purchaseLotByCode.get(lotCode) : undefined;
       return {
+        id: ing.id,
+        sortOrder: ing.sortOrder,
+        inventoryItemId: ing.inventoryItemId,
         ingredient: inv.name,
         quantity: ing.quantity.toString(),
         unit: ing.unit,
@@ -127,6 +202,23 @@ export class ProductsService {
         lineTotalCOP: lineTotalCOP.toFixed(0),
         sheetUnitCost,
         sheetQuantity,
+        quantityOnHand: inv.quantity.toString(),
+        minStock: inv.minStock?.toString() ?? null,
+        inventoryCategoryName: inv.category?.name ?? null,
+        lotCode,
+        purchaseLot: pl
+          ? {
+              id: pl.id,
+              code: pl.code,
+              purchaseDate: pl.purchaseDate.toISOString(),
+            }
+          : null,
+        inventoryArchived: inv.deletedAt != null,
+        stockStatus: ingredientStockStatus(
+          inv.quantity,
+          inv.minStock,
+          inv.deletedAt,
+        ),
       };
     });
 
@@ -134,7 +226,8 @@ export class ProductsService {
       ...rest,
       recipe: {
         recipeYield: recipe.recipeYield.toString(),
-        lines,
+        costs,
+        ingredients,
       },
     };
   }
@@ -182,5 +275,89 @@ export class ProductsService {
       where: { id },
       data: { deletedAt: new Date() },
     });
+  }
+
+  async upsertRecipe(productId: string, dto: UpsertRecipeDto) {
+    const product = await this.prisma.product.findFirst({
+      where: { id: productId, deletedAt: null },
+      select: { id: true },
+    });
+    if (!product) {
+      throw new NotFoundException('Product not found');
+    }
+
+    const ingredients = dto.ingredients ?? [];
+    const costs = dto.costs ?? [];
+
+    if (!ingredients.length && !costs.length) {
+      await this.prisma.recipe.deleteMany({ where: { productId } });
+      return this.findOne(productId);
+    }
+
+    if (ingredients.length > 0) {
+      const invIds = [...new Set(ingredients.map((i) => i.inventoryItemId))];
+      const invRows = await this.prisma.inventory.findMany({
+        where: { id: { in: invIds }, deletedAt: null },
+        select: { id: true },
+      });
+      if (invRows.length !== invIds.length) {
+        throw new BadRequestException(
+          'Uno o más insumos de inventario no existen o están archivados',
+        );
+      }
+    }
+
+    const yieldDec = new Prisma.Decimal(dto.recipeYield);
+
+    await this.prisma.$transaction(async (tx) => {
+      let recipe = await tx.recipe.findUnique({ where: { productId } });
+      if (!recipe) {
+        recipe = await tx.recipe.create({
+          data: { productId, recipeYield: yieldDec },
+        });
+      } else {
+        await tx.recipe.update({
+          where: { id: recipe.id },
+          data: { recipeYield: yieldDec },
+        });
+        await tx.recipeIngredient.deleteMany({
+          where: { recipeId: recipe.id },
+        });
+        await tx.recipeCost.deleteMany({ where: { recipeId: recipe.id } });
+      }
+      if (ingredients.length > 0) {
+        await tx.recipeIngredient.createMany({
+          data: ingredients.map((ing, i) => ({
+            recipeId: recipe!.id,
+            inventoryItemId: ing.inventoryItemId,
+            quantity: new Prisma.Decimal(ing.quantity),
+            unit: ing.unit,
+            sortOrder: ing.sortOrder ?? i,
+          })),
+        });
+      }
+      if (costs.length > 0) {
+        await tx.recipeCost.createMany({
+          data: costs.map((c, i) => ({
+            recipeId: recipe!.id,
+            kind:
+              c.kind === 'VARIABLE'
+                ? RecipeCostKind.VARIABLE
+                : RecipeCostKind.FIJO,
+            name: c.name,
+            quantity:
+              c.quantity != null && c.quantity > 0
+                ? new Prisma.Decimal(c.quantity)
+                : null,
+            unit: c.unit,
+            lineTotalCOP: new Prisma.Decimal(c.lineTotalCOP),
+            sheetUnitCost: c.sheetUnitCost?.trim() || null,
+            sortOrder: c.sortOrder ?? i,
+          })),
+        });
+      }
+    });
+
+    return this.findOne(productId);
   }
 }

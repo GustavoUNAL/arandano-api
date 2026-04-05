@@ -40,6 +40,7 @@ async function main() {
         "stock_movements",
         "cart_items",
         "carts",
+        "costos",
         "recipe_ingredients",
         "recipes",
         "products",

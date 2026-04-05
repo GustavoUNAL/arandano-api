@@ -31,13 +31,16 @@ async function main() {
 
     await client.query(`
       TRUNCATE TABLE
+        costos,
         recipe_ingredients,
         recipes,
         cart_items,
         products
       RESTART IDENTITY CASCADE
     `);
-    console.log('TRUNCATE: recipe_ingredients, recipes, cart_items, products');
+    console.log(
+      'TRUNCATE: costos, recipe_ingredients, recipes, cart_items, products',
+    );
 
     await client.query('COMMIT');
 

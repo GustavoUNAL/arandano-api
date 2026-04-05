@@ -42,8 +42,8 @@ async function main() {
     });
 
     const catInventory = await prisma.category.upsert({
-      where: { name: 'Materia prima' },
-      create: { name: 'Materia prima', type: CategoryType.INVENTORY },
+      where: { name: 'Insumos (demo)' },
+      create: { name: 'Insumos (demo)', type: CategoryType.INVENTORY },
       update: {},
     });
 

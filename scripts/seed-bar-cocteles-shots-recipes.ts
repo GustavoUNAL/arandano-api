@@ -2,11 +2,7 @@ import 'dotenv/config';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
 import { Pool } from 'pg';
-import {
-  ensureInventoryCategory,
-  RecipeSpec,
-  seedRecipeSpecs,
-} from './lib/sheet-recipe-seed';
+import { RecipeSpec, seedRecipeSpecs } from './lib/sheet-recipe-seed';
 
 /**
  * Recetas Bar, Cócteles y Shots (misma estructura que la hoja de costos).
@@ -92,7 +88,7 @@ const RECIPES: RecipeSpec[] = [
         qty: null,
         unit: 'porción',
         sheetUnitCost: '—',
-        lineTotalCOP: 3186,
+        lineTotalCOP: 3200,
       },
     ],
   },
@@ -233,7 +229,7 @@ const RECIPES: RecipeSpec[] = [
         qty: null,
         unit: 'porción',
         sheetUnitCost: '—',
-        lineTotalCOP: 2520,
+        lineTotalCOP: 2460,
       },
     ],
   },
@@ -523,13 +519,7 @@ async function main() {
   const prisma = new PrismaClient({ adapter: new PrismaPg(pool) });
 
   try {
-    const invCategoryId = await ensureInventoryCategory(prisma);
-    const n = await seedRecipeSpecs(
-      prisma,
-      invCategoryId,
-      RECIPES,
-      'Bar/Cócteles/Shots',
-    );
+    const n = await seedRecipeSpecs(prisma, RECIPES, 'Bar/Cócteles/Shots');
     console.log('Listo. Recetas aplicadas:', n, '/', RECIPES.length);
   } finally {
     await prisma.$disconnect();

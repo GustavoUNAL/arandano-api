@@ -34,6 +34,7 @@
     "db:register-purchase-lots": "ts-node --transpile-only scripts/register-purchase-lots.ts",
     "db:export-inventory-lots-tsv": "ts-node --transpile-only scripts/register-purchase-lots.ts --export-tsv prisma/data/inventory-purchase-lots.tsv",
     "db:verify-data": "ts-node --transpile-only scripts/verify-data-consistency.ts",
+    "db:migrate-recipe-costs-to-costos": "ts-node --transpile-only scripts/migrate-recipe-costs-to-costos.ts",
     "db:seed-cafeteria-recipes": "ts-node --transpile-only scripts/seed-cafeteria-recipes.ts",
     "db:seed-bar-cocteles-shots-recipes": "ts-node --transpile-only scripts/seed-bar-cocteles-shots-recipes.ts",
     "db:seed-comida-recipes": "ts-node --transpile-only scripts/seed-comida-recipes.ts",

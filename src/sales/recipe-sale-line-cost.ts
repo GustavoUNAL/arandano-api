@@ -13,11 +13,20 @@ export async function unitRecipeCostCOP(
     where: { productId },
     include: {
       ingredients: { include: { inventoryItem: true } },
+      costs: true,
     },
   });
-  if (!recipe?.ingredients.length) return null;
+  if (
+    !recipe ||
+    (recipe.ingredients.length === 0 && recipe.costs.length === 0)
+  ) {
+    return null;
+  }
 
   let total = new Prisma.Decimal(0);
+  for (const c of recipe.costs) {
+    total = total.add(c.lineTotalCOP);
+  }
   for (const ing of recipe.ingredients) {
     total = total.add(
       new Prisma.Decimal(ing.quantity).mul(ing.inventoryItem.unitCost),

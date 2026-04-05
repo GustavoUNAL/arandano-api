@@ -33,7 +33,18 @@ npm run db:migrate      # prisma migrate deploy (CI / prod)
 npm run db:migrate:dev  # crear/aplicar migración en desarrollo
 ```
 
-Incluye la tabla `purchase_lots` (lotes de compra históricos enlazados por `inventory.lot`).
+Incluye la tabla `purchase_lots` (lotes de compra históricos enlazados por `inventory.lot`) y la tabla **`costos`** (`RecipeCost`): costeo de receta con **`FIJO`** vs **`VARIABLE`**, sin crear filas en `inventory`.
+
+- **`recipe_ingredients`**: solo enlaces a inventario físico (descuenta stock al vender).
+- **`costos`**: líneas de la hoja de costos (materiales sin stock, indirectos, etc.).
+
+Tras desplegar la migración de `costos`, si ya tenías recetas sembradas con inventario “Recetas (costeo)” o lotes `seed:receta:…`, ejecuta una vez:
+
+```bash
+npm run db:migrate-recipe-costs-to-costos
+```
+
+Luego puedes volver a sembrar menú con `npm run db:seed-menu-recipes`. El detalle de producto expone `recipe.costs` e `recipe.ingredients` (ya no un único `recipe.lines`).
 
 ### Verificar consistencia de datos locales
 
@@ -77,7 +88,7 @@ Exploración: `npm run db:studio`.
 
 ## Estructura relevante
 
-- `prisma/schema.prisma` — modelos (`Inventory`, `PurchaseLot`, `Partner`, `PartnerContribution`, …)
+- `prisma/schema.prisma` — modelos (`Inventory`, `RecipeCost` → tabla `costos`, `PurchaseLot`, …)
 - `prisma/data/tables/` — tablas en JSON para dumps / import
 - `scripts/` — importadores y utilidades de datos
 
