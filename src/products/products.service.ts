@@ -25,6 +25,26 @@ type IngredientStockStatus =
   | 'DEPLETED'
   | 'ARCHIVED';
 
+function normalizeCostName(s: string): string {
+  return (s ?? '')
+    .normalize('NFD')
+    .replace(/\p{M}/gu, '')
+    .trim()
+    .toLowerCase();
+}
+
+function isAdminCostLine(name: string): boolean {
+  return normalizeCostName(name).startsWith('administracion');
+}
+
+function isServiceOrIndirectCostLine(name: string): boolean {
+  const n = normalizeCostName(name);
+  if (n.includes('indirecto')) return true;
+  if (n.startsWith('agua')) return true;
+  if (n.startsWith('energia')) return true;
+  return false;
+}
+
 function ingredientStockStatus(
   quantity: Prisma.Decimal,
   minStock: Prisma.Decimal | null,
@@ -191,6 +211,11 @@ export class ProductsService {
       );
       const lotCode = inv.lot?.trim() || null;
       const pl = lotCode ? purchaseLotByCode.get(lotCode) : undefined;
+      const stockStatus = ingredientStockStatus(
+        inv.quantity,
+        inv.minStock,
+        inv.deletedAt,
+      );
       return {
         id: ing.id,
         sortOrder: ing.sortOrder,
@@ -214,20 +239,23 @@ export class ProductsService {
             }
           : null,
         inventoryArchived: inv.deletedAt != null,
-        stockStatus: ingredientStockStatus(
-          inv.quantity,
-          inv.minStock,
-          inv.deletedAt,
-        ),
+        stockStatus,
       };
     });
 
+    const hasUnavailableIngredient = ingredients.some(
+      (i) => i.stockStatus === 'DEPLETED' || i.stockStatus === 'ARCHIVED',
+    );
+    const productAvailable = product.active && !hasUnavailableIngredient;
+
     return {
       ...rest,
+      available: productAvailable,
       recipe: {
         recipeYield: recipe.recipeYield.toString(),
         costs,
         ingredients,
+        available: productAvailable,
       },
     };
   }
@@ -287,25 +315,63 @@ export class ProductsService {
     }
 
     const ingredients = dto.ingredients ?? [];
-    const costs = dto.costs ?? [];
+    const costsIn = dto.costs ?? [];
+
+    // Administración (30%) se recalcula siempre en backend.
+    const costs = costsIn.filter((c) => !isAdminCostLine(c.name));
 
     if (!ingredients.length && !costs.length) {
       await this.prisma.recipe.deleteMany({ where: { productId } });
       return this.findOne(productId);
     }
 
-    if (ingredients.length > 0) {
-      const invIds = [...new Set(ingredients.map((i) => i.inventoryItemId))];
-      const invRows = await this.prisma.inventory.findMany({
-        where: { id: { in: invIds }, deletedAt: null },
-        select: { id: true },
-      });
-      if (invRows.length !== invIds.length) {
-        throw new BadRequestException(
-          'Uno o más insumos de inventario no existen o están archivados',
-        );
-      }
+    const invIds =
+      ingredients.length > 0
+        ? [...new Set(ingredients.map((i) => i.inventoryItemId))]
+        : [];
+    const invRows =
+      invIds.length > 0
+        ? await this.prisma.inventory.findMany({
+            where: { id: { in: invIds }, deletedAt: null },
+            select: { id: true, unitCost: true },
+          })
+        : [];
+    if (invRows.length !== invIds.length) {
+      throw new BadRequestException(
+        'Uno o más insumos de inventario no existen o están archivados',
+      );
     }
+    const invCostById = new Map(invRows.map((r) => [r.id, r.unitCost]));
+
+    // Base: (costo insumos de inventario) + (servicios/indirectos)
+    let baseTotal = new Prisma.Decimal(0);
+    for (const ing of ingredients) {
+      const uc = invCostById.get(ing.inventoryItemId);
+      if (!uc) continue;
+      baseTotal = baseTotal.add(new Prisma.Decimal(ing.quantity).mul(uc));
+    }
+    for (const c of costs) {
+      if (!isServiceOrIndirectCostLine(c.name)) continue;
+      baseTotal = baseTotal.add(new Prisma.Decimal(c.lineTotalCOP));
+    }
+    const adminLineTotal = baseTotal
+      .mul(new Prisma.Decimal(0.3))
+      .toDecimalPlaces(0);
+    const adminCostLine =
+      adminLineTotal.gt(0)
+        ? {
+            kind: 'FIJO' as const,
+            name: 'Administración (30%)',
+            quantity: undefined,
+            unit: 'porción',
+            lineTotalCOP: Number(adminLineTotal.toString()),
+            sheetUnitCost: undefined,
+            sortOrder:
+              costs.length > 0
+                ? Math.max(...costs.map((x) => x.sortOrder ?? 0)) + 1
+                : 0,
+          }
+        : null;
 
     const yieldDec = new Prisma.Decimal(dto.recipeYield);
 
@@ -354,6 +420,20 @@ export class ProductsService {
             sheetUnitCost: c.sheetUnitCost?.trim() || null,
             sortOrder: c.sortOrder ?? i,
           })),
+        });
+      }
+      if (adminCostLine) {
+        await tx.recipeCost.create({
+          data: {
+            recipeId: recipe!.id,
+            kind: RecipeCostKind.FIJO,
+            name: adminCostLine.name,
+            quantity: null,
+            unit: adminCostLine.unit,
+            lineTotalCOP: new Prisma.Decimal(adminCostLine.lineTotalCOP),
+            sheetUnitCost: null,
+            sortOrder: adminCostLine.sortOrder,
+          },
         });
       }
     });

@@ -24,6 +24,235 @@ npm run start:prod   # producción (tras build)
 npm run test         # tests unitarios
 ```
 
+## API (rutas y funcionalidades)
+
+Por defecto **no hay prefijo global** (`/api`), así que las rutas cuelgan directo del host (ej. `http://localhost:3000`).
+
+### Convenciones para el frontend
+
+- **Base URL**: `http://localhost:3000` (o el dominio donde despliegues).
+- **Auth**: usa header `Authorization: Bearer <accessToken>` (por ahora solo se exige en `/auth/me`).
+- **Paginación**: `page` (1-based) y `limit` (máx 100) cuando aplique.
+- **Fechas**: se envían como ISO string (`YYYY-MM-DD` o `YYYY-MM-DDTHH:mm:ss.sssZ`).
+
+### Salud
+
+- `GET /` — respuesta simple (health/hello).
+
+### Auth (`/auth`)
+
+Autenticación JWT para roles `ADMIN` / `EMPLEADO`.
+
+- `POST /auth/login` — devuelve `accessToken` (Bearer) + `user`.
+
+  Body:
+
+```json
+{ "email": "admin@arandano.local", "password": "admin123" }
+```
+
+  Response:
+
+```json
+{
+  "accessToken": "…",
+  "user": { "sub": "usr_…", "email": "…", "name": "…", "role": "ADMIN" }
+}
+```
+
+- `GET /auth/me` — devuelve el payload del JWT (requiere `Authorization: Bearer <token>`).
+
+Variables:
+- `JWT_SECRET` (recomendado en prod)
+- `JWT_EXPIRES_IN` (ej. `7d`, `12h`)
+
+### Productos (`/products`)
+
+- `POST /products` — crea un producto.
+
+  Body:
+
+```json
+{
+  "name": "Café negro artesanal",
+  "price": 7000,
+  "categoryId": "cat_…",
+  "type": "bebida",
+  "description": "Opcional",
+  "size": "Opcional",
+  "imageUrl": "Opcional",
+  "active": true
+}
+```
+
+- `GET /products` — lista paginada.
+  - **Query**: `page`, `limit`, `search`, `categoryId`, `active` (`true|false`), `type`, `sort` (`name|price_asc|price_desc`).
+
+  Ejemplo:
+
+```text
+GET /products?page=1&limit=20&search=cafe&active=true&sort=name
+```
+
+- `GET /products/:id` — detalle de producto + receta (si existe).
+  - **Incluye receta**:
+    - **`recipe.ingredients`** (insumos físicos): `quantityOnHand`, `minStock`, `stockStatus` (`AVAILABLE|LOW|DEPLETED|ARCHIVED`), `lotCode`, `purchaseLot` (si coincide con `purchase_lots.code`), `inventoryArchived`, `sortOrder`.
+    - **`recipe.costs`** (líneas de costeo): `kind` (`FIJO|VARIABLE`), `lineTotalCOP`, `sheetUnitCost`, `sortOrder`.
+  - **Disponibilidad**:
+    - `available`: `true` si `product.active === true` y **ningún ingrediente** está `DEPLETED`/`ARCHIVED`.
+    - `recipe.available`: mismo flag (duplicado dentro de `recipe` para facilidad).
+- `PATCH /products/:id` — actualiza campos del producto (incluye `active`).
+
+  Body (todos opcionales):
+
+```json
+{ "price": 7500, "active": false }
+```
+
+- `DELETE /products/:id` — soft-delete (`deletedAt`).
+- `PUT /products/:id/recipe` — crea o reemplaza receta.
+  - **Body**: `recipeYield`, `ingredients?[]`, `costs?[]`.
+  - `ingredients[]`: `inventoryItemId`, `quantity`, `unit`, `sortOrder?`.
+  - `costs[]`: `kind`, `name`, `quantity?`, `unit`, `lineTotalCOP`, `sheetUnitCost?`, `sortOrder?`.
+  - Nota: `ingredients` enlaza inventario físico (impacta stock en ventas). `costs` vive en la tabla `costos` y **no** crea inventario.
+  - **Administración (30%)**:
+    - El backend **siempre recalcula** la línea `Administración (30%)` y **ignora** cualquier línea enviada que empiece por “Administración…”.
+    - Fórmula: \(30%\) de \((\text{costo insumos de inventario}) + (\text{servicios/indirectos})\).
+    - Servicios/indirectos se identifican por nombre (contiene `Indirecto` o empieza por `Agua`/`Energía`).
+
+  Ejemplo:
+
+```json
+{
+  "recipeYield": 1,
+  "ingredients": [
+    { "inventoryItemId": "inv_…", "quantity": 15, "unit": "g", "sortOrder": 0 }
+  ],
+  "costs": [
+    {
+      "kind": "FIJO",
+      "name": "Administración (30%)",
+      "unit": "porción",
+      "lineTotalCOP": 637,
+      "sortOrder": 10
+    }
+  ]
+}
+```
+
+### Recetas (`/recipes`)
+
+- `GET /recipes` — catálogo de recetas (por producto).
+  - **Query**: `categoryId?`.
+  - **Incluye**: `productActive`, `ingredientCount`, `costLineCount`, `depletedMaterialCount`, `lowStockMaterialCount`.
+- `GET /recipes/costs` — todas las líneas en `costos` (fijos/variables) con totales.
+
+### Inventario (`/inventory`)
+
+- `POST /inventory` — crea ítem.
+
+  Body:
+
+```json
+{
+  "name": "Café molido",
+  "categoryId": "cat_…",
+  "quantity": 1000,
+  "unit": "g",
+  "unitCost": 81.5,
+  "supplier": "Opcional",
+  "lot": "Opcional",
+  "minStock": 200
+}
+```
+
+- `GET /inventory` — lista paginada.
+  - **Query**: `page`, `limit`, `search`, `categoryId`.
+- `GET /inventory/:id` — detalle.
+- `PATCH /inventory/:id` — actualiza.
+
+  Body (todos opcionales):
+
+```json
+{ "quantity": 800, "unitCost": 90 }
+```
+
+- `DELETE /inventory/:id` — archiva (`deletedAt`).
+
+### Lotes de compra (`/purchase-lots`)
+
+Los lotes son históricos y se enlazan por `inventory.lot` ↔ `purchase_lots.code`.
+
+- `GET /purchase-lots` — lista paginada.
+  - **Query**: `page`, `limit`, `search`, `dateFrom`, `dateTo`.
+- `GET /purchase-lots/:id` — detalle.
+- `PATCH /purchase-lots/:id` — actualiza (`purchaseDate`, `supplier`, `notes`, `totalValue`).
+
+  Body (todos opcionales):
+
+```json
+{ "purchaseDate": "2026-04-06", "supplier": "Proveedor", "totalValue": 123000 }
+```
+
+### Ventas (`/sales`)
+
+- `POST /sales` — crea venta con líneas.
+
+  Body:
+
+```json
+{
+  "saleDate": "2026-04-06T10:00:00.000Z",
+  "paymentMethod": "efectivo",
+  "source": "MANUAL",
+  "mesa": "5",
+  "notes": "Opcional",
+  "userId": "usr_…",
+  "lines": [
+    {
+      "productId": "prd_…",
+      "productName": "Café negro artesanal",
+      "quantity": 1,
+      "unitPrice": 7000,
+      "costAtSale": 1500,
+      "profit": 5500
+    }
+  ]
+}
+```
+
+- `GET /sales` — lista paginada.
+  - **Query**: `page`, `limit`, `search`, `source`, `dateFrom`, `dateTo`.
+  - **Respuesta** (`data[]`): `saleDate` (ISO), **`saleDateOnly`** (`YYYY-MM-DD`), `createdAt`, `updatedAt`, **`total`** (número COP, para tablas), **`totalCOP`** (string), `displayPerson` (nombre o `—`), `recordedByName` / `recordedByUserId`, **`lineCount`**, `paymentMethod`, `source`, `mesa`, `notes`, `userId`, `cartId`, `user`, `cart` (incluye `cart.user` si existe), `payments[]`, `paymentSummary`, `counts`.
+- `GET /sales/:id` — detalle completo para el front.
+  - Igual que el listado en cabecera (`total`, `totalCOP`, `saleDate`, `saleDateOnly`, `displayPerson`, …), más: **`lines`** con `unitPrice` / `lineTotal` (número), `lineSubtotalCOP`, costo/utilidad, producto ampliado, **`lineSummary`**, **`cart.items`** y **`cart.user`**, **`payments`** con `metadata`, **`stockMovements`**.
+- `PATCH /sales/:id` — actualiza cabecera (fecha, método, mesa, notas, usuario, source).
+
+  Body (todos opcionales):
+
+```json
+{ "notes": "Cerrado", "paymentMethod": "tarjeta" }
+```
+
+- `PUT /sales/:id/lines` — reemplaza todas las líneas y recalcula total.
+
+  Body:
+
+```json
+{
+  "lines": [
+    { "productId": "prd_…", "productName": "Café", "quantity": 2, "unitPrice": 7000 }
+  ]
+}
+```
+
+### Explorador de tablas (`/explorer`) — “gestión” tipo DB browser (solo lectura)
+
+- `GET /explorer/tables` — lista de tablas expuestas.
+- `GET /explorer/tables/:slug?limit=50&offset=0` — filas + columnas (paginado, `limit` máx 500).
+
+Tablas expuestas (slugs): `users`, `categories`, `products`, `inventory`, `purchase_lots`, `recipes`, `recipe_ingredients`, `costos`, `carts`, `cart_items`, `sales`, `sale_lines`, `payments`, `stock_movements`, `expenses`, `partners`, `partner_contributions`, `tasks`.
+
 ## Base de datos
 
 ### Migraciones
@@ -65,6 +294,7 @@ Los ítems viven en `prisma/data/tables/inventory.json` (ids estables `inv-…`)
 | `npm run db:export-inventory-lots-tsv` | Escribe `prisma/data/inventory-purchase-lots.tsv` |
 | `npm run db:import-inventory-partners` | Upsert de `inventory` + `PartnerContribution` (INSUMO) inferido por socio |
 | `npm run db:register-purchase-lots` | Upsert de `purchase_lots` (agregados por código de lote) |
+| `npm run db:backfill-purchase-lot-dates-from-code` | Ajusta `purchase_lots.purchase_date` infiriéndola del código de lote. Si la tabla está vacía, usa `--from-inventory` para crear/actualizar lotes desde `inventory.lot`. `--dry-run` solo lista cambios |
 
 Orden sugerido en una base nueva (tras migraciones y categorías necesarias):
 

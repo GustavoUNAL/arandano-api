@@ -67,7 +67,19 @@ export function isRecipeLineCostOnly(line: SheetLine): boolean {
   if (isRecipeLineExcludedFromInventory(line)) return true;
   const n = normalizeSheetLabel(line.ingredient);
   if (n.includes('indirecto')) return true;
-  if (n.includes('administracion')) return true;
+  if (n.includes('administracion')) return true; // se recalcula automáticamente
+  return false;
+}
+
+function isAdminLine(line: SheetLine): boolean {
+  return normalizeSheetLabel(line.ingredient).startsWith('administracion');
+}
+
+function isServiceOrIndirectLine(line: SheetLine): boolean {
+  const n = normalizeSheetLabel(line.ingredient);
+  if (n.includes('indirecto')) return true;
+  if (n.startsWith('agua')) return true;
+  if (n.startsWith('energia')) return true;
   return false;
 }
 
@@ -189,6 +201,7 @@ export async function seedRecipeSpecs(
     let sheetOrder = 0;
     for (const line of spec.lines) {
       if (isRecipeLineExcludedFromInventory(line)) continue;
+      if (isAdminLine(line)) continue; // siempre se recalcula
 
       if (isRecipeLineMaterial(line)) {
         const inventoryItemId = await findOrCreateInventoryForMaterialLine(
@@ -219,6 +232,45 @@ export async function seedRecipeSpecs(
           sortOrder: sheetOrder++,
         });
       }
+    }
+
+    // Administración (30%) automática: 30% de (insumos inventario + servicios/indirectos)
+    let base = new Prisma.Decimal(0);
+    for (const ing of ingredientCreates) {
+      const inv = await prisma.inventory.findUnique({
+        where: { id: ing.inventoryItemId },
+        select: { unitCost: true, deletedAt: true },
+      });
+      if (!inv || inv.deletedAt) continue;
+      base = base.add(ing.quantity.mul(inv.unitCost));
+    }
+    for (const c of costCreates) {
+      if (!isServiceOrIndirectLine({ ingredient: c.name, qty: null, unit: 'porción', sheetUnitCost: '—', lineTotalCOP: 0 })) {
+        // no-op; placeholder to satisfy type is handled below
+      }
+    }
+    for (const c of costCreates) {
+      const fakeLine: SheetLine = {
+        ingredient: c.name,
+        qty: c.quantity ? Number(c.quantity.toString()) : null,
+        unit: 'porción',
+        sheetUnitCost: '—',
+        lineTotalCOP: 0,
+      };
+      if (!isServiceOrIndirectLine(fakeLine)) continue;
+      base = base.add(c.lineTotalCOP);
+    }
+    const admin = base.mul(new Prisma.Decimal(0.3)).toDecimalPlaces(0);
+    if (admin.gt(0)) {
+      costCreates.push({
+        kind: RecipeCostKind.FIJO,
+        name: 'Administración (30%)',
+        quantity: null,
+        unit: 'porción',
+        lineTotalCOP: admin,
+        sheetUnitCost: null,
+        sortOrder: sheetOrder++,
+      });
     }
 
     await prisma.recipe.create({
