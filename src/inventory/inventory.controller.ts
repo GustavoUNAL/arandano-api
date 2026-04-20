@@ -29,13 +29,31 @@ export class InventoryController {
     @Query('limit', new DefaultValuePipe(20), ParseIntPipe) limit: number,
     @Query('search') search?: string,
     @Query('categoryId') categoryId?: string,
+    @Query('lot') lot?: string,
+    @Query('includeStats') includeStatsRaw?: string,
   ) {
-    return this.inventoryService.findAll({ page, limit, search, categoryId });
+    const includeStats = ['1', 'true', 'yes'].includes(
+      includeStatsRaw?.trim().toLowerCase() ?? '',
+    );
+    return this.inventoryService.findAll({
+      page,
+      limit,
+      search,
+      categoryId,
+      lot,
+      includeStats,
+    });
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.inventoryService.findOne(id);
+  findOne(
+    @Param('id') id: string,
+    @Query('includeStats') includeStatsRaw?: string,
+  ) {
+    const includeStats = ['1', 'true', 'yes'].includes(
+      includeStatsRaw?.trim().toLowerCase() ?? '',
+    );
+    return this.inventoryService.findOne(id, includeStats);
   }
 
   @Patch(':id')

@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { PaymentStatus, Prisma, SaleSource } from '@prisma/client';
+import { mapCategoryRelation } from '../common/category-display-name';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateSaleDto } from './dto/create-sale.dto';
 import { ReplaceSaleLinesDto } from './dto/replace-sale-lines.dto';
@@ -226,7 +227,9 @@ export class SalesService {
               active: ln.product.active,
               size: ln.product.size,
               description: ln.product.description,
-              category: ln.product.category,
+              category: ln.product.category
+                ? mapCategoryRelation(ln.product.category)
+                : null,
             }
           : null,
       };
@@ -305,7 +308,9 @@ export class SalesService {
                     imageUrl: it.product.imageUrl,
                     active: it.product.active,
                     size: it.product.size,
-                    category: it.product.category,
+                    category: it.product.category
+                      ? mapCategoryRelation(it.product.category)
+                      : null,
                   }
                 : null,
             })),
@@ -578,5 +583,36 @@ export class SalesService {
     });
 
     return this.findOne(id);
+  }
+
+  /**
+   * Valores distintos en ventas: `payment_method` (legacy) y `payments.gateway`.
+   */
+  async listPaymentMethodsMeta() {
+    const [saleMethods, gateways] = await this.prisma.$transaction([
+      this.prisma.sale.findMany({
+        where: { paymentMethod: { not: null } },
+        select: { paymentMethod: true },
+        distinct: ['paymentMethod'],
+      }),
+      this.prisma.payment.findMany({
+        select: { gateway: true },
+        distinct: ['gateway'],
+      }),
+    ]);
+
+    const fromSales = saleMethods
+      .map((r) => r.paymentMethod?.trim())
+      .filter((v): v is string => !!v?.length)
+      .sort((a, b) => a.localeCompare(b, 'es'));
+
+    const fromPayments = gateways
+      .map((r) => r.gateway)
+      .sort((a, b) => a.localeCompare(b, 'es'));
+
+    return {
+      salePaymentMethods: fromSales,
+      paymentGateways: fromPayments,
+    };
   }
 }

@@ -1,6 +1,10 @@
 import { IsDateString, IsNumber, IsOptional, IsString, Min } from 'class-validator';
 
 export class UpdatePurchaseLotDto {
+  @IsString()
+  @IsOptional()
+  name?: string;
+
   @IsDateString()
   @IsOptional()
   purchaseDate?: string;

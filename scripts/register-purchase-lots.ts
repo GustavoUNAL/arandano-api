@@ -4,6 +4,7 @@ import * as path from 'node:path';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { Pool } from 'pg';
+import { syncPurchaseLotItemCountFromInventory } from '../src/common/sync-purchase-lot-aggregates';
 
 /**
  * Registra lotes de compra históricos en `purchase_lots`, agrupando por el mismo
@@ -294,6 +295,10 @@ async function main() {
       n++;
     }
     console.log(`purchase_lots upsert: ${n}`);
+    for (const agg of aggs.values()) {
+      await syncPurchaseLotItemCountFromInventory(prisma, agg.code);
+    }
+    console.log(`item_count sincronizado desde inventario activo (${n} lotes).`);
   } finally {
     await prisma.$disconnect();
     await pool.end();

@@ -111,14 +111,18 @@ GET /products?page=1&limit=20&search=cafe&active=true&sort=name
 
 - `DELETE /products/:id` — soft-delete (`deletedAt`).
 - `PUT /products/:id/recipe` — crea o reemplaza receta.
-  - **Body**: `recipeYield`, `ingredients?[]`, `costs?[]`.
+  - **Body**: `recipeYield`, `adminRate?`, `ingredients?[]`, `costs?[]`.
   - `ingredients[]`: `inventoryItemId`, `quantity`, `unit`, `sortOrder?`.
   - `costs[]`: `kind`, `name`, `quantity?`, `unit`, `lineTotalCOP`, `sheetUnitCost?`, `sortOrder?`.
   - Nota: `ingredients` enlaza inventario físico (impacta stock en ventas). `costs` vive en la tabla `costos` y **no** crea inventario.
   - **Administración (30%)**:
-    - El backend **siempre recalcula** la línea `Administración (30%)` y **ignora** cualquier línea enviada que empiece por “Administración…”.
-    - Fórmula: \(30%\) de \((\text{costo insumos de inventario}) + (\text{servicios/indirectos})\).
+    - El backend **siempre recalcula** la línea `Administración (…)` y **ignora** cualquier línea enviada que empiece por “Administración…”.
+    - Fórmula: \(\text{adminRate}\) de \((\text{costo insumos de inventario}) + (\text{servicios/indirectos})\).
     - Servicios/indirectos se identifican por nombre (contiene `Indirecto` o empieza por `Agua`/`Energía`).
+    - `adminRate` es editable por receta (default `0.30`).
+
+- `GET /products/:id/recipe/cost-controls` — devuelve `adminRate` y totales base (`materialsCOP`, `servicesCOP`, `baseCOP`).
+- `PUT /products/:id/recipe/admin` — actualiza `adminRate` del producto (recalcula administración automáticamente).
 
   Ejemplo:
 
@@ -145,7 +149,10 @@ GET /products?page=1&limit=20&search=cafe&active=true&sort=name
 - `GET /recipes` — catálogo de recetas (por producto).
   - **Query**: `categoryId?`.
   - **Incluye**: `productActive`, `ingredientCount`, `costLineCount`, `depletedMaterialCount`, `lowStockMaterialCount`.
-- `GET /recipes/costs` — todas las líneas en `costos` (fijos/variables) con totales.
+- `GET /recipes/costs` — líneas en `costos` agrupadas por producto:
+  - `products[]`: cada producto trae `fixed[]` y `variable[]`, además de `rows[]` (flat ordenado) + `totals` por producto.
+  - `rows[]`: versión “flat” global (una fila por costo) para tablas.
+  - `totals`: suma global (`fixedCOP`, `variableCOP`, `totalCOP`).
 
 ### Inventario (`/inventory`)
 
@@ -252,6 +259,40 @@ Los lotes son históricos y se enlazan por `inventory.lot` ↔ `purchase_lots.co
 - `GET /explorer/tables/:slug?limit=50&offset=0` — filas + columnas (paginado, `limit` máx 500).
 
 Tablas expuestas (slugs): `users`, `categories`, `products`, `inventory`, `purchase_lots`, `recipes`, `recipe_ingredients`, `costos`, `carts`, `cart_items`, `sales`, `sale_lines`, `payments`, `stock_movements`, `expenses`, `partners`, `partner_contributions`, `tasks`.
+
+### Gastos administrativos base (`/admin-expenses`)
+
+Tabla para guardar los **valores base** (mensuales) de: arriendo, agua, luz, internet, seguridad y salarios. Sirve para costeo/planeación; no reemplaza la tabla `expenses` (gastos transaccionales).
+
+- `GET /admin-expenses` — lista todos los valores base.
+- `PUT /admin-expenses` — upsert por `kind` (único).
+
+Body:
+
+```json
+{ "kind": "ARRIENDO", "name": "Arriendo local", "period": "MONTHLY", "amountCOP": 3500000, "active": true }
+```
+
+- `DELETE /admin-expenses/:kind` — elimina el registro (por `kind`).
+
+### Gastos base (`/gastos`)
+
+Tabla `gastos` para planeación/tablero (fijos vs variables).
+
+- `GET /gastos` — devuelve:
+  - `fixed[]` (mensuales) y `variable[]` (operativos)
+  - `items[]` (flat, todos los gastos)
+  - `fixedByType[]` / `variableByType[]` para render por secciones
+  - `totals` (`fixedCOP`, `variableCOP`, `totalCOP`)
+- `PUT /gastos` — upsert por `(kind,type)` (único).
+
+Body:
+
+```json
+{ "kind": "FIJO", "type": "ARRIENDO", "name": "Arriendo", "period": "MONTHLY", "amountCOP": 3500000, "active": true }
+```
+
+- `DELETE /gastos?kind=FIJO&type=ARRIENDO` — borra un gasto por su clave compuesta.
 
 ## Base de datos
 

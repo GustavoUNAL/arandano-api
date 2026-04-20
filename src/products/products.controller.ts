@@ -14,6 +14,7 @@ import {
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { UpsertRecipeDto } from './dto/upsert-recipe.dto';
+import { UpdateRecipeAdminDto } from './dto/update-recipe-admin.dto';
 import { ProductsService } from './products.service';
 
 @Controller('products')
@@ -53,6 +54,18 @@ export class ProductsController {
   @Put(':id/recipe')
   upsertRecipe(@Param('id') id: string, @Body() dto: UpsertRecipeDto) {
     return this.productsService.upsertRecipe(id, dto);
+  }
+
+  /** Lee administración/servicios actuales (incluye totales base). */
+  @Get(':id/recipe/cost-controls')
+  recipeCostControls(@Param('id') id: string) {
+    return this.productsService.getRecipeCostControls(id);
+  }
+
+  /** Actualiza la tasa de administración (se recalcula la línea automáticamente). */
+  @Put(':id/recipe/admin')
+  updateRecipeAdmin(@Param('id') id: string, @Body() dto: UpdateRecipeAdminDto) {
+    return this.productsService.updateRecipeAdminRate(id, dto.adminRate);
   }
 
   @Get(':id')

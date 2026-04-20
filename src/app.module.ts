@@ -10,12 +10,20 @@ import { InventoryModule } from './inventory/inventory.module';
 import { SalesModule } from './sales/sales.module';
 import { PurchaseLotsModule } from './purchase-lots/purchase-lots.module';
 import { AuthModule } from './auth/auth.module';
+import { AdminExpensesModule } from './admin-expenses/admin-expenses.module';
+import { GastosModule } from './gastos/gastos.module';
+import { NavigationModule } from './navigation/navigation.module';
+import { StockMovementsModule } from './stock-movements/stock-movements.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     PrismaModule,
     AuthModule,
+    AdminExpensesModule,
+    GastosModule,
+    NavigationModule,
+    StockMovementsModule,
     ProductsModule,
     RecipesModule,
     InventoryModule,

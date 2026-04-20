@@ -25,6 +25,12 @@ export class SalesController {
     return this.salesService.create(dto);
   }
 
+  /** Métodos de pago y gateways usados en datos históricos. */
+  @Get('meta/payment-methods')
+  paymentMethodsMeta() {
+    return this.salesService.listPaymentMethodsMeta();
+  }
+
   @Get()
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,

@@ -5,5 +5,6 @@ import { PurchaseLotsService } from './purchase-lots.service';
 @Module({
   controllers: [PurchaseLotsController],
   providers: [PurchaseLotsService],
+  exports: [PurchaseLotsService],
 })
 export class PurchaseLotsModule {}

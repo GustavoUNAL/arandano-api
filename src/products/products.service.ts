@@ -4,6 +4,10 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { CategoryType, Prisma, RecipeCostKind } from '@prisma/client';
+import {
+  categoryDisplayName,
+  mapCategoryRelation,
+} from '../common/category-display-name';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -91,7 +95,7 @@ export class ProductsService {
 
   async create(dto: CreateProductDto) {
     const categoryId = await this.requireProductCategoryId(dto.categoryId);
-    return this.prisma.product.create({
+    const created = await this.prisma.product.create({
       data: {
         name: dto.name,
         price: new Prisma.Decimal(dto.price),
@@ -104,6 +108,7 @@ export class ProductsService {
       },
       include: { category: true },
     });
+    return { ...created, category: mapCategoryRelation(created.category) };
   }
 
   async findAll(params: PaginationParams) {
@@ -142,7 +147,10 @@ export class ProductsService {
     ]);
 
     return {
-      data,
+      data: data.map((p) => ({
+        ...p,
+        category: mapCategoryRelation(p.category),
+      })),
       meta: { page, limit, total, hasNextPage: skip + data.length < total },
     };
   }
@@ -156,7 +164,9 @@ export class ProductsService {
           include: {
             ingredients: {
               include: {
-                inventoryItem: { include: { category: true } },
+                inventoryItem: {
+                  include: { category: true, purchaseLot: true },
+                },
               },
               orderBy: [{ sortOrder: 'asc' }, { id: 'asc' }],
             },
@@ -171,7 +181,7 @@ export class ProductsService {
 
     const { recipe, ...rest } = product;
     if (!recipe) {
-      return rest;
+      return { ...rest, category: mapCategoryRelation(rest.category) };
     }
 
     const costs = recipe.costs.map((c) => ({
@@ -196,7 +206,7 @@ export class ProductsService {
       lotCodes.length > 0
         ? await this.prisma.purchaseLot.findMany({
             where: { code: { in: lotCodes } },
-            select: { id: true, code: true, purchaseDate: true },
+            select: { id: true, code: true, purchaseDate: true, supplier: true },
           })
         : [];
     const purchaseLotByCode = new Map(
@@ -229,13 +239,17 @@ export class ProductsService {
         sheetQuantity,
         quantityOnHand: inv.quantity.toString(),
         minStock: inv.minStock?.toString() ?? null,
-        inventoryCategoryName: inv.category?.name ?? null,
+        inventoryCategoryName: inv.category
+          ? categoryDisplayName(inv.category.name)
+          : null,
         lotCode,
         purchaseLot: pl
           ? {
               id: pl.id,
               code: pl.code,
               purchaseDate: pl.purchaseDate.toISOString(),
+              supplier:
+                pl.supplier?.trim() || inv.supplier?.trim() || null,
             }
           : null,
         inventoryArchived: inv.deletedAt != null,
@@ -250,14 +264,121 @@ export class ProductsService {
 
     return {
       ...rest,
+      category: mapCategoryRelation(rest.category),
       available: productAvailable,
       recipe: {
         recipeYield: recipe.recipeYield.toString(),
+        adminRate: recipe.adminRate.toString(),
         costs,
         ingredients,
         available: productAvailable,
       },
     };
+  }
+
+  async getRecipeCostControls(productId: string) {
+    const product = await this.prisma.product.findFirst({
+      where: { id: productId, deletedAt: null },
+      include: {
+        recipe: {
+          include: {
+            ingredients: { include: { inventoryItem: true } },
+            costs: true,
+          },
+        },
+      },
+    });
+    if (!product) throw new NotFoundException('Product not found');
+    if (!product.recipe) {
+      return {
+        productId: product.id,
+        productName: product.name,
+        recipeId: null,
+        adminRate: '0.30',
+        totals: { materialsCOP: '0', servicesCOP: '0', baseCOP: '0' },
+      };
+    }
+
+    let materials = new Prisma.Decimal(0);
+    for (const ing of product.recipe.ingredients) {
+      materials = materials.add(
+        new Prisma.Decimal(ing.quantity).mul(ing.inventoryItem.unitCost),
+      );
+    }
+    let services = new Prisma.Decimal(0);
+    for (const c of product.recipe.costs) {
+      if (isServiceOrIndirectCostLine(c.name)) services = services.add(c.lineTotalCOP);
+    }
+    const base = materials.add(services);
+
+    return {
+      productId: product.id,
+      productName: product.name,
+      recipeId: product.recipe.id,
+      adminRate: product.recipe.adminRate.toString(),
+      totals: {
+        materialsCOP: materials.toFixed(0),
+        servicesCOP: services.toFixed(0),
+        baseCOP: base.toFixed(0),
+      },
+    };
+  }
+
+  async updateRecipeAdminRate(productId: string, adminRate: number) {
+    const product = await this.prisma.product.findFirst({
+      where: { id: productId, deletedAt: null },
+      select: { id: true },
+    });
+    if (!product) throw new NotFoundException('Product not found');
+
+    // Si no existe receta todavía, no se puede recalcular (no hay base). Fuerza creación vía upsertRecipe.
+    const existing = await this.prisma.recipe.findUnique({
+      where: { productId },
+      select: { id: true },
+    });
+    if (!existing) {
+      throw new BadRequestException('El producto no tiene receta aún');
+    }
+
+    await this.prisma.recipe.update({
+      where: { id: existing.id },
+      data: { adminRate: new Prisma.Decimal(adminRate) },
+    });
+
+    // Recalcula administración persistiendo receta (sin cambios de líneas).
+    const current = await this.prisma.product.findFirst({
+      where: { id: productId, deletedAt: null },
+      include: {
+        recipe: {
+          include: {
+            ingredients: true,
+            costs: true,
+          },
+        },
+      },
+    });
+    if (!current?.recipe) return this.findOne(productId);
+    await this.upsertRecipe(productId, {
+      recipeYield: Number(current.recipe.recipeYield.toString()),
+      adminRate,
+      ingredients: current.recipe.ingredients.map((i) => ({
+        inventoryItemId: i.inventoryItemId,
+        quantity: Number(i.quantity.toString()),
+        unit: i.unit,
+        sortOrder: i.sortOrder,
+      })),
+      costs: current.recipe.costs.map((c) => ({
+        kind: c.kind,
+        name: c.name,
+        quantity: c.quantity ? Number(c.quantity.toString()) : undefined,
+        unit: c.unit,
+        lineTotalCOP: Number(c.lineTotalCOP.toString()),
+        sheetUnitCost: c.sheetUnitCost ?? undefined,
+        sortOrder: c.sortOrder,
+      })),
+    });
+
+    return this.findOne(productId);
   }
 
   async update(id: string, dto: UpdateProductDto) {
@@ -274,7 +395,7 @@ export class ProductsService {
       categoryId = await this.requireProductCategoryId(dto.categoryId);
     }
 
-    return this.prisma.product.update({
+    const updated = await this.prisma.product.update({
       where: { id },
       data: {
         ...(dto.name !== undefined ? { name: dto.name } : {}),
@@ -288,6 +409,7 @@ export class ProductsService {
       },
       include: { category: true },
     });
+    return { ...updated, category: mapCategoryRelation(updated.category) };
   }
 
   async remove(id: string) {
@@ -317,7 +439,7 @@ export class ProductsService {
     const ingredients = dto.ingredients ?? [];
     const costsIn = dto.costs ?? [];
 
-    // Administración (30%) se recalcula siempre en backend.
+    // Administración se recalcula siempre en backend (pero la tasa es editable por receta).
     const costs = costsIn.filter((c) => !isAdminCostLine(c.name));
 
     if (!ingredients.length && !costs.length) {
@@ -343,6 +465,12 @@ export class ProductsService {
     }
     const invCostById = new Map(invRows.map((r) => [r.id, r.unitCost]));
 
+    // Admin rate: editable por receta (default 0.30 para receta nueva).
+    const adminRateDec =
+      dto.adminRate !== undefined
+        ? new Prisma.Decimal(dto.adminRate)
+        : null;
+
     // Base: (costo insumos de inventario) + (servicios/indirectos)
     let baseTotal = new Prisma.Decimal(0);
     for (const ing of ingredients) {
@@ -354,9 +482,15 @@ export class ProductsService {
       if (!isServiceOrIndirectCostLine(c.name)) continue;
       baseTotal = baseTotal.add(new Prisma.Decimal(c.lineTotalCOP));
     }
-    const adminLineTotal = baseTotal
-      .mul(new Prisma.Decimal(0.3))
-      .toDecimalPlaces(0);
+    // Si la receta existe, usa su adminRate actual cuando dto no lo provea.
+    const existingRecipe = await this.prisma.recipe.findUnique({
+      where: { productId },
+      select: { adminRate: true },
+    });
+    const effectiveRate =
+      adminRateDec ?? existingRecipe?.adminRate ?? new Prisma.Decimal(0.3);
+
+    const adminLineTotal = baseTotal.mul(effectiveRate).toDecimalPlaces(0);
     const adminCostLine =
       adminLineTotal.gt(0)
         ? {
@@ -379,12 +513,19 @@ export class ProductsService {
       let recipe = await tx.recipe.findUnique({ where: { productId } });
       if (!recipe) {
         recipe = await tx.recipe.create({
-          data: { productId, recipeYield: yieldDec },
+          data: {
+            productId,
+            recipeYield: yieldDec,
+            adminRate: adminRateDec ?? new Prisma.Decimal(0.3),
+          },
         });
       } else {
         await tx.recipe.update({
           where: { id: recipe.id },
-          data: { recipeYield: yieldDec },
+          data: {
+            recipeYield: yieldDec,
+            ...(adminRateDec ? { adminRate: adminRateDec } : {}),
+          },
         });
         await tx.recipeIngredient.deleteMany({
           where: { recipeId: recipe.id },

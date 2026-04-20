@@ -64,6 +64,50 @@ enum RecipeCostKind {
   VARIABLE
 }
 
+/// Gastos administrativos fijos para costeo (valores base mensuales).
+enum AdminExpenseKind {
+  ARRIENDO
+  AGUA
+  LUZ
+  INTERNET
+  SEGURIDAD
+  SALARIOS
+}
+
+enum AdminExpensePeriod {
+  MONTHLY
+}
+
+/// Gastos base para planeación (fijos vs variables).
+enum GastoKind {
+  FIJO
+  VARIABLE
+}
+
+enum GastoPeriod {
+  MONTHLY
+}
+
+enum GastoType {
+  // Fijos (mensuales)
+  ARRIENDO
+  SALARIOS
+  AGUA
+  LUZ
+  GAS
+  INTERNET
+  PLATAFORMA
+  IMPUESTOS
+  SEGURIDAD
+
+  // Variables (operativos)
+  LIMPIEZA
+  TRANSPORTE
+  MANTENIMIENTO
+  COMISIONES
+  EMPAQUES
+}
+
 // ---------------------------------------------------------------------------
 // Models
 // ---------------------------------------------------------------------------
@@ -135,6 +179,10 @@ model Product {
   @@map("products")
 }
 
+/// Estado físico actual del insumo: existencias, costo unitario, mínimos.
+/// El consumo acumulado y mermas viven en `stock_movements` (SALE, OUT, WASTE, etc.).
+///
+/// `lot` referencia `purchase_lots.code` (FK). Si `lot` es null, el ítem no está asignado a una compra/lote.
 model Inventory {
   id         String   @id @default(cuid())
   name       String
@@ -145,7 +193,9 @@ model Inventory {
   unit      String
   unitCost  Decimal   @map("unit_cost") @db.Decimal(12, 2)
   supplier  String?
+  /// Código de lote = `purchase_lots.code` (obligatorio que exista la fila de compra si no es null).
   lot       String?
+  purchaseLot PurchaseLot? @relation(fields: [lot], references: [code], onDelete: Restrict, onUpdate: Cascade)
   minStock  Decimal?  @map("min_stock") @db.Decimal(12, 4)
   deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
 
@@ -158,22 +208,35 @@ model Inventory {
 
   @@index([categoryId], map: "idx_inventory_category")
   @@index([deletedAt], map: "idx_inventory_deleted_at")
+  @@index([lot], map: "idx_inventory_lot")
   @@map("inventory")
 }
 
-/// Lote de compra histórico (misma factura o visita). Se enlaza con `inventory.lot` por `code`.
+/// Evento de compra (entrada financiera): proveedor, monto pagado, fecha.
+/// No reemplaza el stock físico (`inventory` + `stock_movements`); resume la compra / factura.
+///
+/// Relación con inventario: `code` = `inventory.lot` (mismo string). `item_count` se mantiene
+/// alineado con el número de ítems activos enlazados vía la API/sincronización.
+/// `total_value` es el monto pagado registrado en la compra (no se recalcula desde stock).
 model PurchaseLot {
   id           String   @id @default(cuid())
+  /// Clave de enlace con `inventory.lot` (única).
   code         String   @unique
+  /// Título legible en panel (opcional). `code` sigue enlazando inventario y factura.
+  name         String?
   purchaseDate DateTime @map("purchase_date") @db.Timestamptz(6)
   supplier     String?
   notes        String?
 
+  /// Ítems de inventario activos con `inventory.lot` = `code` (sincronizado desde API).
   itemCount  Int      @default(0) @map("item_count")
+  /// Monto pagado / factura (COP), no Σ existencias × costo.
   totalValue Decimal? @map("total_value") @db.Decimal(12, 2)
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  inventoryItems Inventory[]
 
   @@index([purchaseDate], map: "idx_purchase_lots_purchase_date")
   @@map("purchase_lots")
@@ -186,6 +249,8 @@ model Recipe {
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   recipeYield Decimal @default(1) @map("yield") @db.Decimal(12, 4)
+  /// Porcentaje de administración (ej. 0.30 = 30%). Editable por receta.
+  adminRate  Decimal @default(0.30) @map("admin_rate") @db.Decimal(5, 4)
 
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
@@ -333,6 +398,7 @@ model Payment {
   @@map("payments")
 }
 
+/// Historial físico: entradas (IN), salidas por venta (SALE), salidas manuales (OUT), mermas (WASTE), ajustes (ADJUSTMENT).
 model StockMovement {
   id              String    @id @default(cuid())
   inventoryItemId String    @map("inventory_item_id")
@@ -378,6 +444,41 @@ model Expense {
   @@index([categoryId], map: "idx_expenses_category")
   @@index([userId], map: "idx_expenses_user_id")
   @@map("expenses")
+}
+
+/// Valores base de gastos administrativos (no son movimientos contables).
+model AdminExpense {
+  id       String           @id @default(cuid())
+  kind     AdminExpenseKind @unique
+  name     String
+  period   AdminExpensePeriod @default(MONTHLY)
+  amountCOP Decimal         @map("amount_cop") @db.Decimal(12, 2)
+  active   Boolean          @default(true)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([active], map: "idx_admin_expenses_active")
+  @@map("admin_expenses")
+}
+
+/// Tabla principal de gastos base (para tablero/planeación).
+model Gasto {
+  id        String     @id @default(cuid())
+  kind      GastoKind
+  type      GastoType
+  name      String
+  period    GastoPeriod @default(MONTHLY)
+  amountCOP Decimal    @map("amount_cop") @db.Decimal(12, 2)
+  active    Boolean    @default(true)
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([kind, type], map: "gastos_kind_type_key")
+  @@index([kind], map: "idx_gastos_kind")
+  @@index([active], map: "idx_gastos_active")
+  @@map("gastos")
 }
 
 model Partner {

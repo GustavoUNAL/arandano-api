@@ -15,6 +15,11 @@ import { PurchaseLotsService } from './purchase-lots.service';
 export class PurchaseLotsController {
   constructor(private readonly purchaseLotsService: PurchaseLotsService) {}
 
+  @Get('meta/suppliers')
+  suppliersMeta() {
+    return this.purchaseLotsService.listDistinctSuppliers();
+  }
+
   @Get()
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,

@@ -66,6 +66,15 @@ export class UpsertRecipeDto {
   @Min(0.0000001)
   recipeYield!: number;
 
+  /**
+   * Porcentaje de administración (ej. 0.30 = 30%). Si no se envía, se conserva el actual
+   * (o default 0.30 si es receta nueva).
+   */
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  adminRate?: number;
+
   /** Solo insumos de inventario físico (descuentan stock al vender). */
   @IsOptional()
   @IsArray()
