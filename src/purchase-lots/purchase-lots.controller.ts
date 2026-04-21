@@ -6,8 +6,10 @@ import {
   Param,
   ParseIntPipe,
   Patch,
+  Put,
   Query,
 } from '@nestjs/common';
+import { ReplacePurchaseLotLinesDto } from './dto/replace-purchase-lot-lines.dto';
 import { UpdatePurchaseLotDto } from './dto/update-purchase-lot.dto';
 import { PurchaseLotsService } from './purchase-lots.service';
 
@@ -45,5 +47,14 @@ export class PurchaseLotsController {
   @Patch(':id')
   update(@Param('id') id: string, @Body() dto: UpdatePurchaseLotDto) {
     return this.purchaseLotsService.update(id, dto);
+  }
+
+  /** Reemplaza líneas de comprobante (costo histórico) y alinea `totalValue` del lote con la suma. */
+  @Put(':id/purchase-lines')
+  replacePurchaseLines(
+    @Param('id') id: string,
+    @Body() dto: ReplacePurchaseLotLinesDto,
+  ) {
+    return this.purchaseLotsService.replacePurchaseLotLines(id, dto);
   }
 }

@@ -143,9 +143,10 @@ model Category {
   children  Category[]   @relation("CategoryChildren")
   createdAt DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
 
-  products       Product[]
-  inventoryItems Inventory[]
-  expenses       Expense[]
+  products          Product[]
+  inventoryItems    Inventory[]
+  expenses          Expense[]
+  purchaseLotLines  PurchaseLotLine[]
 
   @@index([parentId], map: "idx_categories_parent_id")
   @@index([type], map: "idx_categories_type")
@@ -205,6 +206,7 @@ model Inventory {
   recipeIngredients    RecipeIngredient[]
   stockMovements       StockMovement[]
   partnerContributions PartnerContribution[]
+  purchaseLotLine      PurchaseLotLine?
 
   @@index([categoryId], map: "idx_inventory_category")
   @@index([deletedAt], map: "idx_inventory_deleted_at")
@@ -236,10 +238,38 @@ model PurchaseLot {
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
-  inventoryItems Inventory[]
+  inventoryItems   Inventory[]
+  purchaseLotLines PurchaseLotLine[]
 
   @@index([purchaseDate], map: "idx_purchase_lots_purchase_date")
   @@map("purchase_lots")
+}
+
+/// Línea de comprobante / factura de compra: cantidades y costos históricos (no se recalculan al consumir existencias).
+model PurchaseLotLine {
+  id              String @id @default(cuid())
+  purchaseLotCode String @map("purchase_lot_code")
+  purchaseLot     PurchaseLot @relation(fields: [purchaseLotCode], references: [code], onDelete: Cascade, onUpdate: Cascade)
+
+  inventoryItemId String?    @unique @map("inventory_item_id")
+  inventoryItem   Inventory? @relation(fields: [inventoryItemId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  lineName   String    @map("line_name")
+  categoryId String?   @map("category_id")
+  category   Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+
+  quantityPurchased     Decimal @map("quantity_purchased") @db.Decimal(12, 4)
+  unit                  String
+  purchaseUnitCostCOP Decimal @map("purchase_unit_cost_cop") @db.Decimal(12, 2)
+  lineTotalCOP          Decimal @map("line_total_cop") @db.Decimal(12, 2)
+
+  sortOrder Int @default(0) @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@index([purchaseLotCode], map: "idx_purchase_lot_lines_lot_code")
+  @@map("purchase_lot_lines")
 }
 
 /// Una receta por producto (`product_id` único). Columna SQL `yield` mapeada a `recipeYield` (evita palabra reservada en TS).

@@ -35,6 +35,7 @@
     "db:backfill-purchase-lot-dates-from-code": "ts-node --transpile-only scripts/backfill-purchase-lot-dates-from-code.ts",
     "db:backfill-purchase-lot-suppliers": "ts-node --transpile-only scripts/backfill-purchase-lot-suppliers-from-inventory.ts",
     "db:sync-purchase-lot-item-counts": "ts-node --transpile-only scripts/sync-purchase-lot-item-counts.ts",
+    "db:backfill-purchase-lot-lines": "ts-node --transpile-only scripts/backfill-purchase-lot-lines-from-inventory.ts",
     "db:export-inventory-lots-tsv": "ts-node --transpile-only scripts/register-purchase-lots.ts --export-tsv prisma/data/inventory-purchase-lots.tsv",
     "db:verify-data": "ts-node --transpile-only scripts/verify-data-consistency.ts",
     "db:export-inventory-csv": "ts-node --transpile-only scripts/export-inventory-csv.ts",

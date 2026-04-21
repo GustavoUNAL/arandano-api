@@ -163,6 +163,15 @@ export class InventoryService {
       ...row,
       category: mapCategoryRelation(row.category),
     };
+    await this.purchaseLotsService.ensurePurchaseLotLineFromInventorySnapshot({
+      id: row.id,
+      lot: row.lot,
+      name: row.name,
+      categoryId: row.categoryId,
+      quantity: row.quantity,
+      unit: row.unit,
+      unitCost: row.unitCost,
+    });
     await this.purchaseLotsService.syncInventoryItemCountForLotCode(row.lot);
     return created;
   }
@@ -315,6 +324,18 @@ export class InventoryService {
     });
     const out = { ...updated, category: mapCategoryRelation(updated.category) };
     const newLot = updated.lot?.trim() || '';
+    await this.purchaseLotsService.reconcilePurchaseLotLineAfterInventoryChange({
+      inventoryId: id,
+      inventoryAfter: {
+        id: updated.id,
+        lot: updated.lot,
+        name: updated.name,
+        categoryId: updated.categoryId,
+        quantity: updated.quantity,
+        unit: updated.unit,
+        unitCost: updated.unitCost,
+      },
+    });
     const lotsToSync = new Set<string>();
     if (previousLot) lotsToSync.add(previousLot);
     if (newLot) lotsToSync.add(newLot);
