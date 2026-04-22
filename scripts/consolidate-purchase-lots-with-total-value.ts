@@ -41,7 +41,8 @@ async function main() {
         select: { code: true, supplier: true, totalValue: true, purchaseDate: true },
       }),
       prisma.inventory.findMany({
-        where: { deletedAt: null },
+        // Incluye activos y archivados para poder eliminar lotes no válidos
+        // sin violar FK RESTRICT desde inventory.lot -> purchase_lots.code.
         select: {
           id: true,
           name: true,
@@ -120,38 +121,54 @@ async function main() {
 
     if (dryRun) return;
 
-    await prisma.$transaction(async (tx) => {
-      if (fallbackAssigned.length > 0) {
-        await tx.purchaseLot.upsert({
-          where: { code: FALLBACK_LOT_CODE },
-          create: {
-            code: FALLBACK_LOT_CODE,
-            name: 'Lote consolidado (sin costo histórico por lote)',
-            purchaseDate: new Date(),
-            supplier: 'Consolidado automático',
-            notes:
-              'Creado para consolidar ítems que estaban en lotes sin totalValue; totalValue aproximado desde stock actual.',
-            totalValue: fallbackStockValue.toDecimalPlaces(0),
-          },
-          update: {
-            totalValue: fallbackStockValue.toDecimalPlaces(0),
-            notes:
-              'Consolidado automático para ítems originalmente en lotes sin totalValue.',
-          },
-        });
-      }
+    await prisma.$transaction(
+      async (tx) => {
+        if (fallbackAssigned.length > 0) {
+          await tx.purchaseLot.upsert({
+            where: { code: FALLBACK_LOT_CODE },
+            create: {
+              code: FALLBACK_LOT_CODE,
+              name: 'Lote consolidado (sin costo histórico por lote)',
+              purchaseDate: new Date(),
+              supplier: 'Consolidado automático',
+              notes:
+                'Creado para consolidar ítems que estaban en lotes sin totalValue; totalValue aproximado desde stock actual.',
+              totalValue: fallbackStockValue.toDecimalPlaces(0),
+            },
+            update: {
+              totalValue: fallbackStockValue.toDecimalPlaces(0),
+              notes:
+                'Consolidado automático para ítems originalmente en lotes sin totalValue.',
+            },
+          });
+        }
 
-      for (const u of updates) {
-        await tx.inventory.update({
-          where: { id: u.id },
-          data: { lot: u.to },
-        });
-      }
+        for (const u of updates) {
+          await tx.inventory.update({
+            where: { id: u.id },
+            data: { lot: u.to },
+          });
+        }
 
-      if (nonValidCodes.length > 0) {
-        await tx.purchaseLot.deleteMany({ where: { code: { in: nonValidCodes } } });
-      }
-    });
+        if (nonValidCodes.length > 0) {
+          const referencedLots = await tx.inventory.findMany({
+            where: { lot: { in: nonValidCodes } },
+            select: { lot: true },
+            distinct: ['lot'],
+          });
+          const referencedSet = new Set(
+            referencedLots
+              .map((r) => r.lot?.trim())
+              .filter((x): x is string => !!x),
+          );
+          const deletable = nonValidCodes.filter((c) => !referencedSet.has(c));
+          if (deletable.length > 0) {
+            await tx.purchaseLot.deleteMany({ where: { code: { in: deletable } } });
+          }
+        }
+      },
+      { maxWait: 20_000, timeout: 120_000 },
+    );
 
     const finalLots = await prisma.purchaseLot.findMany({ select: { code: true } });
     for (const lot of finalLots) {

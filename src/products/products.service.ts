@@ -29,6 +29,12 @@ type IngredientStockStatus =
   | 'DEPLETED'
   | 'ARCHIVED';
 
+type CacheEntry<T> = {
+  value: T;
+  freshUntil: number;
+  staleUntil: number;
+};
+
 function normalizeCostName(s: string): string {
   return (s ?? '')
     .normalize('NFD')
@@ -81,6 +87,70 @@ function parseRecipeSheetSupplier(s: string | null | undefined): {
 @Injectable()
 export class ProductsService {
   constructor(private readonly prisma: PrismaService) {}
+  private readonly freshTtlMs = 20_000;
+  private readonly staleTtlMs = 300_000;
+  private readonly listCache = new Map<string, CacheEntry<unknown>>();
+  private readonly detailCache = new Map<string, CacheEntry<unknown>>();
+  private readonly listInFlight = new Map<string, Promise<unknown>>();
+  private readonly detailInFlight = new Map<string, Promise<unknown>>();
+
+  private getCachedFresh<T>(
+    map: Map<string, CacheEntry<unknown>>,
+    key: string,
+  ): T | null {
+    const hit = map.get(key);
+    if (!hit) return null;
+    if (Date.now() > hit.staleUntil) {
+      map.delete(key);
+      return null;
+    }
+    if (Date.now() > hit.freshUntil) return null;
+    return hit.value as T;
+  }
+
+  private getCachedStale<T>(
+    map: Map<string, CacheEntry<unknown>>,
+    key: string,
+  ): T | null {
+    const hit = map.get(key);
+    if (!hit) return null;
+    if (Date.now() > hit.staleUntil) {
+      map.delete(key);
+      return null;
+    }
+    return hit.value as T;
+  }
+
+  private setCached<T>(map: Map<string, CacheEntry<unknown>>, key: string, value: T) {
+    const now = Date.now();
+    map.set(key, {
+      value,
+      freshUntil: now + this.freshTtlMs,
+      staleUntil: now + this.staleTtlMs,
+    });
+  }
+
+  private refreshListInBackground(key: string, run: () => Promise<unknown>) {
+    if (this.listInFlight.has(key)) return;
+    const task = run()
+      .catch(() => undefined)
+      .finally(() => this.listInFlight.delete(key));
+    this.listInFlight.set(key, task);
+  }
+
+  private refreshDetailInBackground(key: string, run: () => Promise<unknown>) {
+    if (this.detailInFlight.has(key)) return;
+    const task = run()
+      .catch(() => undefined)
+      .finally(() => this.detailInFlight.delete(key));
+    this.detailInFlight.set(key, task);
+  }
+
+  private invalidateProductsCache(productId?: string) {
+    this.listCache.clear();
+    if (productId) this.detailCache.delete(productId);
+    else this.detailCache.clear();
+  }
 
   private async requireProductCategoryId(id: string) {
     const c = await this.prisma.category.findFirst({
@@ -108,10 +178,61 @@ export class ProductsService {
       },
       include: { category: true },
     });
+    this.invalidateProductsCache();
     return { ...created, category: mapCategoryRelation(created.category) };
   }
 
   async findAll(params: PaginationParams) {
+    const cacheKey = JSON.stringify({
+      page: params.page,
+      limit: params.limit,
+      search: params.search?.trim() ?? '',
+      categoryId: params.categoryId?.trim() ?? '',
+      active: params.active ?? null,
+      type: params.type?.trim() ?? '',
+      sort: params.sort ?? 'name',
+    });
+    const cachedFresh = this.getCachedFresh<{
+      data: unknown[];
+      meta: { page: number; limit: number; total: number; hasNextPage: boolean };
+    }>(this.listCache, cacheKey);
+    if (cachedFresh) return cachedFresh;
+
+    const cachedStale = this.getCachedStale<{
+      data: unknown[];
+      meta: { page: number; limit: number; total: number; hasNextPage: boolean };
+    }>(this.listCache, cacheKey);
+    if (cachedStale) {
+      this.refreshListInBackground(cacheKey, async () => {
+        const fresh = await this.queryProductList(params);
+        this.setCached(this.listCache, cacheKey, fresh);
+        return fresh;
+      });
+      return cachedStale;
+    }
+
+    const inFlight = this.listInFlight.get(cacheKey);
+    if (inFlight) {
+      return (await inFlight) as {
+        data: unknown[];
+        meta: { page: number; limit: number; total: number; hasNextPage: boolean };
+      };
+    }
+
+    const task = this.queryProductList(params)
+      .then((response) => {
+        this.setCached(this.listCache, cacheKey, response);
+        return response;
+      })
+      .finally(() => this.listInFlight.delete(cacheKey));
+    this.listInFlight.set(cacheKey, task);
+    return (await task) as {
+      data: unknown[];
+      meta: { page: number; limit: number; total: number; hasNextPage: boolean };
+    };
+  }
+
+  private async queryProductList(params: PaginationParams) {
     const page = Math.max(1, Math.trunc(params.page));
     const limit = Math.min(100, Math.max(1, Math.trunc(params.limit)));
     const skip = (page - 1) * limit;
@@ -156,6 +277,33 @@ export class ProductsService {
   }
 
   async findOne(id: string) {
+    const cachedFresh = this.getCachedFresh<unknown>(this.detailCache, id);
+    if (cachedFresh) return cachedFresh;
+
+    const cachedStale = this.getCachedStale<unknown>(this.detailCache, id);
+    if (cachedStale) {
+      this.refreshDetailInBackground(id, async () => {
+        const fresh = await this.queryProductDetail(id);
+        this.setCached(this.detailCache, id, fresh);
+        return fresh;
+      });
+      return cachedStale;
+    }
+
+    const inFlight = this.detailInFlight.get(id);
+    if (inFlight) return await inFlight;
+
+    const task = this.queryProductDetail(id)
+      .then((response) => {
+        this.setCached(this.detailCache, id, response);
+        return response;
+      })
+      .finally(() => this.detailInFlight.delete(id));
+    this.detailInFlight.set(id, task);
+    return await task;
+  }
+
+  private async queryProductDetail(id: string) {
     const product = await this.prisma.product.findFirst({
       where: { id, deletedAt: null },
       include: {
@@ -262,7 +410,7 @@ export class ProductsService {
     );
     const productAvailable = product.active && !hasUnavailableIngredient;
 
-    return {
+    const response = {
       ...rest,
       category: mapCategoryRelation(rest.category),
       available: productAvailable,
@@ -274,6 +422,7 @@ export class ProductsService {
         available: productAvailable,
       },
     };
+    return response;
   }
 
   async getRecipeCostControls(productId: string) {
@@ -378,6 +527,7 @@ export class ProductsService {
       })),
     });
 
+    this.invalidateProductsCache(productId);
     return this.findOne(productId);
   }
 
@@ -409,6 +559,7 @@ export class ProductsService {
       },
       include: { category: true },
     });
+    this.invalidateProductsCache(id);
     return { ...updated, category: mapCategoryRelation(updated.category) };
   }
 
@@ -421,10 +572,12 @@ export class ProductsService {
       throw new NotFoundException('Product not found');
     }
 
-    return this.prisma.product.update({
+    const removed = await this.prisma.product.update({
       where: { id },
       data: { deletedAt: new Date() },
     });
+    this.invalidateProductsCache(id);
+    return removed;
   }
 
   async upsertRecipe(productId: string, dto: UpsertRecipeDto) {
@@ -444,6 +597,7 @@ export class ProductsService {
 
     if (!ingredients.length && !costs.length) {
       await this.prisma.recipe.deleteMany({ where: { productId } });
+      this.invalidateProductsCache(productId);
       return this.findOne(productId);
     }
 
@@ -579,6 +733,7 @@ export class ProductsService {
       }
     });
 
+    this.invalidateProductsCache(productId);
     return this.findOne(productId);
   }
 }

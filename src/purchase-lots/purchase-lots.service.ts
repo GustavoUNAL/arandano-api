@@ -59,9 +59,66 @@ type PurchaseLotLineWithCategory = Prisma.PurchaseLotLineGetPayload<{
   include: { category: { select: { id: true; name: true } } };
 }>;
 
+type CacheEntry<T> = {
+  value: T;
+  freshUntil: number;
+  staleUntil: number;
+};
+
+const purchaseLotSafeSelect = {
+  id: true,
+  code: true,
+  purchaseDate: true,
+  supplier: true,
+  notes: true,
+  itemCount: true,
+  totalValue: true,
+  createdAt: true,
+  updatedAt: true,
+} satisfies Prisma.PurchaseLotSelect;
+
 @Injectable()
 export class PurchaseLotsService {
   constructor(private readonly prisma: PrismaService) {}
+  private readonly freshTtlMs = 15_000;
+  private readonly staleTtlMs = 120_000;
+  private readonly listCache = new Map<string, CacheEntry<unknown>>();
+  private readonly listInFlight = new Map<string, Promise<unknown>>();
+
+  private invalidateListCache() {
+    this.listCache.clear();
+  }
+
+  private getFresh<T>(key: string): T | null {
+    const hit = this.listCache.get(key);
+    if (!hit) return null;
+    const now = Date.now();
+    if (now > hit.staleUntil) {
+      this.listCache.delete(key);
+      return null;
+    }
+    if (now > hit.freshUntil) return null;
+    return hit.value as T;
+  }
+
+  private getStale<T>(key: string): T | null {
+    const hit = this.listCache.get(key);
+    if (!hit) return null;
+    if (Date.now() > hit.staleUntil) {
+      this.listCache.delete(key);
+      return null;
+    }
+    return hit.value as T;
+  }
+
+  private setCache<T>(key: string, value: T) {
+    const now = Date.now();
+    this.listCache.set(key, {
+      value,
+      freshUntil: now + this.freshTtlMs,
+      staleUntil: now + this.staleTtlMs,
+    });
+  }
 
   private lotAgeDaysFromPurchaseDate(purchaseDate: Date): number {
     const ms = Date.now() - purchaseDate.getTime();
@@ -204,6 +261,7 @@ export class PurchaseLotsService {
     code: string | null | undefined,
   ): Promise<void> {
     await syncPurchaseLotItemCountFromInventory(this.prisma, code);
+    this.invalidateListCache();
   }
 
   async ensurePurchaseLotRowForCode(
@@ -221,6 +279,7 @@ export class PurchaseLotsService {
       },
       update: {},
     });
+    this.invalidateListCache();
   }
 
   /**
@@ -261,6 +320,7 @@ export class PurchaseLotsService {
     } catch (e) {
       if (!isMissingPurchaseLotLinesTableError(e)) throw e;
     }
+    this.invalidateListCache();
   }
 
   /**
@@ -327,6 +387,7 @@ export class PurchaseLotsService {
     } catch (e) {
       if (!isMissingPurchaseLotLinesTableError(e)) throw e;
     }
+    this.invalidateListCache();
   }
 
   private async supplierFromInventoryByCode(
@@ -444,6 +505,38 @@ export class PurchaseLotsService {
   }
 
   async findAll(params: ListParams) {
+    const cacheKey = JSON.stringify({
+      page: params.page,
+      limit: params.limit,
+      search: params.search?.trim() ?? '',
+      dateFrom: params.dateFrom?.trim() ?? '',
+      dateTo: params.dateTo?.trim() ?? '',
+    });
+    const fresh = this.getFresh<unknown>(cacheKey);
+    if (fresh) return fresh;
+    const stale = this.getStale<unknown>(cacheKey);
+    if (stale) {
+      if (!this.listInFlight.has(cacheKey)) {
+        const bg = this.queryFindAll(params)
+          .then((data) => this.setCache(cacheKey, data))
+          .finally(() => this.listInFlight.delete(cacheKey));
+        this.listInFlight.set(cacheKey, bg);
+      }
+      return stale;
+    }
+    const existing = this.listInFlight.get(cacheKey);
+    if (existing) return existing;
+    const task = this.queryFindAll(params)
+      .then((data) => {
+        this.setCache(cacheKey, data);
+        return data;
+      })
+      .finally(() => this.listInFlight.delete(cacheKey));
+    this.listInFlight.set(cacheKey, task);
+    return task;
+  }
+
+  private async queryFindAll(params: ListParams) {
     const page = Math.max(1, Math.trunc(params.page));
     const limit = Math.min(100, Math.max(1, Math.trunc(params.limit)));
     const skip = (page - 1) * limit;
@@ -484,6 +577,7 @@ export class PurchaseLotsService {
         skip,
         take: limit,
         orderBy: { purchaseDate: 'desc' },
+        select: purchaseLotSafeSelect,
       }),
     ]);
 
@@ -586,7 +680,10 @@ export class PurchaseLotsService {
   }
 
   async findOne(id: string) {
-    const row = await this.prisma.purchaseLot.findUnique({ where: { id } });
+    const row = await this.prisma.purchaseLot.findUnique({
+      where: { id },
+      select: purchaseLotSafeSelect,
+    });
     if (!row) {
       throw new NotFoundException('Purchase lot not found');
     }
@@ -782,7 +879,6 @@ export class PurchaseLotsService {
     await this.prisma.purchaseLot.update({
       where: { id },
       data: {
-        ...(dto.name !== undefined ? { name: dto.name || null } : {}),
         ...(dto.purchaseDate !== undefined
           ? { purchaseDate: new Date(dto.purchaseDate) }
           : {}),
@@ -793,6 +889,7 @@ export class PurchaseLotsService {
           : {}),
       },
     });
+    this.invalidateListCache();
     return this.findOne(id);
   }
 
@@ -891,6 +988,7 @@ export class PurchaseLotsService {
     }
 
     await this.syncInventoryItemCountForLotCode(lot.code);
+    this.invalidateListCache();
     return this.findOne(id);
   }
 }

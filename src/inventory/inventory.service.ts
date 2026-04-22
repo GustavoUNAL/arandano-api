@@ -25,6 +25,12 @@ type MovementSums = {
   ADJUSTMENT: Prisma.Decimal;
 };
 
+type CacheEntry<T> = {
+  value: T;
+  freshUntil: number;
+  staleUntil: number;
+};
+
 const zero = () => new Prisma.Decimal(0);
 
 @Injectable()
@@ -33,6 +39,45 @@ export class InventoryService {
     private readonly prisma: PrismaService,
     private readonly purchaseLotsService: PurchaseLotsService,
   ) {}
+  private readonly freshTtlMs = 15_000;
+  private readonly staleTtlMs = 120_000;
+  private readonly listCache = new Map<string, CacheEntry<unknown>>();
+  private readonly inFlight = new Map<string, Promise<unknown>>();
+
+  private invalidateListCache() {
+    this.listCache.clear();
+  }
+
+  private getFresh<T>(key: string): T | null {
+    const hit = this.listCache.get(key);
+    if (!hit) return null;
+    const now = Date.now();
+    if (now > hit.staleUntil) {
+      this.listCache.delete(key);
+      return null;
+    }
+    if (now > hit.freshUntil) return null;
+    return hit.value as T;
+  }
+
+  private getStale<T>(key: string): T | null {
+    const hit = this.listCache.get(key);
+    if (!hit) return null;
+    if (Date.now() > hit.staleUntil) {
+      this.listCache.delete(key);
+      return null;
+    }
+    return hit.value as T;
+  }
+
+  private setCache<T>(key: string, value: T) {
+    const now = Date.now();
+    this.listCache.set(key, {
+      value,
+      freshUntil: now + this.freshTtlMs,
+      staleUntil: now + this.staleTtlMs,
+    });
+  }
 
   /** Agrega cantidades por tipo de movimiento para los ítems dados. */
   private async movementSumsByInventoryIds(
@@ -157,7 +202,7 @@ export class InventoryService {
             ? new Prisma.Decimal(dto.minStock)
             : null,
       },
-      include: { category: true, purchaseLot: true },
+      include: { category: true },
     });
     const created = {
       ...row,
@@ -173,10 +218,44 @@ export class InventoryService {
       unitCost: row.unitCost,
     });
     await this.purchaseLotsService.syncInventoryItemCountForLotCode(row.lot);
+    this.invalidateListCache();
     return created;
   }
 
   async findAll(params: PaginationParams) {
+    const cacheKey = JSON.stringify({
+      page: params.page,
+      limit: params.limit,
+      search: params.search?.trim() ?? '',
+      categoryId: params.categoryId?.trim() ?? '',
+      lot: params.lot?.trim() ?? '',
+      includeStats: !!params.includeStats,
+    });
+    const fresh = this.getFresh<unknown>(cacheKey);
+    if (fresh) return fresh;
+    const stale = this.getStale<unknown>(cacheKey);
+    if (stale) {
+      if (!this.inFlight.has(cacheKey)) {
+        const bg = this.queryFindAll(params)
+          .then((data) => this.setCache(cacheKey, data))
+          .finally(() => this.inFlight.delete(cacheKey));
+        this.inFlight.set(cacheKey, bg);
+      }
+      return stale;
+    }
+    const existing = this.inFlight.get(cacheKey);
+    if (existing) return existing;
+    const task = this.queryFindAll(params)
+      .then((data) => {
+        this.setCache(cacheKey, data);
+        return data;
+      })
+      .finally(() => this.inFlight.delete(cacheKey));
+    this.inFlight.set(cacheKey, task);
+    return task;
+  }
+
+  private async queryFindAll(params: PaginationParams) {
     const page = Math.max(1, Math.trunc(params.page));
     const limit = Math.min(100, Math.max(1, Math.trunc(params.limit)));
     const skip = (page - 1) * limit;
@@ -201,7 +280,7 @@ export class InventoryService {
         skip,
         take: limit,
         orderBy: { name: 'asc' },
-        include: { category: true, purchaseLot: true },
+        include: { category: true },
       }),
     ]);
 
@@ -250,7 +329,7 @@ export class InventoryService {
   async findOne(id: string, includeStats?: boolean) {
     const row = await this.prisma.inventory.findFirst({
       where: { id, deletedAt: null },
-      include: { category: true, purchaseLot: true },
+      include: { category: true },
     });
     if (!row) {
       throw new NotFoundException('Inventory item not found');
@@ -320,7 +399,7 @@ export class InventoryService {
           ? { minStock: new Prisma.Decimal(dto.minStock) }
           : {}),
       },
-      include: { category: true, purchaseLot: true },
+      include: { category: true },
     });
     const out = { ...updated, category: mapCategoryRelation(updated.category) };
     const newLot = updated.lot?.trim() || '';
@@ -342,6 +421,7 @@ export class InventoryService {
     for (const code of lotsToSync) {
       await this.purchaseLotsService.syncInventoryItemCountForLotCode(code);
     }
+    this.invalidateListCache();
     return out;
   }
 
@@ -361,6 +441,7 @@ export class InventoryService {
     await this.purchaseLotsService.syncInventoryItemCountForLotCode(
       existing.lot,
     );
+    this.invalidateListCache();
     return archived;
   }
 }
