@@ -72,6 +72,10 @@ export class PlatformAdminService {
       recentRequests,
       users,
       companies,
+      salesAgg,
+      productsCount,
+      inventoryCount,
+      lastSales,
     ] = await Promise.all([
       this.prisma.company.count(),
       this.prisma.company.count({ where: { status: 'ACTIVE' } }),
@@ -84,7 +88,7 @@ export class PlatformAdminService {
       }),
       this.prisma.user.findMany({
         where: { active: true },
-        orderBy: { createdAt: 'desc' },
+        orderBy: [{ lastLoginAt: { sort: 'desc', nulls: 'last' } }, { createdAt: 'desc' }],
         take: 20,
         select: {
           id: true,
@@ -92,6 +96,7 @@ export class PlatformAdminService {
           name: true,
           isPlatformAdmin: true,
           createdAt: true,
+          lastLoginAt: true,
           memberships: {
             where: { status: 'ACTIVE' },
             include: {
@@ -108,6 +113,7 @@ export class PlatformAdminService {
           id: true,
           name: true,
           plan: true,
+          shopSlug: true,
           _count: {
             select: {
               members: true,
@@ -118,17 +124,44 @@ export class PlatformAdminService {
           },
           companyModules: {
             where: { isEnabled: true },
-            include: { module: { select: { slug: true } } },
+            include: { module: { select: { slug: true, name: true } } },
           },
         },
       }),
+      this.prisma.sale.aggregate({
+        _count: { _all: true },
+        _sum: { total: true },
+      }),
+      this.prisma.product.count(),
+      this.prisma.inventoryItem.count(),
+      this.prisma.sale.groupBy({
+        by: ['companyId'],
+        _sum: { total: true },
+        _max: { saleDate: true },
+      }),
     ]);
+
+    const salesByCompany = new Map(
+      lastSales.map((row) => [
+        row.companyId,
+        {
+          total: Number(row._sum.total ?? 0),
+          lastSaleAt: row._max.saleDate?.toISOString() ?? null,
+        },
+      ]),
+    );
 
     return {
       companiesCount,
       activeCompanies,
       usersCount,
       pendingRequests,
+      totals: {
+        salesCount: Number(salesAgg._count._all ?? 0),
+        salesTotal: Number(salesAgg._sum.total ?? 0),
+        productsCount,
+        inventoryCount,
+      },
       recentRequests,
       recentUsers: users.map((u) => ({
         id: u.id,
@@ -136,22 +169,30 @@ export class PlatformAdminService {
         name: u.name,
         isPlatformAdmin: u.isPlatformAdmin,
         createdAt: u.createdAt,
+        lastLoginAt: u.lastLoginAt?.toISOString() ?? null,
         companies: u.memberships.map((m) => ({
           id: m.company.id,
           name: m.company.name,
           role: m.memberRoles[0]?.role.slug ?? 'member',
         })),
       })),
-      companyStats: companies.map((c) => ({
-        id: c.id,
-        name: c.name,
-        plan: c.plan,
-        membersCount: c._count.members,
-        productsCount: c._count.products,
-        salesCount: c._count.sales,
-        inventoryCount: c._count.inventoryItems,
-        modules: c.companyModules.map((cm) => cm.module.slug),
-      })),
+      companyStats: companies.map((c) => {
+        const sales = salesByCompany.get(c.id);
+        return {
+          id: c.id,
+          name: c.name,
+          slug: this.slugFromCompany(c.name, c.shopSlug),
+          plan: c.plan,
+          membersCount: c._count.members,
+          productsCount: c._count.products,
+          salesCount: c._count.sales,
+          salesTotal: sales?.total ?? 0,
+          lastSaleAt: sales?.lastSaleAt ?? null,
+          inventoryCount: c._count.inventoryItems,
+          modules: c.companyModules.map((cm) => cm.module.slug),
+          moduleNames: c.companyModules.map((cm) => cm.module.name),
+        };
+      }),
     };
   }
 
