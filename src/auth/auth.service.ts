@@ -593,20 +593,8 @@ export class AuthService {
     const sessionUser = { ...user, isPlatformAdmin };
 
     if (isPlatformAdmin) {
-      const preferred = sanitizeCompanyIdHint(preferredCompanyId);
-      if (preferred) {
-        const company = await this.prisma.company.findFirst({
-          where: { id: preferred, status: 'ACTIVE' },
-          select: { id: true },
-        });
-        if (company) {
-          return this.issuePlatformCompanySession(
-            sessionUser,
-            company.id,
-            memberships,
-          );
-        }
-      }
+      // El admin siempre arranca en el panel de plataforma (empresas + menú).
+      // Entra a una empresa solo cuando la elige desde ese panel.
       return this.issuePlatformSession(sessionUser, memberships);
     }
 
