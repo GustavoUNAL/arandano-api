@@ -136,3 +136,16 @@ export function bucketsToSeries(
       otherCOP: agg.otherCOP != null ? Math.round(agg.otherCOP) : undefined,
     }));
 }
+
+/** Incluye todos los días del rango (p. ej. lunes–domingo) aunque no haya movimientos. */
+export function enumerateDayKeys(fromKey: string, toKey: string): string[] {
+  const keys: string[] = [];
+  let cursor = fromKey;
+  while (cursor <= toKey) {
+    keys.push(cursor);
+    const [y, m, d] = cursor.split('-').map(Number);
+    cursor = new Date(Date.UTC(y, m - 1, d + 1)).toISOString().slice(0, 10);
+    if (keys.length > 400) break;
+  }
+  return keys;
+}

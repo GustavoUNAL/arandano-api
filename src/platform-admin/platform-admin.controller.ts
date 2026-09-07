@@ -17,6 +17,7 @@ import { PlatformAdminService } from './platform-admin.service';
 import { SetCompanyPlanDto } from './dto/set-company-plan.dto';
 import { SetCompanyModuleDto } from './dto/set-company-module.dto';
 import { UpdatePlatformUserDto } from './dto/update-platform-user.dto';
+import { UpdateAccessRequestDto } from './dto/update-access-request.dto';
 
 @Controller('platform')
 @UseGuards(JwtAuthGuard, PlatformAdminGuard)
@@ -83,5 +84,18 @@ export class PlatformAdminController {
   @Get('access-requests')
   accessRequests(@Query('status') status?: string) {
     return this.platform.listAccessRequests(status);
+  }
+
+  @Patch('access-requests/:id')
+  updateAccessRequest(
+    @Param('id') id: string,
+    @Body() body: UpdateAccessRequestDto,
+  ) {
+    return this.platform.updateAccessRequest(id, body.status);
+  }
+
+  @Delete('access-requests/:id')
+  deleteAccessRequest(@Param('id') id: string) {
+    return this.platform.deleteAccessRequest(id);
   }
 }

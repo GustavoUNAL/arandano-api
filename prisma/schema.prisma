@@ -137,6 +137,8 @@ model Company {
   email     String?
   status    CompanyStatus @default(ACTIVE)
   plan      CompanyPlan   @default(TRIAL)
+  /// Tipo de negocio elegido en el onboarding (cafe, restaurant, barbershop, retail, services, clinic, other).
+  businessType String?    @map("business_type")
   storageLimitBytes Int   @default(26214400) @map("storage_limit_bytes")
   createdAt DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt DateTime      @updatedAt @map("updated_at") @db.Timestamptz(6)

@@ -17,6 +17,7 @@ export type CompanySummary = {
   slug: string;
   role: string;
   modules: string[];
+  businessType?: string | null;
 };
 
 export type SystemSettings = {

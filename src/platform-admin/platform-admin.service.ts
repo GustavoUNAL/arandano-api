@@ -823,4 +823,29 @@ export class PlatformAdminService {
       take: 100,
     });
   }
+
+  async updateAccessRequest(
+    id: string,
+    status: 'PENDING' | 'APPROVED' | 'REJECTED',
+  ) {
+    const existing = await this.prisma.accessRequest.findUnique({
+      where: { id },
+      select: { id: true },
+    });
+    if (!existing) throw new NotFoundException('Solicitud no encontrada');
+    return this.prisma.accessRequest.update({
+      where: { id },
+      data: { status },
+    });
+  }
+
+  async deleteAccessRequest(id: string) {
+    const existing = await this.prisma.accessRequest.findUnique({
+      where: { id },
+      select: { id: true },
+    });
+    if (!existing) throw new NotFoundException('Solicitud no encontrada');
+    await this.prisma.accessRequest.delete({ where: { id } });
+    return { ok: true };
+  }
 }

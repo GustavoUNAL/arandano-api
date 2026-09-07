@@ -1,12 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { OperatingExpenseKind } from '@prisma/client';
-import { bogotaDayBounds } from '../common/bogota-time';
+import { bogotaDateKey, bogotaDayBounds } from '../common/bogota-time';
 import { splitPaymentChannels } from '../common/payment-channels';
 import { PrismaService } from '../prisma/prisma.service';
 import type { TenantContext } from '../tenant/tenant.types';
 import {
   type AnalyticsGranularity,
   bucketsToSeries,
+  enumerateDayKeys,
   mergeIntoBuckets,
   parseDateRange,
   periodKey,
@@ -65,12 +66,12 @@ export class PlatformAnalyticsService {
     }
 
     return {
-      dateFrom: new Date(Math.min(...mins.map((d) => d.getTime())))
-        .toISOString()
-        .slice(0, 10),
-      dateTo: new Date(Math.max(...maxes.map((d) => d.getTime())))
-        .toISOString()
-        .slice(0, 10),
+      dateFrom: bogotaDateKey(
+        new Date(Math.min(...mins.map((d) => d.getTime()))),
+      ),
+      dateTo: bogotaDateKey(
+        new Date(Math.max(...maxes.map((d) => d.getTime()))),
+      ),
     };
   }
 
@@ -244,6 +245,13 @@ export class PlatformAnalyticsService {
       ...staffBuckets.keys(),
       ...utilitiesBuckets.keys(),
     ]);
+
+    // Semana o rangos cortos por día: mostrar todos los días aunque estén en cero.
+    if (granularity === 'day') {
+      for (const day of enumerateDayKeys(fromKey, toKey)) {
+        allPeriods.add(day);
+      }
+    }
 
     const combined = [...allPeriods]
       .sort((a, b) => a.localeCompare(b))

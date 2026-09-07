@@ -18,6 +18,7 @@ import { JwtAuthGuard } from './jwt-auth.guard';
 import { CurrentUser } from './current-user.decorator';
 import type { JwtPayload } from './jwt.types';
 import { SwitchCompanyDto } from './dto/switch-company.dto';
+import { SetBusinessTypeDto } from './dto/set-business-type.dto';
 import { PlatformAdminGuard } from '../platform-admin/platform-admin.guard';
 
 @Controller('auth')
@@ -156,5 +157,14 @@ export class AuthController {
   @UseGuards(JwtAuthGuard, PlatformAdminGuard)
   platformHome(@CurrentUser() user: JwtPayload) {
     return this.auth.exitToPlatformAdmin(user.sub);
+  }
+
+  @Post('business-setup')
+  @UseGuards(JwtAuthGuard)
+  setBusinessType(
+    @CurrentUser() user: JwtPayload,
+    @Body() dto: SetBusinessTypeDto,
+  ) {
+    return this.auth.setBusinessType(user.sub, dto.businessType, user.companyId);
   }
 }

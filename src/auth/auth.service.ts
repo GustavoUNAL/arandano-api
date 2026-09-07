@@ -26,6 +26,11 @@ import {
   type GoogleOAuthState,
   type GoogleSignupTicket,
 } from './google-oauth';
+import {
+  BUSINESS_TYPE_MODULES,
+  isBusinessTypeId,
+  type BusinessTypeId,
+} from './business-types';
 
 @Injectable()
 export class AuthService {
@@ -102,6 +107,7 @@ export class AuthService {
             name: true,
             shopSlug: true,
             status: true,
+            businessType: true,
             companyModules: {
               where: { isEnabled: true },
               include: { module: { select: { slug: true } } },
@@ -134,6 +140,7 @@ export class AuthService {
       slug: this.companySlugFromName(m.company.name, m.company.shopSlug),
       role: m.memberRoles[0]?.role.slug ?? 'member',
       modules: m.company.companyModules.map((cm) => cm.module.slug),
+      businessType: m.company.businessType ?? null,
     };
   }
 
@@ -301,13 +308,13 @@ export class AuthService {
       );
     }
 
+    // Sin módulos activos hasta que el dueño elija el tipo de negocio.
     for (const mod of modules) {
-      if (mod.slug === 'dental') continue;
       await this.prisma.companyModule.create({
         data: {
           companyId: company.id,
           moduleId: mod.id,
-          isEnabled: true,
+          isEnabled: false,
         },
       });
     }
@@ -860,5 +867,99 @@ export class AuthService {
     const user = await this.assertPlatformAdmin(userId);
     const memberships = await this.loadMemberships(userId);
     return this.issuePlatformSession(user, memberships);
+  }
+
+  private async applyBusinessTypeModules(
+    companyId: string,
+    businessType: BusinessTypeId,
+  ) {
+    const wanted = new Set(BUSINESS_TYPE_MODULES[businessType]);
+    const catalog = await this.prisma.module.findMany({
+      select: { id: true, slug: true },
+    });
+    if (!catalog.length) {
+      throw new BadRequestException(
+        'La plataforma aún no está inicializada. Contactá soporte.',
+      );
+    }
+
+    for (const mod of catalog) {
+      const enabled = wanted.has(mod.slug);
+      await this.prisma.companyModule.upsert({
+        where: {
+          companyId_moduleId: { companyId, moduleId: mod.id },
+        },
+        create: {
+          companyId,
+          moduleId: mod.id,
+          isEnabled: enabled,
+          enabledAt: new Date(),
+        },
+        update: {
+          isEnabled: enabled,
+          ...(enabled ? { enabledAt: new Date() } : {}),
+        },
+      });
+    }
+
+    await this.prisma.company.update({
+      where: { id: companyId },
+      data: { businessType },
+    });
+  }
+
+  async setBusinessType(
+    userId: string,
+    businessTypeRaw: string,
+    companyIdHint?: string,
+  ) {
+    if (!isBusinessTypeId(businessTypeRaw)) {
+      throw new BadRequestException('Tipo de negocio no válido');
+    }
+    const businessType = businessTypeRaw;
+
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        active: true,
+        isPlatformAdmin: true,
+      },
+    });
+    if (!user?.active) {
+      throw new UnauthorizedException('Usuario inactivo');
+    }
+
+    const memberships = await this.loadMemberships(userId);
+    const preferred = sanitizeCompanyIdHint(companyIdHint);
+    const current =
+      (preferred
+        ? memberships.find((m) => m.company.id === preferred)
+        : undefined) ??
+      memberships.find((m) => m.company.status === 'ACTIVE') ??
+      memberships[0];
+    if (!current || current.company.status !== 'ACTIVE') {
+      throw new BadRequestException('No hay empresa activa');
+    }
+
+    const isOwner = current.memberRoles.some((mr) => mr.role.slug === 'owner');
+    if (!isOwner) {
+      throw new ForbiddenException(
+        'Solo el propietario puede configurar el tipo de negocio',
+      );
+    }
+
+    await this.applyBusinessTypeModules(current.company.id, businessType);
+
+    const refreshed = await this.loadMemberships(userId);
+    const target =
+      refreshed.find((m) => m.company.id === current.company.id) ?? refreshed[0];
+    if (!target) {
+      throw new BadRequestException('No se pudo actualizar la empresa');
+    }
+
+    return this.issueSession(user, target, refreshed);
   }
 }
